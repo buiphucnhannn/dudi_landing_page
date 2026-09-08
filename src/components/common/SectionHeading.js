@@ -39,16 +39,13 @@ export function SectionHeading({
 
   const content = (
     <>
-      <span className="bg-gradient-to-r from-sky-400 via-cyan-300 to-sky-300 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(56,189,248,0.25)]">
+      <span className="block bg-gradient-to-r from-sky-400 via-cyan-300 to-sky-300 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(56,189,248,0.25)]">
         {p1}
       </span>
       {p2 ? (
-        <>
-          {" "}
-          <span className="bg-gradient-to-r from-pink-500 via-rose-500 to-red-500 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(244,63,94,0.25)]">
-            {p2}
-          </span>
-        </>
+        <span className="block mt-1 sm:mt-1.5 bg-gradient-to-r from-pink-500 via-rose-500 to-red-500 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(244,63,94,0.25)]">
+          {p2}
+        </span>
       ) : null}
     </>
   );
@@ -61,7 +58,7 @@ export function SectionHeading({
         className
       )}
     >
-      <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-black tracking-tight leading-[1.28] text-balance drop-shadow-[0_2px_16px_rgba(244,63,94,0.15)]">
+      <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-black tracking-tight leading-[1.24] drop-shadow-[0_2px_16px_rgba(244,63,94,0.15)]">
         {content}
       </h2>
       {/* Decorative colorful accent line matching the 2 colors */}

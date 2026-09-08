@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, Mail, MapPin, MessageCircle, ShieldCheck } from "lucide-react";
@@ -5,13 +7,22 @@ import { siteConfig } from "@/constants/site-config";
 import { Container } from "@/components/common/Container";
 
 export function Footer() {
+  const scrollToTop = (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <footer className="border-t border-slate-800/80 bg-[#050811] text-slate-300 py-12">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Cột 1: Logo & Thông tin pháp nhân */}
           <div className="md:col-span-2 space-y-4">
-            <Link href="/" className="inline-flex items-center gap-3 group mb-2">
+            <Link
+              href="/"
+              onClick={scrollToTop}
+              className="inline-flex items-center gap-3 group mb-2 cursor-pointer"
+            >
               <div className="relative h-10 w-10 rounded-lg overflow-hidden shadow-md border border-red-500/30 flex-shrink-0 transition-transform group-hover:scale-105">
                 <Image
                   src={siteConfig.logoUrl}

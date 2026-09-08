@@ -27,6 +27,11 @@ export function Navbar() {
     trackEvent("phone_click", { position, page_path: window.location.pathname });
   };
 
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <header
       className={cn(
@@ -38,7 +43,11 @@ export function Navbar() {
     >
       <Container className="flex items-center justify-between">
         {/* Brand Logo & Name */}
-        <Link href="/" className="flex items-center gap-2.5 group">
+        <Link
+          href="/"
+          onClick={handleLogoClick}
+          className="flex items-center gap-2.5 group cursor-pointer"
+        >
           <div className="relative h-9 w-9 sm:h-10 sm:w-10 rounded-lg overflow-hidden shadow-md border border-red-500/30 flex-shrink-0 transition-transform group-hover:scale-105">
             <Image
               src="/dudi/dudisoftware1.webp"
