@@ -1,0 +1,47 @@
+import React from "react";
+import { cn } from "@/lib/utils";
+
+const buttonVariants = {
+  primary:
+    "bg-red-600 text-white hover:bg-red-700 shadow-md shadow-red-600/30 active:scale-[0.98] border border-red-500/40",
+  dudiGradient:
+    "bg-gradient-to-r from-red-600 via-rose-600 to-red-700 text-white hover:from-red-700 hover:to-rose-800 shadow-lg shadow-red-600/30 active:scale-[0.98] border border-red-400/40",
+  secondary:
+    "bg-slate-800 text-white hover:bg-slate-700 active:scale-[0.98] border border-slate-700",
+  outline:
+    "border border-slate-700 hover:border-red-500 bg-slate-900/60 hover:bg-red-950/30 text-slate-200 hover:text-white shadow-xs",
+  outlineRed:
+    "border-2 border-red-500 bg-red-950/20 text-red-400 hover:bg-red-600 hover:text-white hover:border-red-600",
+  ghost:
+    "bg-transparent hover:bg-white/10 text-slate-300 hover:text-white",
+  zalo:
+    "bg-blue-600 text-white hover:bg-blue-700 shadow-md shadow-blue-600/30 active:scale-[0.98]",
+};
+
+const buttonSizes = {
+  sm: "px-3.5 py-1.5 text-xs font-semibold rounded-lg gap-1.5",
+  md: "px-5 py-2.5 text-sm font-semibold rounded-xl gap-2",
+  lg: "px-7 py-3.5 text-base font-bold rounded-xl gap-2.5",
+};
+
+export function Button({
+  children,
+  variant = "primary",
+  size = "md",
+  className,
+  ...props
+}) {
+  return (
+    <button
+      className={cn(
+        "inline-flex items-center justify-center transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:pointer-events-none select-none",
+        buttonVariants[variant] || buttonVariants.primary,
+        buttonSizes[size] || buttonSizes.md,
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+}

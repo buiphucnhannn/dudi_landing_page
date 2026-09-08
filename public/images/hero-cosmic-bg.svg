@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <!-- Deep Space Cosmic Background Gradients -->
+    <radialGradient id="deepVoid" cx="50%" cy="40%" r="75%">
+      <stop offset="0%" stop-color="#0E172A" />
+      <stop offset="40%" stop-color="#080D1E" />
+      <stop offset="70%" stop-color="#060A14" />
+      <stop offset="100%" stop-color="#020409" />
+    </radialGradient>
+
+    <!-- Crimson Ruby Nebula Core -->
+    <radialGradient id="redNebula" cx="30%" cy="30%" r="45%">
+      <stop offset="0%" stop-color="#EF4444" stop-opacity="0.45" />
+      <stop offset="35%" stop-color="#DC2626" stop-opacity="0.25" />
+      <stop offset="70%" stop-color="#991B1B" stop-opacity="0.10" />
+      <stop offset="100%" stop-color="#060A14" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Deep Sapphire Cosmic Cloud -->
+    <radialGradient id="blueNebula" cx="75%" cy="35%" r="50%">
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.40" />
+      <stop offset="40%" stop-color="#1D4ED8" stop-opacity="0.22" />
+      <stop offset="75%" stop-color="#0F172A" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#060A14" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Center Celestial Galaxy Core -->
+    <radialGradient id="galaxyCore" cx="50%" cy="50%" r="35%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.30" />
+      <stop offset="25%" stop-color="#F43F5E" stop-opacity="0.20" />
+      <stop offset="60%" stop-color="#6366F1" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#060A14" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Gaussian Blurs for Cosmic Dust -->
+    <filter id="blurHeavy" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="85" />
+    </filter>
+    <filter id="blurMedium" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="40" />
+    </filter>
+    <filter id="glowStar" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" />
+    </filter>
+
+    <!-- Perspective Grid Shader -->
+    <linearGradient id="cyberGridFade" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#DC2626" stop-opacity="0" />
+      <stop offset="50%" stop-color="#DC2626" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0.5" />
+    </linearGradient>
+  </defs>
+
+  <!-- 1. Deep Space Canvas Base -->
+  <rect width="1920" height="1080" fill="url(#deepVoid)" />
+
+  <!-- 2. Volumetric Cosmic Nebulae -->
+  <ellipse cx="500" cy="350" rx="650" ry="420" fill="url(#redNebula)" filter="url(#blurHeavy)" />
+  <ellipse cx="1450" cy="380" rx="680" ry="450" fill="url(#blueNebula)" filter="url(#blurHeavy)" />
+  <ellipse cx="960" cy="480" rx="550" ry="320" fill="url(#galaxyCore)" filter="url(#blurMedium)" />
+
+  <!-- 3. Cosmic Dust Trails & Spiral Streams -->
+  <path d="M-100,200 Q400,100 800,280 T1700,150 T2100,400" fill="none" stroke="#F43F5E" stroke-width="2.5" stroke-opacity="0.18" filter="url(#blurMedium)" />
+  <path d="M-50,350 Q500,250 960,380 T1850,280 T2050,600" fill="none" stroke="#38BDF8" stroke-width="3" stroke-opacity="0.15" filter="url(#blurMedium)" />
+  <path d="M100,500 Q650,420 1100,520 T1900,480" fill="none" stroke="#A855F7" stroke-width="2" stroke-opacity="0.12" filter="url(#blurMedium)" />
+
+  <!-- 4. Distant Constellations and Starfield Nodes -->
+  <!-- Star Clusters -->
+  <g fill="#FFFFFF">
+    <circle cx="120" cy="80" r="1.5" opacity="0.6" />
+    <circle cx="280" cy="140" r="2.2" opacity="0.8" filter="url(#glowStar)" />
+    <circle cx="220" cy="260" r="1.2" opacity="0.5" />
+    <circle cx="390" cy="95" r="1.8" opacity="0.7" />
+    <circle cx="450" cy="210" r="2.5" opacity="0.9" fill="#FCA5A5" filter="url(#glowStar)" />
+    <circle cx="620" cy="120" r="1.2" opacity="0.4" />
+    <circle cx="750" cy="180" r="2.0" opacity="0.75" />
+    <circle cx="880" cy="90" r="1.5" opacity="0.6" />
+    <circle cx="1020" cy="140" r="2.4" opacity="0.85" fill="#93C5FD" filter="url(#glowStar)" />
+    <circle cx="1180" cy="75" r="1.6" opacity="0.5" />
+    <circle cx="1320" cy="160" r="2.0" opacity="0.7" />
+    <circle cx="1480" cy="110" r="3.0" opacity="0.95" fill="#BAE6FD" filter="url(#glowStar)" />
+    <circle cx="1620" cy="180" r="1.4" opacity="0.5" />
+    <circle cx="1780" cy="90" r="2.2" opacity="0.8" filter="url(#glowStar)" />
+    <circle cx="1850" cy="240" r="1.5" opacity="0.6" />
+    
+    <circle cx="180" cy="420" r="1.5" opacity="0.5" />
+    <circle cx="310" cy="520" r="2.0" opacity="0.7" />
+    <circle cx="1650" cy="460" r="2.2" opacity="0.85" fill="#FCA5A5" filter="url(#glowStar)" />
+    <circle cx="1740" cy="580" r="1.6" opacity="0.6" />
+    <circle cx="1560" cy="620" r="1.8" opacity="0.7" />
+    <circle cx="1420" cy="510" r="2.8" opacity="0.9" fill="#93C5FD" filter="url(#glowStar)" />
+  </g>
+
+  <!-- Constellation Linking Lines -->
+  <g stroke="#FFFFFF" stroke-opacity="0.12" stroke-width="0.8" stroke-dasharray="3,3">
+    <line x1="280" y1="140" x2="390" y2="95" />
+    <line x1="390" y1="95" x2="450" y2="210" />
+    <line x1="450" y1="210" x2="220" y2="260" />
+    
+    <line x1="1320" y1="160" x2="1480" y2="110" />
+    <line x1="1480" y1="110" x2="1620" y2="180" />
+    <line x1="1620" y1="180" x2="1780" y2="90" />
+  </g>
+
+  <!-- 5. Celestial Orbital Rings (Universe Portal Aesthetics) -->
+  <g stroke-opacity="0.18" fill="none">
+    <circle cx="1500" cy="300" r="260" stroke="#EF4444" stroke-width="1.5" />
+    <circle cx="1500" cy="300" r="320" stroke="#38BDF8" stroke-width="1" stroke-dasharray="8,8" />
+    <circle cx="1500" cy="300" r="390" stroke="#A855F7" stroke-width="0.8" stroke-dasharray="4,6" />
+  </g>
+
+  <!-- 6. Perspective Horizon Cyber Grid Lines -->
+  <g stroke="url(#cyberGridFade)" stroke-width="1" opacity="0.6">
+    <line x1="960" y1="720" x2="0" y2="1080" />
+    <line x1="960" y1="720" x2="240" y2="1080" />
+    <line x1="960" y1="720" x2="480" y2="1080" />
+    <line x1="960" y1="720" x2="720" y2="1080" />
+    <line x1="960" y1="720" x2="960" y2="1080" stroke-width="1.5" />
+    <line x1="960" y1="720" x2="1200" y2="1080" />
+    <line x1="960" y1="720" x2="1440" y2="1080" />
+    <line x1="960" y1="720" x2="1680" y2="1080" />
+    <line x1="960" y1="720" x2="1920" y2="1080" />
+
+    <!-- Grid Horizontal Latitudes -->
+    <line x1="680" y1="800" x2="1240" y2="800" opacity="0.4" />
+    <line x1="500" y1="870" x2="1420" y2="870" opacity="0.6" />
+    <line x1="280" y1="950" x2="1640" y2="950" opacity="0.8" />
+    <line x1="0" y1="1050" x2="1920" y2="1050" stroke-width="1.5" />
+  </g>
+
+  <!-- 7. Gradient Vignette Overlay to ensure seamless background blend -->
+  <rect width="1920" height="1080" fill="url(#deepVoid)" opacity="0.25" />
+</svg>
