@@ -3,20 +3,22 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, MessageCircle, ArrowRight, Menu, X } from "lucide-react";
+import { Phone, ArrowRight, Menu, X } from "lucide-react";
 import { siteConfig } from "@/constants/site-config";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
 import { Container } from "@/components/common/Container";
 import { Button } from "@/components/ui/Button";
+import { ZaloIcon } from "@/components/ui/ZaloIcon";
 import { trackEvent } from "@/lib/tracking";
-import { cn } from "@/lib/utils";
+import { cn, scrollToSection } from "@/lib/utils";
 
 export function Navbar() {
   const { isScrolled } = useScrollPosition(20);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const handleCtaClick = (label, position) => {
+  const handleCtaClick = (e, label, position) => {
     trackEvent("cta_click", { label, position, target: "#form-tu-van" });
+    scrollToSection(e, "#form-tu-van");
   };
 
   const handleZaloClick = (position) => {
@@ -79,7 +81,8 @@ export function Navbar() {
             <a
               key={item.label}
               href={item.href}
-              className="text-sm font-medium text-slate-300 hover:text-red-400 transition-colors"
+              onClick={(e) => scrollToSection(e, item.href)}
+              className="text-sm font-medium text-slate-300 hover:text-red-400 transition-colors cursor-pointer"
             >
               {item.label}
             </a>
@@ -106,11 +109,11 @@ export function Navbar() {
             onClick={() => handleZaloClick("navbar")}
           >
             <Button
-              variant="outline"
+              variant="outlineZalo"
               size="sm"
-              className="gap-1.5 text-blue-400 border-blue-500/40 bg-blue-950/20 hover:bg-blue-900/40"
+              className="gap-1.5 border-blue-500/50 hover:border-[#0068FF] hover:bg-blue-900/40"
             >
-              <MessageCircle className="h-4 w-4 fill-blue-500 text-white" />
+              <ZaloIcon className="h-4 w-4" />
               <span>Zalo</span>
             </Button>
           </a>
@@ -118,9 +121,9 @@ export function Navbar() {
           {/* Main CTA */}
           <a
             href="#form-tu-van"
-            onClick={() => handleCtaClick("Liên hệ", "navbar")}
+            onClick={(e) => handleCtaClick(e, "Liên hệ", "navbar")}
           >
-            <Button variant="dudiGradient" size="sm" className="glow-red">
+            <Button variant="dudiGradient" size="sm" className="glow-red cursor-pointer">
               <span>Liên hệ</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </Button>
@@ -131,9 +134,9 @@ export function Navbar() {
         <div className="flex md:hidden items-center gap-2">
           <a
             href="#form-tu-van"
-            onClick={() => handleCtaClick("Liên hệ", "navbar_mobile")}
+            onClick={(e) => handleCtaClick(e, "Liên hệ", "navbar_mobile")}
           >
-            <Button variant="dudiGradient" size="sm" className="px-3 py-1.5 text-xs">
+            <Button variant="dudiGradient" size="sm" className="px-3 py-1.5 text-xs cursor-pointer">
               Liên hệ
             </Button>
           </a>
@@ -157,8 +160,11 @@ export function Navbar() {
               <a
                 key={item.label}
                 href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-base font-semibold text-slate-200 hover:text-red-400"
+                onClick={(e) => {
+                  setMobileMenuOpen(false);
+                  scrollToSection(e, item.href);
+                }}
+                className="text-base font-semibold text-slate-200 hover:text-red-400 cursor-pointer"
               >
                 {item.label}
               </a>
@@ -186,19 +192,19 @@ export function Navbar() {
                     setMobileMenuOpen(false);
                   }}
                 >
-                  <Button variant="outline" className="w-full text-blue-400 border-blue-500/40 bg-blue-950/20 gap-1.5">
-                    <MessageCircle className="h-4 w-4 fill-blue-500 text-white" />
+                  <Button variant="outlineZalo" className="w-full text-blue-400 border-blue-500/50 hover:border-[#0068FF] bg-blue-950/20 hover:bg-blue-900/40 gap-1.5 cursor-pointer">
+                    <ZaloIcon className="h-4 w-4" />
                     Zalo Chat
                   </Button>
                 </a>
                 <a
                   href="#form-tu-van"
-                  onClick={() => {
-                    handleCtaClick("Liên hệ", "navbar_drawer");
+                  onClick={(e) => {
                     setMobileMenuOpen(false);
+                    handleCtaClick(e, "Liên hệ", "navbar_drawer");
                   }}
                 >
-                  <Button variant="dudiGradient" className="w-full">
+                  <Button variant="dudiGradient" className="w-full cursor-pointer">
                     Liên hệ
                   </Button>
                 </a>

@@ -18,13 +18,17 @@ const whyUsIcons = [
 
 export function WhyUs() {
   return (
-    <section className="py-12 sm:py-16 bg-transparent relative">
+    <section id="vi-sao-chon-dudi" className="pt-10 pb-10 sm:pt-12 sm:pb-12 bg-transparent relative scroll-mt-6 sm:scroll-mt-8">
       <Container>
         <RevealOnScroll duration={1200}>
           <SectionHeading
             titlePart1="Vì Sao Doanh Nghiệp Chọn"
             titlePart2="Đồng Hành Cùng DUDI?"
             description="Sự rõ ràng và trách nhiệm kỹ thuật là ưu tiên hàng đầu trong mọi dự án chúng tôi tiếp nhận."
+            action={{
+              label: "Xem quy trình làm việc",
+              href: "#quy-trinh",
+            }}
           />
         </RevealOnScroll>
 
@@ -52,7 +56,7 @@ export function WhyUs() {
                     {item.title}
                   </h3>
 
-                  <p className="mt-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed text-balance">
+                  <p className="mt-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed text-justify">
                     {item.desc}
                   </p>
                 </div>

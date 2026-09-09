@@ -1,10 +1,11 @@
 "use client";
 
-import { ArrowRight, Phone, MessageCircle } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 import { bottomCtaContent } from "@/constants/landing-content";
 import { siteConfig } from "@/constants/site-config";
 import { Container } from "@/components/common/Container";
 import { Button } from "@/components/ui/Button";
+import { ZaloIcon } from "@/components/ui/ZaloIcon";
 import { RevealOnScroll } from "@/components/common/RevealOnScroll";
 import { trackEvent } from "@/lib/tracking";
 
@@ -75,9 +76,9 @@ export function BottomCTA() {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="w-full sm:w-auto border-2 border-white/80 bg-white/10 text-white hover:bg-white/25 font-bold py-4 px-6 gap-2"
+                  className="w-full sm:w-auto border-2 border-white/80 hover:border-blue-400 bg-white/10 text-white hover:bg-blue-900/30 font-bold py-4 px-6 gap-2"
                 >
-                  <MessageCircle className="h-5 w-5 fill-white text-blue-600" />
+                  <ZaloIcon className="h-5 w-5" />
                   <span>{bottomCtaContent.zaloButtonLabel}</span>
                 </Button>
               </a>

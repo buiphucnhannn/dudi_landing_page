@@ -19,6 +19,7 @@ import { SectionHeading } from "@/components/common/SectionHeading";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { RevealOnScroll } from "@/components/common/RevealOnScroll";
+import { scrollToSection } from "@/lib/utils";
 
 const solutionIconMap = {
   FileText,
@@ -35,20 +36,26 @@ export function Solutions() {
   const marqueeItems = [...solutionsContent, ...solutionsContent];
 
   return (
-    <section id="giai-phap" className="py-12 sm:py-16 bg-transparent relative overflow-hidden">
+    <section id="giai-phap" className="pt-10 pb-9 sm:pt-12 sm:pb-11 bg-transparent relative overflow-hidden scroll-mt-6 sm:scroll-mt-8">
       <Container>
         <RevealOnScroll duration={1200}>
           <SectionHeading
-            title="DUDI Sửa Đúng Phần Cần Thiết — Bàn Giao Kết Quả Thật"
-            description="Không nói thuật ngữ chung chung, chúng tôi biến từng vấn đề của bạn thành đầu việc kỹ thuật đo lường được."
+            titlePart1="Giải pháp"
+            titlePart2="từ DUDI"
+            description="Chúng tôi cập nhật và nâng cấp website tập trung vào những hạng mục mang lại hiệu quả thực tế."
+            action={{
+              label: "Xem chi tiết bảng giá",
+              href: "#bang-gia",
+            }}
+            breakLine={false}
           />
         </RevealOnScroll>
       </Container>
 
       {/* Infinite Horizontal Marquee - No captions, pure sleek infinite scroll with pause on hover */}
-      <div className="relative w-full overflow-hidden py-4">
+      <div className="relative w-full overflow-hidden pt-1 pb-0">
         {/* Scrolling Marquee Track - PAUSES ON HOVER */}
-        <div className="flex gap-6 animate-marquee py-3">
+        <div className="flex gap-6 animate-marquee pt-1 pb-1">
           {marqueeItems.map((sol, idx) => {
             const IconComp = solutionIconMap[sol.icon] || Zap;
 
@@ -71,13 +78,14 @@ export function Solutions() {
                     {sol.title}
                   </h3>
 
-                  <p className="mt-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-3">
+                  <p className="mt-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed text-justify line-clamp-3">
                     {sol.description}
                   </p>
                 </div>
 
                 <a
                   href="#bang-gia"
+                  onClick={(e) => scrollToSection("#bang-gia", e)}
                   className="mt-5 pt-3 border-t border-slate-800 text-xs font-semibold text-slate-400 group-hover:text-red-400 transition-colors"
                 >
                   <span>Xem trong bảng giá</span>
@@ -88,20 +96,6 @@ export function Solutions() {
           })}
         </div>
       </div>
-
-      <Container>
-        {/* Action button to pricing */}
-        <RevealOnScroll delay={150} duration={1200}>
-          <div className="mt-6 sm:mt-8 flex justify-center">
-            <a href="#bang-gia">
-              <Button variant="outlineRed" size="lg" className="gap-2">
-                <span>Xem chi tiết phạm vi trong bảng giá</span>
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            </a>
-          </div>
-        </RevealOnScroll>
-      </Container>
     </section>
   );
 }

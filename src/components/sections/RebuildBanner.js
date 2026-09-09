@@ -27,7 +27,7 @@ export function RebuildBanner({ onSelectPackage }) {
   };
 
   return (
-    <section className="py-8 sm:py-10 bg-transparent relative">
+    <section className="py-10 sm:py-14 bg-transparent relative">
       <Container>
         <RevealOnScroll duration={1300}>
           <div className="relative overflow-hidden rounded-3xl bg-[#0D1527]/90 border border-slate-700/60 p-8 sm:p-10 text-white shadow-2xl shadow-black/40 backdrop-blur-xl">
@@ -39,16 +39,14 @@ export function RebuildBanner({ onSelectPackage }) {
 
             <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
               <div className="max-w-xl text-left">
-                <h3 className="text-2xl sm:text-3xl font-black tracking-tight leading-tight">
-                  <span className="bg-gradient-to-r from-sky-400 via-cyan-300 to-sky-300 bg-clip-text text-transparent">
-                    Website quá cũ hoặc cần làm lại
-                  </span>{" "}
-                  <span className="bg-gradient-to-r from-pink-500 via-rose-500 to-red-500 bg-clip-text text-transparent">
+                <h3 className="text-2xl sm:text-3xl font-black tracking-tight leading-tight text-white">
+                  <span>Website quá cũ hoặc cần làm lại </span>
+                  <span className="bg-gradient-to-r from-red-500 via-rose-500 to-red-400 bg-clip-text text-transparent">
                     toàn bộ giao diện & tính năng?
                   </span>
                 </h3>
 
-                <p className="mt-3 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p className="mt-3 text-sm sm:text-base text-slate-300 leading-relaxed text-justify">
                   {rebuildBannerContent.description}
                 </p>
 
@@ -61,7 +59,7 @@ export function RebuildBanner({ onSelectPackage }) {
               {/* 3D Cyber Planet Holographic Card */}
               <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-2xl overflow-hidden border border-slate-700/60 shadow-xl shrink-0 animate-float hidden md:block bg-slate-950">
                 <Image
-                  src="/images/cyber-planet.jpg"
+                  src="/images/cyber-planet.webp"
                   alt="Hệ sinh thái số DUDI"
                   fill
                   className="object-cover"

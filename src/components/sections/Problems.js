@@ -23,21 +23,25 @@ const problemIconMap = {
 
 export function Problems() {
   return (
-    <section id="dau-hieu" className="py-12 sm:py-16 bg-transparent relative">
+    <section id="dau-hieu" className="pt-10 pb-9 sm:pt-12 sm:pb-11 bg-transparent relative scroll-mt-6 sm:scroll-mt-8">
       <Container>
         <RevealOnScroll duration={1200}>
           <SectionHeading
             title="Website Của Bạn Có Đang Gặp Phải — 6 Vấn Đề Này?"
             description="Đừng để những lỗi kỹ thuật âm thầm làm giảm uy tín thương hiệu và đánh mất khách hàng tiềm năng mỗi ngày."
+            action={{
+              label: "Xem giải pháp DUDI",
+              href: "#giai-phap",
+            }}
           />
         </RevealOnScroll>
 
         {/* Infinite Horizontal Marquee Track for 6 Problem Cards */}
       </Container>
 
-      <div className="relative w-full overflow-hidden py-4">
+      <div className="relative w-full overflow-hidden pt-1 pb-0">
         {/* Scrolling Marquee Track - PAUSES ON HOVER */}
-        <div className="flex gap-6 animate-marquee-reverse py-3 hover:[animation-play-state:paused]">
+        <div className="flex gap-6 animate-marquee-reverse pt-1 pb-1 hover:[animation-play-state:paused]">
           {[...problemsContent, ...problemsContent].map((item, idx) => {
             const IconComp = problemIconMap[item.icon] || Gauge;
 
@@ -60,7 +64,7 @@ export function Problems() {
                     {item.title}
                   </h3>
 
-                  <p className="mt-2.5 text-sm text-slate-300 leading-relaxed font-normal">
+                  <p className="mt-2.5 text-sm text-slate-300 leading-relaxed font-normal text-justify">
                     {item.description}
                   </p>
                 </div>
@@ -69,21 +73,6 @@ export function Problems() {
           })}
         </div>
       </div>
-
-      <Container>
-        {/* Small bottom hint linking to solutions */}
-        <RevealOnScroll delay={200} duration={1200}>
-          <div className="mt-6 sm:mt-8 text-center">
-            <a
-              href="#giai-phap"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-red-400 hover:text-red-300 transition-colors"
-            >
-              <span>Xem các giải pháp DUDI giúp bạn xử lý triệt để</span>
-              <ArrowDown className="h-4 w-4 animate-bounce text-red-400" />
-            </a>
-          </div>
-        </RevealOnScroll>
-      </Container>
     </section>
   );
 }

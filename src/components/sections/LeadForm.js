@@ -3,22 +3,20 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import {
-  Send,
   Loader2,
   CheckCircle,
-  MessageCircle,
   Phone,
-  AlertCircle,
-  Sparkles,
-  ShieldCheck,
+  ArrowRight,
+  ChevronDown,
 } from "lucide-react";
 import { siteConfig } from "@/constants/site-config";
 import { Container } from "@/components/common/Container";
-import { SectionHeading } from "@/components/common/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
+import { ZaloIcon } from "@/components/ui/ZaloIcon";
 import { RevealOnScroll } from "@/components/common/RevealOnScroll";
 import { trackEvent } from "@/lib/tracking";
+import { cn } from "@/lib/utils";
 
 export function LeadForm({ selectedPackage = "Chưa rõ" }) {
   const [formData, setFormData] = useState({
@@ -81,14 +79,12 @@ export function LeadForm({ selectedPackage = "Chưa rõ" }) {
     const cleanPhone = formData.phone.replace(/[\s.-]/g, "");
     const phoneRegex = /^(\+84|0)[3|5|7|8|9][0-9]{8}$/;
     if (!cleanPhone || !phoneRegex.test(cleanPhone)) {
-      newErrors.phone = "Số điện thoại chưa hợp lệ (gồm 9–12 số, ví dụ: 0909 123 456).";
+      newErrors.phone = "Số điện thoại chưa hợp lệ (ví dụ: 0909 123 456).";
     }
 
-    if (!formData.company.trim() || formData.company.trim().length < 2) {
-      newErrors.company = "Vui lòng nhập tên doanh nghiệp hoặc tên shop của bạn.";
-    }
-
-    if (formData.websiteUrl.trim()) {
+    if (!formData.websiteUrl.trim()) {
+      newErrors.websiteUrl = "Vui lòng nhập đường dẫn website hiện tại.";
+    } else {
       let testUrl = formData.websiteUrl.trim();
       if (!/^https?:\/\//i.test(testUrl)) {
         testUrl = "https://" + testUrl;
@@ -98,10 +94,6 @@ export function LeadForm({ selectedPackage = "Chưa rõ" }) {
       } catch {
         newErrors.websiteUrl = "Đường dẫn website chưa đúng định dạng.";
       }
-    }
-
-    if (!formData.issue.trim() || formData.issue.trim().length < 10) {
-      newErrors.issue = "Vui lòng mô tả sơ bộ vấn đề bạn đang gặp (tối thiểu 10 ký tự).";
     }
 
     if (!formData.consent) {
@@ -178,310 +170,351 @@ export function LeadForm({ selectedPackage = "Chưa rõ" }) {
   };
 
   return (
-    <section id="form-tu-van" className="py-12 sm:py-16 bg-transparent relative scroll-mt-20">
-      <Container className="max-w-4xl">
+    <section id="form-tu-van" className="pt-10 pb-10 sm:pt-12 sm:pb-12 bg-transparent relative scroll-mt-6 sm:scroll-mt-8">
+      <Container className="max-w-7xl">
         <RevealOnScroll duration={1200}>
-          <SectionHeading
-            title="Gửi Website Cần Kiểm Tra — Nhận Đánh Giá Trong 2 Giờ"
-            description="Kỹ thuật viên DUDI sẽ rà soát thực tế website của bạn, chỉ ra đúng nguyên nhân lỗi và tư vấn phương án khắc phục tiết kiệm nhất."
-          />
-        </RevealOnScroll>
+          <div className="relative rounded-3xl border border-slate-700/60 bg-[#0D1527]/90 p-5 sm:p-7 lg:p-9 shadow-2xl backdrop-blur-2xl ring-1 ring-white/10 shadow-black/40">
+            {/* Ambient Red Glow */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -left-20 -bottom-20 h-72 w-72 rounded-full bg-red-600/15 blur-3xl"
+            />
 
-        <RevealOnScroll delay={150} duration={1300}>
-          <div className="relative rounded-3xl border border-slate-700/60 bg-[#0D1527]/90 p-6 sm:p-10 shadow-2xl backdrop-blur-2xl ring-1 ring-white/10 shadow-black/40 card-glow-hover text-white">
-          {submitResult && submitResult.success ? (
-            /* Màn hình gửi thành công */
-            <div className="py-8 text-center animate-in fade-in zoom-in-95 duration-300">
-              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-800/60 mb-5">
-                <CheckCircle className="h-10 w-10" />
-              </div>
-
-              <Badge variant="success" className="mb-3 py-1 px-3.5 bg-emerald-950/80 text-emerald-300 border-emerald-700">
-                Mã yêu cầu: {submitResult.leadId}
-              </Badge>
-
-              <h3 className="text-2xl font-black text-white mb-3">
-                DUDI Đã Nhận Được Thông Tin!
-              </h3>
-
-              <p className="text-sm sm:text-base text-slate-300 max-w-lg mx-auto leading-relaxed mb-8">
-                {submitResult.message}
-              </p>
-
-              {/* 2 Fast contact buttons */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                <a
-                  href={siteConfig.zaloUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto"
-                >
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto text-blue-400 border-blue-500/40 bg-blue-950/20 hover:bg-blue-900/40 gap-2">
-                    <MessageCircle className="h-5 w-5 fill-blue-500 text-white" />
-                    <span>Nhắn tin Zalo ngay</span>
-                  </Button>
-                </a>
-                <a href={siteConfig.hotlineTel} className="w-full sm:w-auto">
-                  <Button variant="dudiGradient" size="lg" className="w-full sm:w-auto gap-2">
-                    <Phone className="h-4 w-4" />
-                    <span>Gọi Hotline: {siteConfig.hotline}</span>
-                  </Button>
-                </a>
-              </div>
-
-              <button
-                onClick={() => setSubmitResult(null)}
-                className="mt-8 text-xs text-slate-400 hover:text-slate-200 underline cursor-pointer"
-              >
-                Gửi thêm yêu cầu khác
-              </button>
-            </div>
-          ) : (
-            /* Form nhập liệu */
-            <form onSubmit={handleSubmit} noValidate className="space-y-5">
-              {/* Specialist Live Status with 3D Robot Mascot */}
-              <div className="flex items-center gap-3.5 p-3 sm:p-3.5 rounded-2xl bg-slate-950/80 border border-slate-800 mb-4">
-                <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-xl overflow-hidden border border-slate-700/60 shrink-0 bg-slate-900 shadow-md">
-                  <Image
-                    src="/images/robot-mascot.jpg"
-                    alt="DUDI Robot Specialist"
-                    fill
-                    className="object-cover"
-                    sizes="48px"
-                  />
+            {submitResult && submitResult.success ? (
+              /* Màn hình gửi thành công */
+              <div className="py-8 text-center animate-in fade-in zoom-in-95 duration-300">
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-800/60 mb-5">
+                  <CheckCircle className="h-10 w-10" />
                 </div>
-                <div className="text-left text-xs">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
-                    <span className="font-bold text-white text-xs sm:text-sm">Kỹ thuật viên DUDI đang trực tuyến</span>
-                    <span className="text-[10px] text-red-300 bg-red-950/80 px-2 py-0.5 rounded-md border border-red-800/60 font-medium">
-                      Đánh giá trong 2 giờ
-                    </span>
+
+                <Badge variant="success" className="mb-3 py-1 px-3.5 bg-emerald-950/80 text-emerald-300 border-emerald-700">
+                  Mã yêu cầu: {submitResult.leadId}
+                </Badge>
+
+                <h3 className="text-2xl font-black text-white mb-3">
+                  DUDI Đã Nhận Được Thông Tin!
+                </h3>
+
+                <p className="text-sm sm:text-base text-slate-300 max-w-lg mx-auto leading-relaxed mb-8">
+                  {submitResult.message}
+                </p>
+
+                {/* 2 Fast contact buttons */}
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                  <a
+                    href={siteConfig.zaloUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto"
+                  >
+                    <Button variant="outlineZalo" size="lg" className="w-full sm:w-auto text-blue-400 border-blue-500/50 hover:border-[#0068FF] bg-blue-950/20 hover:bg-blue-900/40 gap-2">
+                      <ZaloIcon className="h-5 w-5" />
+                      <span>Nhắn tin Zalo ngay</span>
+                    </Button>
+                  </a>
+                  <a href={siteConfig.hotlineTel} className="w-full sm:w-auto">
+                    <Button variant="dudiGradient" size="lg" className="w-full sm:w-auto gap-2">
+                      <Phone className="h-4 w-4" />
+                      <span>Gọi Hotline: {siteConfig.hotline}</span>
+                    </Button>
+                  </a>
+                </div>
+
+                <button
+                  onClick={() => setSubmitResult(null)}
+                  className="mt-8 text-xs text-slate-400 hover:text-slate-200 underline cursor-pointer"
+                >
+                  Gửi thêm yêu cầu khác
+                </button>
+              </div>
+            ) : (
+              /* Layout chia 2 phần: Mascot (trái) và Form nhập liệu (phải) */
+              <div className="relative z-10 flex flex-col lg:flex-row items-center lg:items-center justify-between gap-6 lg:gap-8 xl:gap-10">
+                {/* Mascot Cột Trái */}
+                <div className="w-full lg:w-[260px] xl:w-[290px] shrink-0 flex flex-col items-center justify-center text-center">
+                  {/* Lời nói nghệ thuật phong cách viết tay & nét vẽ tay (Artistic Hand-drawn Speech) */}
+                  <div className="relative mb-2 inline-flex items-center justify-center select-none animate-float">
+                    {/* Nét ngoặc vẽ tay trái */}
+                    <svg
+                      width="20"
+                      height="54"
+                      viewBox="0 0 20 54"
+                      fill="none"
+                      className="text-red-500/90 shrink-0 drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]"
+                    >
+                      <path
+                        d="M16 4 C7 15, 3 27, 6 41 C7 47, 11 50, 14 51"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+
+                    {/* Chữ viết tay nghệ thuật */}
+                    <div className="px-1.5 text-center -rotate-3 font-handwriting">
+                      <p className="text-xl sm:text-2xl font-bold text-red-400 tracking-wide leading-none drop-shadow-[0_2px_12px_rgba(239,68,68,0.5)]">
+                        Gửi ngay website
+                      </p>
+                      <p className="text-xl sm:text-2xl font-extrabold text-red-500 tracking-wide leading-none mt-1 drop-shadow-[0_2px_12px_rgba(239,68,68,0.7)]">
+                        DUDI kiểm tra giúp bạn!
+                      </p>
+                    </div>
+
+                    {/* Nét ngoặc vẽ tay phải */}
+                    <svg
+                      width="20"
+                      height="54"
+                      viewBox="0 0 20 54"
+                      fill="none"
+                      className="text-red-500/90 shrink-0 drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]"
+                    >
+                      <path
+                        d="M4 4 C13 15, 17 27, 14 41 C13 47, 9 50, 6 51"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
                   </div>
-                  <p className="text-slate-400 mt-0.5 text-[11px] sm:text-xs">
-                    Điền thông tin bên dưới để kỹ thuật viên rà soát trực tiếp và tư vấn phương án tiết kiệm nhất.
-                  </p>
-                </div>
-              </div>
 
-              {/* Honeypot hidden input */}
-              <div className="hidden" aria-hidden="true">
-                <input
-                  type="text"
-                  name="hp_company_fax"
-                  tabIndex={-1}
-                  autoComplete="off"
-                  value={formData.hp_company_fax}
-                  onChange={handleChange}
-                />
-              </div>
-
-              {submitResult && !submitResult.success && (
-                <div className="p-4 rounded-xl bg-red-950/80 border border-red-800/80 text-rose-300 text-sm flex items-start gap-2.5">
-                  <AlertCircle className="h-5 w-5 shrink-0 mt-0.5" />
-                  <span>{submitResult.message}</span>
-                </div>
-              )}
-
-              {/* Row 1: Họ tên & Số điện thoại */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-200 mb-1.5">
-                    Họ và tên <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="fullName"
-                    value={formData.fullName}
-                    onChange={handleChange}
-                    placeholder="Nguyễn Văn A"
-                    className={`w-full rounded-xl border px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition-colors ${
-                      errors.fullName
-                        ? "border-red-500 bg-red-950/30"
-                        : "border-slate-700 bg-slate-950/80 focus:border-red-500 focus:ring-1 focus:ring-red-500/30"
-                    }`}
-                  />
-                  {errors.fullName && (
-                    <p className="mt-1 text-xs text-rose-400 font-medium">{errors.fullName}</p>
-                  )}
+                  {/* Ảnh Linh vật HD chỉ tay lên (Chuẩn mẫu linh vật DUDI 100%, Đã tách nền trong suốt) */}
+                  <div className="relative w-52 h-72 sm:w-60 sm:h-80 lg:w-64 lg:h-84 xl:w-72 xl:h-92 drop-shadow-[0_20px_35px_rgba(220,38,38,0.35)] transition-transform duration-500 hover:scale-105">
+                    <Image
+                      src="/images/dudi-mascot-pointing-v3.webp"
+                      alt="Linh vật DUDI Software chỉ tay tư vấn"
+                      fill
+                      className="object-contain"
+                      sizes="(max-width: 768px) 240px, 300px"
+                      priority
+                    />
+                  </div>
                 </div>
 
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-200 mb-1.5">
-                    Số điện thoại / Zalo <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="0909 000 000"
-                    className={`w-full rounded-xl border px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition-colors ${
-                      errors.phone
-                        ? "border-red-500 bg-red-950/30"
-                        : "border-slate-700 bg-slate-950/80 focus:border-red-500 focus:ring-1 focus:ring-red-500/30"
-                    }`}
-                  />
-                  {errors.phone && (
-                    <p className="mt-1 text-xs text-rose-400 font-medium">{errors.phone}</p>
-                  )}
+                {/* Form Card Cột Phải */}
+                <div className="flex-1 w-full">
+                  {/* Tiêu đề & phụ đề form */}
+                  <div className="mb-5 sm:mb-6 text-left">
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-white tracking-tight leading-snug">
+                      Gửi website để được kiểm tra và tư vấn
+                    </h3>
+                    <p className="mt-1.5 text-xs sm:text-sm text-slate-300">
+                      Điền thông tin bên dưới, chúng tôi sẽ liên hệ trong thời gian sớm nhất.
+                    </p>
+                  </div>
+
+                  <form onSubmit={handleSubmit} noValidate className="space-y-4 text-left">
+                    {/* Hàng 1: 4 cột trên desktop, 2 cột trên tablet/mobile */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-3.5">
+                      {/* 1. Họ và tên * */}
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                          Họ và tên <span className="text-red-400 font-bold">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          name="fullName"
+                          value={formData.fullName}
+                          onChange={handleChange}
+                          placeholder="Nguyễn Văn A"
+                          className={cn(
+                            "w-full rounded-xl bg-slate-950/80 border px-3.5 py-2.5 text-xs sm:text-sm text-white placeholder:text-slate-500 transition-all focus:outline-none focus:ring-1",
+                            errors.fullName
+                              ? "border-red-500 focus:ring-red-500"
+                              : "border-slate-700/80 focus:border-red-500/80 focus:ring-red-500/40"
+                          )}
+                        />
+                        {errors.fullName && (
+                          <p className="text-[11px] text-red-400 mt-1">{errors.fullName}</p>
+                        )}
+                      </div>
+
+                      {/* 2. Số điện thoại/Zalo * */}
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                          Số điện thoại/Zalo <span className="text-red-400 font-bold">*</span>
+                        </label>
+                        <input
+                          type="tel"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          placeholder="0909 000 000"
+                          className={cn(
+                            "w-full rounded-xl bg-slate-950/80 border px-3.5 py-2.5 text-xs sm:text-sm text-white placeholder:text-slate-500 transition-all focus:outline-none focus:ring-1",
+                            errors.phone
+                              ? "border-red-500 focus:ring-red-500"
+                              : "border-slate-700/80 focus:border-red-500/80 focus:ring-red-500/40"
+                          )}
+                        />
+                        {errors.phone && (
+                          <p className="text-[11px] text-red-400 mt-1">{errors.phone}</p>
+                        )}
+                      </div>
+
+                      {/* 3. Tên doanh nghiệp */}
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                          Tên doanh nghiệp
+                        </label>
+                        <input
+                          type="text"
+                          name="company"
+                          value={formData.company}
+                          onChange={handleChange}
+                          placeholder="Công ty ABC"
+                          className="w-full rounded-xl bg-slate-950/80 border border-slate-700/80 px-3.5 py-2.5 text-xs sm:text-sm text-white placeholder:text-slate-500 transition-all focus:outline-none focus:border-red-500/80 focus:ring-1 focus:ring-red-500/40"
+                        />
+                      </div>
+
+                      {/* 4. Website hiện tại * */}
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                          Website hiện tại <span className="text-red-400 font-bold">*</span>
+                        </label>
+                        <input
+                          type="url"
+                          name="websiteUrl"
+                          value={formData.websiteUrl}
+                          onChange={handleChange}
+                          placeholder="https://example.com"
+                          className={cn(
+                            "w-full rounded-xl bg-slate-950/80 border px-3.5 py-2.5 text-xs sm:text-sm text-white placeholder:text-slate-500 transition-all focus:outline-none focus:ring-1",
+                            errors.websiteUrl
+                              ? "border-red-500 focus:ring-red-500"
+                              : "border-slate-700/80 focus:border-red-500/80 focus:ring-red-500/40"
+                          )}
+                        />
+                        {errors.websiteUrl && (
+                          <p className="text-[11px] text-red-400 mt-1">{errors.websiteUrl}</p>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Hàng 2: 3 cột dropdown */}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-3.5">
+                      {/* 5. Vấn đề đang gặp */}
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                          Vấn đề đang gặp
+                        </label>
+                        <div className="relative">
+                          <select
+                            name="issue"
+                            value={formData.issue}
+                            onChange={handleChange}
+                            className="w-full appearance-none rounded-xl bg-slate-950/80 border border-slate-700/80 px-3.5 py-2.5 pr-8 text-xs sm:text-sm text-white transition-all focus:outline-none focus:border-red-500/80 focus:ring-1 focus:ring-red-500/40 cursor-pointer"
+                          >
+                            <option value="" className="bg-slate-900 text-slate-400">Chọn vấn đề</option>
+                            <option value="Web tải chậm / Giật lag" className="bg-slate-900">Web tải chậm / Giật lag</option>
+                            <option value="Vỡ giao diện trên điện thoại" className="bg-slate-900">Vỡ giao diện trên điện thoại</option>
+                            <option value="Lỗi form liên hệ / Gửi thư" className="bg-slate-900">Lỗi form liên hệ / gửi thư</option>
+                            <option value="Cần thay đổi nội dung & hình ảnh" className="bg-slate-900">Cần thay nội dung & hình ảnh</option>
+                            <option value="Website cũ muốn làm mới" className="bg-slate-900">Website cũ muốn làm mới</option>
+                            <option value="Vấn đề kỹ thuật khác" className="bg-slate-900">Vấn đề kỹ thuật khác</option>
+                          </select>
+                          <ChevronDown className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                        </div>
+                      </div>
+
+                      {/* 6. Gói quan tâm */}
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                          Gói quan tâm
+                        </label>
+                        <div className="relative">
+                          <select
+                            name="packageInterested"
+                            value={formData.packageInterested}
+                            onChange={handleChange}
+                            className="w-full appearance-none rounded-xl bg-slate-950/80 border border-slate-700/80 px-3.5 py-2.5 pr-8 text-xs sm:text-sm text-white transition-all focus:outline-none focus:border-red-500/80 focus:ring-1 focus:ring-red-500/40 cursor-pointer"
+                          >
+                            <option value="Chưa rõ" className="bg-slate-900 text-slate-400">Chọn gói</option>
+                            <option value="Cơ bản" className="bg-slate-900">Gói Cơ Bản (500.000đ)</option>
+                            <option value="Tiêu chuẩn" className="bg-slate-900">Gói Tiêu Chuẩn (2.000.000đ)</option>
+                            <option value="Cao cấp" className="bg-slate-900">Gói Cao Cấp (5.000.000đ)</option>
+                            <option value="Làm mới toàn bộ website" className="bg-slate-900">Làm mới toàn bộ (Từ 10tr)</option>
+                            <option value="Chưa rõ" className="bg-slate-900">Chưa rõ - Cần DUDI tư vấn</option>
+                          </select>
+                          <ChevronDown className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                        </div>
+                      </div>
+
+                      {/* 7. Thời gian mong muốn */}
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                          Thời gian mong muốn
+                        </label>
+                        <div className="relative">
+                          <select
+                            name="timeline"
+                            value={formData.timeline}
+                            onChange={handleChange}
+                            className="w-full appearance-none rounded-xl bg-slate-950/80 border border-slate-700/80 px-3.5 py-2.5 pr-8 text-xs sm:text-sm text-white transition-all focus:outline-none focus:border-red-500/80 focus:ring-1 focus:ring-red-500/40 cursor-pointer"
+                          >
+                            <option value="1 tuần" className="bg-slate-900 text-slate-400">Chọn thời gian</option>
+                            <option value="Cần gấp (1–2 ngày)" className="bg-slate-900">Cần gấp (1–2 ngày)</option>
+                            <option value="Trong tuần này" className="bg-slate-900">Trong tuần này (3–5 ngày)</option>
+                            <option value="Trong 1–2 tuần" className="bg-slate-900">Trong 1–2 tuần tới</option>
+                            <option value="Chưa gấp" className="bg-slate-900">Chưa gấp - Đang tham khảo</option>
+                          </select>
+                          <ChevronDown className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Honeypot field (hidden) */}
+                    <input
+                      type="text"
+                      name="hp_company_fax"
+                      value={formData.hp_company_fax}
+                      onChange={handleChange}
+                      tabIndex={-1}
+                      autoComplete="off"
+                      className="hidden"
+                    />
+
+                    {/* Hàng 3: Checkbox đồng ý & Nút Gửi yêu cầu ngay */}
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-3.5 mt-4 border-t border-slate-800/80">
+                      <label className="flex items-center gap-2.5 cursor-pointer select-none text-xs sm:text-sm text-slate-300">
+                        <input
+                          type="checkbox"
+                          name="consent"
+                          checked={formData.consent}
+                          onChange={handleChange}
+                          className="h-4 w-4 rounded border-slate-700 bg-slate-900 text-red-600 focus:ring-red-500 focus:ring-offset-0 cursor-pointer accent-red-600"
+                        />
+                        <span>Tôi đồng ý để DUDI liên hệ tư vấn.</span>
+                      </label>
+
+                      <Button
+                        type="submit"
+                        variant="dudiGradient"
+                        disabled={isSubmitting}
+                        className="w-full sm:w-auto px-7 py-3 text-sm font-bold text-white shadow-xl glow-red hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer flex items-center justify-center gap-2 rounded-xl"
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                            <span>Đang gửi thông tin...</span>
+                          </>
+                        ) : (
+                          <>
+                            <span>Gửi yêu cầu ngay</span>
+                            <ArrowRight className="h-4 w-4" />
+                          </>
+                        )}
+                      </Button>
+                    </div>
+                    {errors.consent && (
+                      <p className="text-[11px] text-red-400">{errors.consent}</p>
+                    )}
+                  </form>
                 </div>
               </div>
-
-              {/* Row 2: Doanh nghiệp & Website */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-200 mb-1.5">
-                    Tên doanh nghiệp / Đơn vị <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="company"
-                    value={formData.company}
-                    onChange={handleChange}
-                    placeholder="Công ty TNHH ABC..."
-                    className={`w-full rounded-xl border px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition-colors ${
-                      errors.company
-                        ? "border-red-500 bg-red-950/30"
-                        : "border-slate-700 bg-slate-950/80 focus:border-red-500 focus:ring-1 focus:ring-red-500/30"
-                    }`}
-                  />
-                  {errors.company && (
-                    <p className="mt-1 text-xs text-rose-400 font-medium">{errors.company}</p>
-                  )}
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-200 mb-1.5">
-                    Đường dẫn website hiện tại <span className="text-slate-400 font-normal">(nếu có)</span>
-                  </label>
-                  <input
-                    type="url"
-                    name="websiteUrl"
-                    value={formData.websiteUrl}
-                    onChange={handleChange}
-                    placeholder="https://example.com"
-                    className={`w-full rounded-xl border px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition-colors ${
-                      errors.websiteUrl
-                        ? "border-red-500 bg-red-950/30"
-                        : "border-slate-700 bg-slate-950/80 focus:border-red-500 focus:ring-1 focus:ring-red-500/30"
-                    }`}
-                  />
-                  {errors.websiteUrl && (
-                    <p className="mt-1 text-xs text-rose-400 font-medium">{errors.websiteUrl}</p>
-                  )}
-                </div>
-              </div>
-
-              {/* Row 3: Vấn đề đang gặp */}
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-200 mb-1.5">
-                  Vấn đề hoặc phần bạn muốn sửa <span className="text-red-500">*</span>
-                </label>
-                <textarea
-                  name="issue"
-                  rows={3}
-                  value={formData.issue}
-                  onChange={handleChange}
-                  placeholder="Ví dụ: Website tải rất chậm trên điện thoại, form liên hệ gửi bị lỗi, cần thay mới bảng giá và bố cục trang chủ..."
-                  className={`w-full rounded-xl border px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition-colors ${
-                    errors.issue
-                      ? "border-red-500 bg-red-950/30"
-                      : "border-slate-700 bg-slate-950/80 focus:border-red-500 focus:ring-1 focus:ring-red-500/30"
-                  }`}
-                />
-                {errors.issue && (
-                  <p className="mt-1 text-xs text-rose-400 font-medium">{errors.issue}</p>
-                )}
-              </div>
-
-              {/* Row 4: Gói quan tâm & Thời gian mong muốn */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-200 mb-1.5">
-                    Gói dịch vụ quan tâm <span className="text-red-500">*</span>
-                  </label>
-                  <select
-                    name="packageInterested"
-                    value={formData.packageInterested}
-                    onChange={handleChange}
-                    className="w-full rounded-xl border border-slate-700 bg-slate-950/90 px-4 py-3 text-sm text-white outline-none focus:border-red-500 cursor-pointer"
-                  >
-                    <option value="Chưa rõ" className="bg-slate-900 text-white">Chưa rõ (Cần DUDI kiểm tra tư vấn)</option>
-                    <option value="Cơ bản" className="bg-slate-900 text-white">Gói Cơ bản (500.000đ/gói)</option>
-                    <option value="Tiêu chuẩn" className="bg-slate-900 text-white">Gói Tiêu chuẩn (2.000.000đ/gói - Khuyên dùng)</option>
-                    <option value="Cao cấp" className="bg-slate-900 text-white">Gói Cao cấp (5.000.000đ/gói)</option>
-                    <option value="Làm mới toàn bộ" className="bg-slate-900 text-white">Gói Làm mới toàn bộ (từ 10.000.000đ)</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-200 mb-1.5">
-                    Thời gian mong muốn hoàn thành
-                  </label>
-                  <select
-                    name="timeline"
-                    value={formData.timeline}
-                    onChange={handleChange}
-                    className="w-full rounded-xl border border-slate-700 bg-slate-950/90 px-4 py-3 text-sm text-white outline-none focus:border-red-500 cursor-pointer"
-                  >
-                    <option value="Trong 3 ngày" className="bg-slate-900 text-white">Trong 3 ngày (Gấp)</option>
-                    <option value="1 tuần" className="bg-slate-900 text-white">Khoảng 1 tuần</option>
-                    <option value="2 tuần" className="bg-slate-900 text-white">Khoảng 2 tuần</option>
-                    <option value="Chưa gấp" className="bg-slate-900 text-white">Chưa gấp / Linh hoạt</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Consent checkbox */}
-              <div className="pt-2">
-                <label className="flex items-start gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    name="consent"
-                    checked={formData.consent}
-                    onChange={handleChange}
-                    className="mt-1 h-4 w-4 rounded border-slate-700 bg-slate-950 text-red-600 focus:ring-red-500 cursor-pointer"
-                  />
-                  <span className="text-xs text-slate-300 leading-normal select-none">
-                    Tôi đồng ý để chuyên viên kỹ thuật của DUDI liên hệ hỗ trợ khảo sát website qua điện thoại hoặc Zalo. DUDI cam kết bảo mật thông tin 100%.
-                  </span>
-                </label>
-                {errors.consent && (
-                  <p className="mt-1 text-xs text-rose-400 font-medium">{errors.consent}</p>
-                )}
-              </div>
-
-              {/* Submit Button */}
-              <div className="pt-3">
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  variant="dudiGradient"
-                  size="lg"
-                  className="w-full py-4 text-base font-bold shadow-lg glow-red cursor-pointer"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="h-5 w-5 animate-spin mr-2" />
-                      <span>Đang gửi thông tin...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Gửi website để DUDI kiểm tra</span>
-                      <Send className="h-4 w-4 ml-2" />
-                    </>
-                  )}
-                </Button>
-              </div>
-
-              <div className="flex items-center justify-center gap-2 pt-2 text-xs text-slate-400">
-                <ShieldCheck className="h-4 w-4 text-emerald-400" />
-                <span>Kiểm tra miễn phí — Báo giá trước — Không phát sinh chi phí</span>
-              </div>
-            </form>
-          )}
-        </div>
+            )}
+          </div>
         </RevealOnScroll>
       </Container>
     </section>

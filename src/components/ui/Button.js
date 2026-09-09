@@ -15,7 +15,9 @@ const buttonVariants = {
   ghost:
     "bg-transparent hover:bg-white/10 text-slate-300 hover:text-white",
   zalo:
-    "bg-blue-600 text-white hover:bg-blue-700 shadow-md shadow-blue-600/30 active:scale-[0.98]",
+    "bg-[#0068FF] text-white hover:bg-[#0052cc] border border-blue-400/30 shadow-md shadow-blue-600/30 active:scale-[0.98]",
+  outlineZalo:
+    "border border-blue-500/50 hover:border-[#0068FF] bg-blue-950/25 hover:bg-blue-900/40 text-blue-300 hover:text-white shadow-xs hover:shadow-[0_0_20px_rgba(0,104,255,0.25)]",
 };
 
 const buttonSizes = {

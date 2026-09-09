@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Caveat } from "next/font/google";
 import { siteConfig } from "@/constants/site-config";
 import { faqContent } from "@/constants/landing-content";
 import "./globals.css";
@@ -11,6 +11,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin", "vietnamese"],
+  weight: ["600", "700"],
 });
 
 export const metadata = {
@@ -109,7 +115,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="vi"
-      className={`${geistSans.variable} ${geistMono.variable} scroll-smooth antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${caveat.variable} scroll-smooth antialiased`}
     >
       <head>
         <script

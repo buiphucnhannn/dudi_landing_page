@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, Mail, MapPin, MessageCircle, ShieldCheck } from "lucide-react";
+import { Phone, Mail, MapPin, ShieldCheck } from "lucide-react";
 import { siteConfig } from "@/constants/site-config";
 import { Container } from "@/components/common/Container";
+import { ZaloIcon } from "@/components/ui/ZaloIcon";
+import { scrollToSection } from "@/lib/utils";
 
 export function Footer() {
   const scrollToTop = (e) => {
@@ -15,9 +17,9 @@ export function Footer() {
   return (
     <footer className="border-t border-slate-800/80 bg-[#050811] text-slate-300 py-12">
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+        <div className="flex flex-col md:flex-row justify-between items-start gap-10 md:gap-8">
           {/* Cột 1: Logo & Thông tin pháp nhân */}
-          <div className="md:col-span-2 space-y-4">
+          <div className="w-full md:w-[38%] lg:w-[36%] max-w-md space-y-4">
             <Link
               href="/"
               onClick={scrollToTop}
@@ -55,7 +57,7 @@ export function Footer() {
               Mã số thuế (MST): <strong className="text-white font-mono">{siteConfig.taxId}</strong>
             </p>
 
-            <p className="text-xs text-slate-400 leading-relaxed max-w-md">
+            <p className="text-xs text-slate-400 leading-relaxed max-w-md text-justify">
               Chuyên cung cấp dịch vụ cập nhật, sửa lỗi và nâng cấp website doanh nghiệp trọn gói. Khảo sát kỹ thuật miễn phí, báo giá trước minh bạch và bảo hành lỗi 30 ngày.
             </p>
 
@@ -65,29 +67,37 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Cột 2: Danh mục liên kết nhanh */}
-          <div>
+          {/* Cột 2: Danh mục liên kết nhanh (Căn giữa cân đối) */}
+          <div className="w-full md:w-auto shrink-0">
             <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">
               Nội dung chính
             </h4>
             <ul className="space-y-2.5 text-xs text-slate-400">
               {siteConfig.navItems.map((item) => (
                 <li key={item.label}>
-                  <a href={item.href} className="hover:text-red-400 transition-colors">
+                  <a
+                    href={item.href}
+                    onClick={(e) => scrollToSection(item.href, e)}
+                    className="hover:text-red-400 transition-colors cursor-pointer"
+                  >
                     {item.label}
                   </a>
                 </li>
               ))}
               <li>
-                <a href="#form-tu-van" className="hover:text-red-400 transition-colors text-red-400 font-semibold">
+                <a
+                  href="#form-tu-van"
+                  onClick={(e) => scrollToSection("#form-tu-van", e)}
+                  className="hover:text-red-400 transition-colors text-red-400 font-semibold cursor-pointer"
+                >
                   Gửi website kiểm tra
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Cột 3: Thông tin liên hệ trực tiếp */}
-          <div>
+          {/* Cột 3: Thông tin liên hệ trực tiếp (Căn sát lề phải container) */}
+          <div className="w-full md:w-auto shrink-0">
             <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">
               Thông tin liên hệ
             </h4>
@@ -103,7 +113,7 @@ export function Footer() {
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
-                <MessageCircle className="h-4 w-4 shrink-0 text-blue-400" />
+                <ZaloIcon className="h-4 w-4 shrink-0" />
                 <a
                   href={siteConfig.zaloUrl}
                   target="_blank"

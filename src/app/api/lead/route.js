@@ -46,11 +46,12 @@ export async function POST(request) {
       errors.phone = "Số điện thoại không hợp lệ (từ 9-12 chữ số hợp lệ tại VN).";
     }
 
-    if (!company || company.trim().length < 2 || company.trim().length > 120) {
-      errors.company = "Tên doanh nghiệp phải từ 2 đến 120 ký tự.";
+    // Company is optional
+    if (company && company.trim().length > 120) {
+      errors.company = "Tên doanh nghiệp tối đa 120 ký tự.";
     }
 
-    // Validate websiteUrl if provided
+    // Validate websiteUrl
     let normalizedUrl = (websiteUrl || "").trim();
     if (normalizedUrl) {
       if (!/^https?:\/\//i.test(normalizedUrl)) {
@@ -63,14 +64,9 @@ export async function POST(request) {
       }
     }
 
-    if (!issue || issue.trim().length < 10 || issue.trim().length > 1000) {
-      errors.issue = "Mô tả vấn đề cần từ 10 đến 1.000 ký tự.";
-    }
+    const cleanIssue = (issue || "Khảo sát & tư vấn tổng thể").trim();
 
-    const validPackages = ["Cơ bản", "Tiêu chuẩn", "Cao cấp", "Chưa rõ", "Làm mới toàn bộ"];
-    if (!packageInterested || !validPackages.includes(packageInterested)) {
-      errors.packageInterested = "Vui lòng chọn gói dịch vụ bạn quan tâm.";
-    }
+    const normalizedPackage = packageInterested || "Chưa rõ";
 
     if (!consent) {
       errors.consent = "Bạn cần đồng ý để DUDI liên hệ tư vấn.";
@@ -93,10 +89,10 @@ export async function POST(request) {
       createdAt: new Date().toISOString(),
       fullName: fullName.trim(),
       phone: cleanedPhone,
-      company: company.trim(),
+      company: (company || "").trim(),
       websiteUrl: normalizedUrl || null,
-      issue: issue.trim(),
-      packageInterested,
+      issue: cleanIssue,
+      packageInterested: normalizedPackage,
       timeline: timeline || "1 tuần",
       metadata: {
         utm_source: utm_source || null,

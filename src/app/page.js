@@ -8,7 +8,6 @@ import { Solutions } from "@/components/sections/Solutions";
 import { CaseStudies } from "@/components/sections/CaseStudies";
 import { Process } from "@/components/sections/Process";
 import { Pricing } from "@/components/sections/Pricing";
-import { RebuildBanner } from "@/components/sections/RebuildBanner";
 import { WhyUs } from "@/components/sections/WhyUs";
 import { FAQ } from "@/components/sections/FAQ";
 import { LeadForm } from "@/components/sections/LeadForm";
@@ -67,10 +66,9 @@ export default function LandingPage() {
         {/* S07 - Bảng giá 3 gói (GIÁ/GÓI) */}
         <Pricing onSelectPackage={handleSelectPackage} />
 
-        {/* S08 - Khối làm mới toàn bộ từ 10 triệu */}
-        <RebuildBanner onSelectPackage={handleSelectPackage} />
+        <SectionDivider />
 
-        {/* S09 - Vì sao chọn DUDI */}
+        {/* S08 - Vì sao chọn DUDI */}
         <WhyUs />
 
         <SectionDivider />

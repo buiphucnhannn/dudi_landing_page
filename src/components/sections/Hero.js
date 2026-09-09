@@ -1,29 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
-import {
-  ArrowRight,
-  MessageCircle,
-  Phone,
-  ShieldCheck,
-  Zap,
-  Smartphone,
-  Sparkles,
-  AlertTriangle,
-  ChevronDown,
-} from "lucide-react";
+import { ArrowRight, Phone, ChevronDown } from "lucide-react";
 import { heroContent } from "@/constants/landing-content";
 import { siteConfig } from "@/constants/site-config";
 import { Container } from "@/components/common/Container";
 import { Button } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/Badge";
 import { HeroBackground } from "@/components/common/HeroBackground";
-import { RevealOnScroll } from "@/components/common/RevealOnScroll";
+import { ZaloIcon } from "@/components/ui/ZaloIcon";
 import { trackEvent } from "@/lib/tracking";
+import { scrollToSection } from "@/lib/utils";
 
 export function Hero() {
-  const [activeTab, setActiveTab] = useState("after");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -126,11 +114,11 @@ export function Hero() {
                 className="w-full sm:w-auto"
               >
                 <Button
-                  variant="outline"
+                  variant="outlineZalo"
                   size="lg"
-                  className="w-full sm:w-auto text-blue-400 border-blue-500/40 bg-blue-950/20 hover:bg-blue-900/40 py-4 px-7"
+                  className="w-full sm:w-auto py-4 px-7 gap-2 border-blue-500/50 hover:border-[#0068FF] hover:bg-blue-900/40 hover:shadow-[0_0_20px_rgba(0,104,255,0.3)]"
                 >
-                  <MessageCircle className="h-5 w-5 fill-blue-500 text-white" />
+                  <ZaloIcon className="h-5 w-5" />
                   <span>{heroContent.secondaryCta.label}</span>
                 </Button>
               </a>
@@ -154,199 +142,19 @@ export function Hero() {
           </div>
         </Container>
 
-        {/* Gợi ý cuộn xuống ở đáy màn hình 1 — nhích xuống dưới */}
+        {/* Gợi ý cuộn xuống ở đáy màn hình 1 */}
         <a
-          href="#showcase-truoc-sau"
+          href="#dau-hieu"
+          onClick={(e) => {
+            scrollToSection("#dau-hieu", e);
+          }}
           className="flex flex-col items-center justify-center gap-1 text-slate-400/80 pt-2 pb-1 animate-pulse hover:text-red-400 transition-colors cursor-pointer group"
         >
           <span className="text-[11px] font-semibold tracking-widest uppercase text-slate-400/70 group-hover:text-red-400 transition-colors">
-            Cuộn xuống để xem kết quả
+            Cuộn xuống để xem thêm
           </span>
           <ChevronDown className="h-4 w-4 text-red-400 animate-bounce" />
         </a>
-      </div>
-
-      {/* Màn hình 2: Before/After Showcase — Chuyên viên DUDI (Phải lướt xuống mới thấy) */}
-      <div id="showcase-truoc-sau" className="pt-14 pb-20 sm:pt-20 sm:pb-28 relative z-10">
-        <Container>
-          <RevealOnScroll duration={900} delay={80}>
-            <div className="relative w-full max-w-[1120px] mx-auto rounded-2xl border border-slate-700/80 bg-[#0B132B]/85 p-3 shadow-2xl backdrop-blur-xl ring-1 ring-white/10">
-              {/* Robot Mascot */}
-              <div className="absolute -top-11 -left-3 sm:-left-6 lg:-left-10 z-20 hidden sm:flex items-center gap-2.5 bg-[#0B132B]/95 border border-red-500/40 rounded-2xl p-2 shadow-2xl backdrop-blur-md animate-tilt-float">
-                <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-xl overflow-hidden border border-red-500/40 shrink-0 bg-slate-900 shadow-md">
-                  <Image
-                    src="/images/robot-mascot.jpg"
-                    alt="DUDI Robot"
-                    fill
-                    className="object-cover"
-                    sizes="48px"
-                  />
-                </div>
-                <div className="text-left pr-2">
-                  <div className="flex items-center gap-1.5">
-                    <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
-                    <span className="text-[11px] font-bold text-white">Chuyên viên DUDI</span>
-                  </div>
-                  <p className="text-[10px] text-slate-300">Khảo sát & sửa đúng phần</p>
-                </div>
-              </div>
-
-              {/* Top Bar */}
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pb-3 border-b border-slate-800 px-3">
-                <div className="flex items-center gap-2">
-                  <div className="flex gap-1.5">
-                    <div className="h-3 w-3 rounded-full bg-red-500" />
-                    <div className="h-3 w-3 rounded-full bg-amber-500" />
-                    <div className="h-3 w-3 rounded-full bg-emerald-500" />
-                  </div>
-                  <span className="text-xs font-mono text-slate-400 pl-2 hidden sm:inline">
-                    https://yourcompany.com
-                  </span>
-                </div>
-
-                {/* Tabs */}
-                <div className="inline-flex rounded-xl bg-slate-950/80 p-1 text-xs font-bold border border-slate-800">
-                  <button
-                    onClick={() => setActiveTab("before")}
-                    className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
-                      activeTab === "before"
-                        ? "bg-rose-950/80 text-rose-300 border border-rose-800/60 shadow-xs"
-                        : "text-slate-400 hover:text-slate-200"
-                    }`}
-                  >
-                    <AlertTriangle className="h-3.5 w-3.5 text-amber-400" />
-                    <span>Website hiện tại (Trước sửa)</span>
-                  </button>
-                  <button
-                    onClick={() => setActiveTab("after")}
-                    className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
-                      activeTab === "after"
-                        ? "bg-red-600 text-white shadow-md glow-red"
-                        : "text-slate-400 hover:text-slate-200"
-                    }`}
-                  >
-                    <Sparkles className="h-3.5 w-3.5 text-yellow-300" />
-                    <span>Sau khi DUDI nâng cấp</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* Screen Content */}
-              {activeTab === "after" ? (
-                <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-slate-950 via-[#070B18] to-slate-950 p-6 sm:p-10 text-white text-left transition-all duration-300 border border-slate-800/60">
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center gap-2">
-                      <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-ping" />
-                      <Badge variant="success" className="text-emerald-300 bg-emerald-950/80 border-emerald-700">
-                        Đã tối ưu chuẩn kỹ thuật DUDI
-                      </Badge>
-                    </div>
-                    <span className="text-xs text-slate-400 font-mono">Bảo hành 30 ngày</span>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-                    <div className="rounded-xl bg-white/5 p-5 border border-white/10 backdrop-blur-sm card-tilt-hover">
-                      <div className="flex items-center gap-2 text-emerald-400 text-xs font-semibold uppercase">
-                        <Zap className="h-4 w-4" />
-                        <span>Tốc độ tải trang</span>
-                      </div>
-                      <p className="text-3xl sm:text-4xl font-black mt-2 text-white">0.78s</p>
-                      <p className="text-xs text-emerald-300 mt-1 font-medium">
-                        ✓ Nén ảnh chuẩn WebP, tải tức thì
-                      </p>
-                    </div>
-
-                    <div className="rounded-xl bg-white/5 p-5 border border-white/10 backdrop-blur-sm card-tilt-hover">
-                      <div className="flex items-center gap-2 text-blue-400 text-xs font-semibold uppercase">
-                        <Smartphone className="h-4 w-4" />
-                        <span>Hiển thị Mobile</span>
-                      </div>
-                      <p className="text-3xl sm:text-4xl font-black mt-2 text-white">100%</p>
-                      <p className="text-xs text-blue-300 mt-1 font-medium">
-                        ✓ Nút to rõ, không tràn khung ngang
-                      </p>
-                    </div>
-
-                    <div className="rounded-xl bg-white/5 p-5 border border-white/10 backdrop-blur-sm card-tilt-hover">
-                      <div className="flex items-center gap-2 text-amber-400 text-xs font-semibold uppercase">
-                        <ShieldCheck className="h-4 w-4" />
-                        <span>Form & Liên hệ</span>
-                      </div>
-                      <p className="text-3xl sm:text-4xl font-black mt-2 text-white">Ổn định</p>
-                      <p className="text-xs text-amber-300 mt-1 font-medium">
-                        ✓ Bấm gọi ngay, thông báo về email/Zalo
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="mt-6 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-300">
-                    <span>Khảo sát và kiểm tra trang web của bạn hoàn toàn miễn phí</span>
-                    <a
-                      href="#form-tu-van"
-                      className="inline-flex items-center gap-1.5 text-red-400 hover:text-red-300 font-bold underline"
-                    >
-                      Gửi link website để kiểm tra ngay <ArrowRight className="h-3.5 w-3.5" />
-                    </a>
-                  </div>
-                </div>
-              ) : (
-                <div className="relative overflow-hidden rounded-xl bg-slate-950/90 p-6 sm:p-10 text-slate-200 text-left transition-all duration-300 border border-slate-800">
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center gap-2">
-                      <Badge variant="warning">Các vấn đề thường gặp trên web cũ</Badge>
-                    </div>
-                    <span className="text-xs text-slate-400 font-mono">Chưa nâng cấp</span>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-                    <div className="rounded-xl bg-slate-900/90 p-5 border border-rose-900/50 shadow-xs">
-                      <div className="flex items-center gap-2 text-rose-400 text-xs font-bold uppercase">
-                        <Zap className="h-4 w-4" />
-                        <span>Tốc độ tải trang</span>
-                      </div>
-                      <p className="text-3xl sm:text-4xl font-black mt-2 text-rose-400">5.8s</p>
-                      <p className="text-xs text-rose-300/80 mt-1">
-                        ✗ Khách chờ lâu và bỏ sang đối thủ
-                      </p>
-                    </div>
-
-                    <div className="rounded-xl bg-slate-900/90 p-5 border border-rose-900/50 shadow-xs">
-                      <div className="flex items-center gap-2 text-rose-400 text-xs font-bold uppercase">
-                        <Smartphone className="h-4 w-4" />
-                        <span>Xem trên điện thoại</span>
-                      </div>
-                      <p className="text-3xl sm:text-4xl font-black mt-2 text-rose-400">Bị vỡ</p>
-                      <p className="text-xs text-rose-300/80 mt-1">
-                        ✗ Chữ bé li ti, nút bấm bị che khuất
-                      </p>
-                    </div>
-
-                    <div className="rounded-xl bg-slate-900/90 p-5 border border-rose-900/50 shadow-xs">
-                      <div className="flex items-center gap-2 text-rose-400 text-xs font-bold uppercase">
-                        <AlertTriangle className="h-4 w-4" />
-                        <span>Form liên hệ</span>
-                      </div>
-                      <p className="text-3xl sm:text-4xl font-black mt-2 text-rose-400">Lỗi gửi</p>
-                      <p className="text-xs text-rose-300/80 mt-1">
-                        ✗ Khách điền nhưng không nhận được tin
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="mt-6 pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
-                    <span>DUDI sẽ rà soát từng mục để đưa ra giải pháp sửa đúng chỗ cần thiết</span>
-                    <button
-                      onClick={() => setActiveTab("after")}
-                      className="inline-flex items-center gap-1.5 text-red-400 font-bold hover:underline cursor-pointer"
-                    >
-                      Xem kết quả sau khi DUDI nâng cấp <ArrowRight className="h-3.5 w-3.5" />
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
-          </RevealOnScroll>
-        </Container>
       </div>
     </section>
   );

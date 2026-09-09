@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Sparkles, Clock, RefreshCw, AlertCircle } from "lucide-react";
+import { Check, Sparkles, Clock, RefreshCw, AlertCircle, ArrowRight } from "lucide-react";
 import { pricingPlans } from "@/constants/landing-content";
 import { Container } from "@/components/common/Container";
 import { SectionHeading } from "@/components/common/SectionHeading";
@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { RevealOnScroll } from "@/components/common/RevealOnScroll";
 import { trackEvent } from "@/lib/tracking";
+import { scrollToSection } from "@/lib/utils";
 
 export function Pricing({ onSelectPackage }) {
   const handleSelect = (plan) => {
@@ -20,20 +21,23 @@ export function Pricing({ onSelectPackage }) {
       onSelectPackage(plan.packageValue);
     }
 
-    // Cuộn mượt đến form
-    const formEl = document.getElementById("form-tu-van");
-    if (formEl) {
-      formEl.scrollIntoView({ behavior: "smooth" });
-    }
+    // Cuộn mượt đến form với vị trí đẹp
+    scrollToSection("#form-tu-van");
   };
 
   return (
-    <section id="bang-gia" className="py-12 sm:py-16 bg-transparent relative">
+    <section id="bang-gia" className="pt-10 pb-10 sm:pt-12 sm:pb-12 bg-transparent relative scroll-mt-6 sm:scroll-mt-8">
       <Container>
         <RevealOnScroll duration={1200}>
           <SectionHeading
-            title="Chi Phí Trọn Gói — Thanh Toán Một Lần"
+            titlePart1="Bảng"
+            titlePart2="giá dịch vụ"
             description="Lựa chọn gói dịch vụ phù hợp với ngân sách và hiện trạng website của bạn. Mọi gói đều bao gồm bảo hành 30 ngày."
+            action={{
+              label: "Gửi website nhận báo giá",
+              href: "#form-tu-van",
+            }}
+            breakLine={false}
           />
         </RevealOnScroll>
 
@@ -73,7 +77,7 @@ export function Pricing({ onSelectPackage }) {
                     )}
 
                     <h3 className="text-2xl font-black text-white mt-3">{plan.name}</h3>
-                    <p className="mt-2 text-xs sm:text-sm text-slate-300 min-h-[42px] leading-relaxed text-balance">
+                    <p className="mt-2 text-xs sm:text-sm text-slate-300 min-h-[42px] leading-relaxed text-justify">
                       {plan.target}
                     </p>
                   </div>
@@ -145,23 +149,34 @@ export function Pricing({ onSelectPackage }) {
           })}
         </div>
 
-        {/* Terms & Exclusions Note */}
+        {/* Ghi chú làm mới toàn bộ website — Thay thế 2 khối cũ theo mẫu */}
         <RevealOnScroll delay={200} duration={1200}>
-          <div className="mt-10 p-5 rounded-2xl bg-[#0D1527]/70 border border-slate-800/80 text-xs sm:text-sm text-slate-300 leading-relaxed backdrop-blur-xl shadow-xl shadow-black/20">
-            <div className="flex items-start gap-2.5">
-              <AlertCircle className="h-5 w-5 text-slate-400 shrink-0 mt-0.5" />
-              <div>
-                <p className="font-bold text-white mb-1">
-                  Điều kiện chung & Giới hạn phạm vi:
-                </p>
-                <p>
-                  Thời gian triển khai tính từ lúc khách hàng cung cấp đủ nội dung, quyền truy cập và hai bên ký xác nhận danh mục hạng mục công việc. DUDI cam kết bảo hành lỗi 30 ngày đối với phần kỹ thuật do DUDI thực hiện.
-                </p>
-                <p className="mt-1 text-slate-400">
-                  <em>* Chi phí không bao gồm: Phí duy trì tên miền, máy chủ hosting, bản quyền theme/plugin trả phí, viết mới toàn bộ bài viết, chụp ảnh và các chức năng nghiệp vụ riêng biệt.</em>
-                </p>
+          <div className="mt-8 sm:mt-10 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-amber-950/35 via-[#131B2E] to-amber-950/35 border border-amber-500/30 text-xs sm:text-sm text-slate-200 backdrop-blur-xl shadow-xl shadow-black/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-3.5">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-500/15 text-amber-400 border border-amber-500/30 shadow-xs">
+                <Sparkles className="h-5 w-5" />
               </div>
+              <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">
+                <strong className="text-white font-bold">Làm mới toàn bộ website:</strong>{" "}
+                <span className="text-slate-300">
+                  Báo giá riêng từ <span className="font-bold text-amber-300">10.000.000đ</span> khi code cũ khó bảo trì hoặc cần thiết kế lại.
+                </span>
+              </p>
             </div>
+
+            <a
+              href="#form-tu-van"
+              onClick={(e) => {
+                if (onSelectPackage) {
+                  onSelectPackage("Làm mới toàn bộ website (Từ 10tr)");
+                }
+                scrollToSection("#form-tu-van", e);
+              }}
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-amber-400 hover:text-amber-300 underline underline-offset-4 decoration-amber-400/50 hover:decoration-amber-300 transition-colors shrink-0 cursor-pointer ml-13 sm:ml-0 group"
+            >
+              <span>Liên hệ để được tư vấn</span>
+              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+            </a>
           </div>
         </RevealOnScroll>
       </Container>

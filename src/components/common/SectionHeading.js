@@ -1,17 +1,22 @@
 import React from "react";
-import { cn } from "@/lib/utils";
+import { ArrowRight } from "lucide-react";
+import { cn, scrollToSection } from "@/lib/utils";
+import { ZaloIcon } from "@/components/ui/ZaloIcon";
 
 export function SectionHeading({
   title,
   titlePart1,
   titlePart2,
   description,
-  align = "center",
+  align = "left",
   className,
+  showBorder = true,
+  action, // { label: string, href: string, onClick?: () => void, external?: boolean }
+  breakLine = true,
 }) {
   const isCenter = align === "center";
 
-  // Smart division into 2 parts: Color 1 (Sky Blue/Cyan) + Color 2 (Hot Pink to Crimson Red)
+  // Smart division into 2 parts: Color 1 (Pure White) + Color 2 (Vivid Red)
   let p1 = titlePart1;
   let p2 = titlePart2;
 
@@ -26,8 +31,8 @@ export function SectionHeading({
       p2 = parts.slice(1).join(" - ").trim();
     } else {
       const words = title.trim().split(/\s+/);
-      if (words.length > 2) {
-        const mid = Math.ceil(words.length / 2);
+      if (words.length > 3) {
+        const mid = Math.ceil(words.length * 0.6);
         p1 = words.slice(0, mid).join(" ");
         p2 = words.slice(mid).join(" ");
       } else {
@@ -37,44 +42,69 @@ export function SectionHeading({
     }
   }
 
-  const content = (
-    <>
-      <span className="block bg-gradient-to-r from-sky-400 via-cyan-300 to-sky-300 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(56,189,248,0.25)]">
-        {p1}
-      </span>
-      {p2 ? (
-        <span className="block mt-1 sm:mt-1.5 bg-gradient-to-r from-pink-500 via-rose-500 to-red-500 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(244,63,94,0.25)]">
-          {p2}
-        </span>
-      ) : null}
-    </>
-  );
-
   return (
     <div
       className={cn(
-        "max-w-3xl mb-8 sm:mb-12",
-        isCenter ? "mx-auto text-center" : "text-left",
+        "mb-6 sm:mb-8",
+        showBorder && "pb-3.5 border-b border-slate-800/60",
         className
       )}
     >
-      <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-black tracking-tight leading-[1.24] drop-shadow-[0_2px_16px_rgba(244,63,94,0.15)]">
-        {content}
-      </h2>
-      {/* Decorative colorful accent line matching the 2 colors */}
       <div
-        className="mt-3.5 h-[3.5px] rounded-full bg-gradient-to-r from-sky-400 via-purple-500 to-rose-500 shadow-[0_0_12px_rgba(244,63,94,0.4)]"
-        style={{
-          width: "80px",
-          marginLeft: isCenter ? "auto" : "0",
-          marginRight: isCenter ? "auto" : undefined,
-        }}
-      />
-      {description && (
-        <p className="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed text-balance max-w-2xl mx-auto">
-          {description}
-        </p>
-      )}
+        className={cn(
+          "flex flex-col sm:flex-row sm:items-start justify-between gap-4",
+          isCenter ? "text-center" : "text-left"
+        )}
+      >
+        <div className="max-w-3xl">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white leading-[1.25]">
+            <span className={breakLine && p2 ? "block" : "inline"}>
+              {p1}{!breakLine || !p2 ? " " : ""}
+            </span>
+            {p2 ? (
+              <span
+                className={cn(
+                  "bg-gradient-to-r from-red-500 via-rose-500 to-red-400 bg-clip-text text-transparent",
+                  breakLine ? "block mt-1 sm:mt-1.5" : "inline"
+                )}
+              >
+                {p2}
+              </span>
+            ) : null}
+          </h2>
+
+          {description && (
+            <p className="mt-2.5 text-sm sm:text-base text-slate-400 max-w-2xl leading-relaxed text-justify">
+              {description}
+            </p>
+          )}
+        </div>
+
+        {action && (
+          <div className="shrink-0 pt-1 sm:pt-2">
+            <a
+              href={action.href}
+              onClick={(e) => {
+                if (action.onClick) {
+                  action.onClick(e);
+                }
+                if (action.href && action.href.startsWith("#") && !action.external) {
+                  scrollToSection(action.href, e);
+                }
+              }}
+              target={action.external ? "_blank" : undefined}
+              rel={action.external ? "noopener noreferrer" : undefined}
+              className="inline-flex items-center gap-1.5 text-sm sm:text-base font-semibold text-red-400 hover:text-red-300 transition-colors group cursor-pointer"
+            >
+              {action.label && action.label.toLowerCase().includes("zalo") && (
+                <ZaloIcon className="h-4 w-4 shrink-0" />
+              )}
+              <span>{action.label}</span>
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </a>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

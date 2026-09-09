@@ -133,34 +133,52 @@ export const caseStudiesContent = [
   {
     id: "packaging",
     client: "Doanh nghiệp Bao Bì Công Nghiệp",
+    shortTitle: "Website bao bì",
     budget: "11.500.000đ",
+    priceBadge: "11,5 triệu",
     tag: "Dự án đã hoàn thành",
     summary:
       "Nâng cấp cấu trúc danh mục sản phẩm, cải thiện hiển thị trên thiết bị di động và tối ưu giao diện nhận yêu cầu báo giá.",
     statusDetail:
       "Website đã hoàn thành nghiệm thu, đang hoạt động ổn định trên internet. Phía khách hàng đang chuẩn bị thêm tư liệu nội dung để cập nhật giai đoạn tiếp theo.",
+    highlights: [
+      "Giao diện hiện đại, chuyên nghiệp",
+      "Tối ưu hiển thị trên mobile",
+      "Tăng tốc độ tải trang",
+    ],
     deliverables: [
       "Tái cấu trúc 8 trang danh mục sản phẩm",
       "Sửa lỗi tràn layout trên 100% màn hình di động",
       "Form yêu cầu báo giá đính kèm file mẫu",
       "Bàn giao kèm tài liệu hướng dẫn cập nhật",
     ],
+    beforeImage: "/images/case-packaging-before.webp",
+    afterImage: "/images/case-packaging-after.webp",
   },
   {
     id: "travel",
     client: "Đơn vị Cung Ứng Dịch Vụ Du Lịch",
+    shortTitle: "Website du lịch",
     budget: "3.500.000đ",
+    priceBadge: "3,5 triệu",
     tag: "Đã hoàn thành & thanh toán",
     summary:
       "Tối ưu tốc độ mở trang tour, sửa lỗi form đặt phòng và làm mới thanh menu điều hướng giúp khách hàng dễ chọn tour hơn.",
     statusDetail:
       "Website đã hoàn thành đúng tiến độ cam kết, khách hàng đã thanh toán 100%, trang web vận hành mượt mà (hạng mục SEO chuyên sâu do đối tác riêng của khách thực hiện).",
+    highlights: [
+      "Nâng cấp giao diện, hình ảnh",
+      "Tối ưu SEO cơ bản",
+      "Sửa form liên hệ, tích hợp chức năng đặt tour",
+    ],
     deliverables: [
       "Tối ưu kích thước ảnh và bộ nhớ đệm trang tour",
       "Tích hợp nút gọi hotline và chat Zalo trực tiếp",
       "Chuẩn hóa form gửi thông tin tour",
       "Bảo hành khắc phục sự cố 30 ngày",
     ],
+    beforeImage: "/images/case-travel-before.webp",
+    afterImage: "/images/case-travel-after.webp",
   },
 ];
 
@@ -322,47 +340,47 @@ export const whyUsContent = [
   },
 ];
 
-// S10 - 8 FAQ chuẩn
+// S10 - 8 FAQ chuẩn (Đồng bộ theo thiết kế 2 cột)
 export const faqContent = [
   {
-    question: "Giá 500k / 2tr / 5tr là thanh toán một lần hay đóng theo tháng?",
+    question: "Giá dịch vụ được tính như thế nào?",
     answer:
-      "Đây là mức chi phí thanh toán trọn gói 1 lần cho toàn bộ hạng mục công việc trong gói đã chốt, hoàn toàn KHÔNG PHẢI phí duy trì định kỳ theo tháng.",
+      "Chi phí được báo trọn gói cố định 1 lần theo đúng danh mục hạng mục công việc đã chốt trước khi làm. Hoàn toàn không phát sinh chi phí và không phải phí đóng định kỳ hàng tháng.",
   },
   {
-    question: "Thời gian triển khai cho mỗi gói là bao lâu?",
+    question: "Thời gian thực hiện mất bao lâu?",
     answer:
-      "Gói Cơ bản từ 1–3 ngày làm việc; gói Tiêu chuẩn từ 3–7 ngày làm việc; gói Cao cấp từ 7–14 ngày làm việc (tính từ thời điểm DUDI nhận đủ dữ liệu và quyền truy cập cần thiết).",
+      "Thời gian hoàn thành tùy theo gói: Gói Cơ bản từ 1–3 ngày, gói Tiêu chuẩn từ 3–7 ngày, và gói Cao cấp từ 7–14 ngày làm việc kể từ khi nhận đủ thông tin và quyền truy cập.",
   },
   {
-    question: "Tôi có cần cung cấp tài khoản hosting hoặc quản trị web không?",
+    question: "Dữ liệu website của tôi có được bảo mật không?",
     answer:
-      "Có, để sửa lỗi và tối ưu trực tiếp, DUDI cần tài khoản quản trị website (WordPress, CMS...) hoặc thông tin hosting/FTP. Mọi thông tin bảo mật được cam kết bảo vệ an toàn 100%.",
+      "DUDI luôn tiến hành sao lưu (backup) toàn bộ mã nguồn và cơ sở dữ liệu trước khi thao tác, đảm bảo tuyệt đối an toàn dữ liệu và cam kết bảo mật thông tin 100%.",
   },
   {
-    question: "Nâng cấp website có làm mất dữ liệu hoặc hình ảnh cũ không?",
+    question: "Các gói có bao gồm SEO không?",
     answer:
-      "DUDI luôn tiến hành sao lưu (backup) toàn bộ mã nguồn và cơ sở dữ liệu nguyên trạng trước khi thao tác, đảm bảo tuyệt đối không làm mất bài viết, hình ảnh hay thông tin sẵn có.",
+      "Có. DUDI giữ nguyên cấu trúc đường dẫn URL hiện có, đồng thời tối ưu tốc độ tải và chuẩn hóa các thẻ SEO kỹ thuật (Title, Meta, Heading) giúp website thân thiện hơn với Google.",
   },
   {
-    question: "Sau khi nâng cấp, thứ hạng từ khóa trên Google có bị ảnh hưởng không?",
+    question: "Sau khi nâng cấp có được bảo hành không?",
     answer:
-      "Không. DUDI giữ nguyên cấu trúc liên kết URL hiện có và chuẩn hóa lại các thẻ SEO (Title, Meta, Heading) giúp website thân thiện và dễ lên top Google hơn.",
+      "Mọi dự án DUDI thực hiện đều đi kèm cam kết bảo hành kỹ thuật 30 ngày. Bất kỳ lỗi phát sinh nào từ các hạng mục đã làm sẽ được kiểm tra và xử lý hoàn toàn miễn phí.",
   },
   {
-    question: "Chính sách bảo hành 30 ngày áp dụng như thế nào?",
+    question: "Tôi cần cung cấp những gì?",
     answer:
-      "Trong vòng 30 ngày kể từ lúc bàn giao nghiệm thu, nếu có bất kỳ lỗi kỹ thuật nào phát sinh liên quan đến các hạng mục DUDI đã chỉnh sửa, chúng tôi sẽ kiểm tra và khắc phục hoàn toàn miễn phí.",
+      "Bạn chỉ cần gửi link website hiện tại, mô tả các điểm muốn sửa và thông tin tài khoản quản trị website hoặc hosting/FTP. DUDI cam kết bảo mật thông tin truy cập tuyệt đối.",
   },
   {
-    question: "Nếu tôi muốn làm thêm tính năng ngoài phạm vi gói thì sao?",
+    question: "Hình thức thanh toán như thế nào?",
     answer:
-      "DUDI sẽ trao đổi cụ thể tính năng bạn mong muốn và gửi báo giá riêng từng hạng mục trước khi thực hiện. Chỉ khi bạn đồng ý mới tiến hành triển khai.",
+      "DUDI áp dụng thanh toán theo hợp đồng minh bạch, chia đợt theo tiến độ bàn giao và có xuất hóa đơn VAT đầy đủ theo pháp nhân Công ty TNHH Giải Pháp Phần Mềm DUDI.",
   },
   {
-    question: "Công ty DUDI có xuất hóa đơn VAT không?",
+    question: "Tôi có thể yêu cầu tính năng riêng không?",
     answer:
-      "Có. DUDI là pháp nhân doanh nghiệp hợp pháp (Công ty TNHH Giải Pháp Phần Mềm DUDI - MST 0319641544), sẵn sàng xuất hóa đơn GTGT đầy đủ cho quý công ty.",
+      "Hoàn toàn được. DUDI sẽ khảo sát cụ thể tính năng bạn mong muốn và báo mức phí hợp lý trước khi làm. Chỉ khi bạn đồng ý thì chúng tôi mới tiến hành triển khai.",
   },
 ];
 

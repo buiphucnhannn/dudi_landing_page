@@ -93,56 +93,56 @@ export function HeroBackground() {
       <div className="absolute -top-24 left-[18%] -translate-x-1/2 w-[42rem] h-[32rem] rounded-full bg-gradient-to-tr from-red-600/20 via-rose-600/10 to-transparent blur-[140px] animate-ambient-slow" />
       <div className="absolute top-16 right-[5%] w-[38rem] h-[30rem] rounded-full bg-gradient-to-bl from-blue-600/15 via-indigo-600/8 to-transparent blur-[140px] animate-ambient-delayed" />
 
-      {/* 4. Left Cosmic Asset: Speed Craft — centered vertically in Hero Screen 1 */}
-      <div className="absolute top-[24vh] sm:top-[26vh] lg:top-[28vh] -left-24 sm:-left-10 lg:-left-4 xl:left-4 w-52 h-52 sm:w-72 sm:h-72 lg:w-[340px] lg:h-[340px] pointer-events-none animate-tilt-float opacity-45">
-        <div className="absolute inset-8 rounded-full bg-cyan-600/15 blur-3xl -z-10" />
-        <div
-          className="relative w-full h-full mix-blend-screen"
-          style={{
-            maskImage: "radial-gradient(circle at 55% 45%, black 40%, transparent 68%)",
-            WebkitMaskImage: "radial-gradient(circle at 55% 45%, black 40%, transparent 68%)",
-          }}
-        >
+      {/* 4. Left Hero Mascot: DUDI Flying Hero (Cứu hộ & Tăng tốc website) */}
+      <div 
+        style={{ left: "clamp(16px, calc(25vw - 330px), 220px)" }}
+        className="absolute top-[22vh] sm:top-[24vh] lg:top-[25vh] w-44 h-44 sm:w-60 sm:h-60 lg:w-[285px] lg:h-[285px] xl:w-[320px] xl:h-[320px] pointer-events-none animate-tilt-float opacity-35 sm:opacity-80 lg:opacity-95 transition-all duration-700"
+      >
+        {/* Glowing Speed Thruster Trail */}
+        <div className="absolute inset-4 rounded-full bg-gradient-to-r from-red-600/30 via-rose-500/20 to-cyan-400/20 blur-3xl -z-10 animate-pulse" />
+        
+        {/* Mascot Image */}
+        <div className="relative w-full h-full drop-shadow-[0_15px_35px_rgba(239,68,68,0.4)]">
           <Image
-            src="/images/speed-rocket.jpg"
-            alt="DUDI Speed Technology"
+            src="/images/mascot-hero-flying.webp"
+            alt="Linh vật DUDI bay cứu hộ website"
             fill
             priority
             className="object-contain"
-            sizes="(max-width: 1280px) 288px, 340px"
+            sizes="(max-width: 768px) 240px, (max-width: 1280px) 285px, 320px"
           />
         </div>
       </div>
 
-      {/* 5. Right Cosmic Asset: Celestial Planet — centered vertically in Hero Screen 1 */}
-      <div className="absolute top-[22vh] sm:top-[24vh] lg:top-[26vh] -right-20 sm:-right-8 lg:-right-2 xl:right-6 w-56 h-56 sm:w-76 sm:h-76 lg:w-[360px] lg:h-[360px] pointer-events-none animate-float opacity-50">
-        <div className="absolute inset-8 rounded-full bg-red-600/18 blur-3xl -z-10" />
+      {/* 5. Right Hero Mascot: DUDI Tech Inspector (Khảo sát & Kiểm tra website) */}
+      <div 
+        style={{ right: "clamp(16px, calc(25vw - 330px), 220px)" }}
+        className="absolute top-[22vh] sm:top-[24vh] lg:top-[25vh] w-44 h-44 sm:w-60 sm:h-60 lg:w-[285px] lg:h-[285px] xl:w-[320px] xl:h-[320px] pointer-events-none animate-float opacity-35 sm:opacity-80 lg:opacity-95 transition-all duration-700"
+      >
+        {/* Holographic Cyan Glow */}
+        <div className="absolute inset-4 rounded-full bg-gradient-to-l from-cyan-500/30 via-blue-600/20 to-red-600/15 blur-3xl -z-10 animate-pulse" />
+        
+        {/* Subtle Tech Orbit Rings */}
         <div
-          className="relative w-full h-full mix-blend-screen"
-          style={{
-            maskImage: "radial-gradient(circle at center, black 38%, transparent 70%)",
-            WebkitMaskImage: "radial-gradient(circle at center, black 38%, transparent 70%)",
-          }}
-        >
+          style={{ animation: "spin 35s linear infinite" }}
+          className="absolute -inset-4 rounded-full border border-dashed border-cyan-400/20 pointer-events-none"
+        />
+        <div
+          style={{ animation: "spin 28s linear infinite reverse" }}
+          className="absolute -inset-10 rounded-full border border-red-500/15 pointer-events-none"
+        />
+
+        {/* Mascot Image */}
+        <div className="relative w-full h-full drop-shadow-[0_15px_35px_rgba(6,182,212,0.4)]">
           <Image
-            src="/images/cyber-planet.jpg"
-            alt="DUDI Celestial Planet"
+            src="/images/mascot-hero-tech.webp"
+            alt="Linh vật DUDI kiểm tra website"
             fill
             priority
-            className="object-cover"
-            sizes="(max-width: 1280px) 304px, 360px"
+            className="object-contain"
+            sizes="(max-width: 768px) 240px, (max-width: 1280px) 285px, 320px"
           />
         </div>
-
-        {/* Orbit Ring — subtle, thin */}
-        <div
-          style={{ animation: "spin 40s linear infinite" }}
-          className="absolute -inset-5 rounded-full border border-dashed border-cyan-400/15"
-        />
-        <div
-          style={{ animation: "spin 32s linear infinite reverse" }}
-          className="absolute -inset-12 rounded-full border border-red-500/12"
-        />
       </div>
 
       {/* 6. Bottom fade */}
