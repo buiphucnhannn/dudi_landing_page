@@ -17,12 +17,12 @@ export const siteConfig = {
     "Chuyên sửa lỗi, tăng tốc độ và nâng cấp giao diện website cũ cho doanh nghiệp. Khảo sát kiểm tra miễn phí, báo giá trước rõ ràng chỉ từ 500.000đ/gói.",
   logoUrl: "/dudi/dudisoftware1.webp",
   navItems: [
+    { label: "Về chúng tôi", href: "https://dudisoftware.com", isExternal: true },
     { label: "Dấu hiệu", href: "#dau-hieu" },
     { label: "Giải pháp", href: "#giai-phap" },
     { label: "Case thực tế", href: "#case-thuc-te" },
     { label: "Quy trình", href: "#quy-trinh" },
     { label: "Bảng giá", href: "#bang-gia" },
     { label: "Hỏi đáp", href: "#faq" },
-    { label: "dudisoftware.com", href: "https://dudisoftware.com", isExternal: true },
   ],
 };

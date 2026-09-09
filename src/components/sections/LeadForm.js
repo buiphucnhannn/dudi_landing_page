@@ -82,9 +82,7 @@ export function LeadForm({ selectedPackage = "Chưa rõ" }) {
       newErrors.phone = "Số điện thoại chưa hợp lệ (ví dụ: 0909 123 456).";
     }
 
-    if (!formData.websiteUrl.trim()) {
-      newErrors.websiteUrl = "Vui lòng nhập đường dẫn website hiện tại.";
-    } else {
+    if (formData.websiteUrl.trim()) {
       let testUrl = formData.websiteUrl.trim();
       if (!/^https?:\/\//i.test(testUrl)) {
         testUrl = "https://" + testUrl;
@@ -170,7 +168,7 @@ export function LeadForm({ selectedPackage = "Chưa rõ" }) {
   };
 
   return (
-    <section id="form-tu-van" className="pt-4 pb-4 sm:pt-5 sm:pb-5 lg:pt-6 lg:pb-6 bg-transparent relative scroll-mt-20 sm:scroll-mt-24 lg:scroll-mt-28">
+    <section id="form-tu-van" className="pt-10 pb-14 sm:pt-12 sm:pb-16 lg:pt-14 lg:pb-20 bg-transparent relative scroll-mt-20 sm:scroll-mt-24 lg:scroll-mt-28">
       <Container className="max-w-7xl">
         <RevealOnScroll duration={1100}>
           <div className="relative rounded-3xl border border-slate-200/90 dark:border-slate-700/60 bg-white dark:bg-[#0D1527]/90 p-3.5 sm:p-5 lg:p-6 shadow-xl shadow-slate-200/50 dark:shadow-2xl backdrop-blur-2xl ring-1 ring-black/5 dark:ring-white/10 dark:shadow-black/40">
@@ -282,7 +280,7 @@ export function LeadForm({ selectedPackage = "Chưa rõ" }) {
                   {/* Ảnh Linh vật HD chỉ tay lên */}
                   <div className="relative w-32 h-44 sm:w-44 sm:h-58 lg:w-48 lg:h-64 xl:w-52 xl:h-70 drop-shadow-[0_12px_25px_rgba(220,38,38,0.22)] dark:drop-shadow-[0_16px_30px_rgba(220,38,38,0.3)] transition-transform duration-500 hover:scale-105">
                     <Image
-                      src="/images/dudi-mascot-pointing-v4.webp"
+                      src="/dudi/dudi_mascot_pointing.webp"
                       alt="Linh vật DUDI Software chỉ tay tư vấn"
                       fill
                       className="object-contain"
@@ -305,8 +303,8 @@ export function LeadForm({ selectedPackage = "Chưa rõ" }) {
                   </div>
 
                   <form onSubmit={handleSubmit} noValidate className="space-y-2.5 sm:space-y-3 text-left">
-                    {/* Hàng 1: 4 cột trên desktop, 2 cột trên tablet/mobile */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-2.5 sm:gap-3">
+                    {/* Hàng 1: 3 cột đồng bộ hoàn hảo với Hàng 2 */}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3.5">
                       {/* 1. Họ và tên * */}
                       <div>
                         <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1 sm:mb-1.5">
@@ -353,25 +351,10 @@ export function LeadForm({ selectedPackage = "Chưa rõ" }) {
                         )}
                       </div>
 
-                      {/* 3. Tên doanh nghiệp */}
+                      {/* 3. Website hiện tại (Không bắt buộc) */}
                       <div>
                         <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1 sm:mb-1.5">
-                          Tên doanh nghiệp
-                        </label>
-                        <input
-                          type="text"
-                          name="company"
-                          value={formData.company}
-                          onChange={handleChange}
-                          placeholder="Công ty ABC"
-                          className="w-full rounded-xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-700/80 px-3.5 py-2.5 sm:py-2 text-base sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-all focus:outline-none focus:border-red-500/80 focus:ring-1 focus:ring-red-500/40"
-                        />
-                      </div>
-
-                      {/* 4. Website hiện tại * */}
-                      <div>
-                        <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1 sm:mb-1.5">
-                          Website hiện tại <span className="text-red-600 dark:text-red-400 font-bold">*</span>
+                          Website hiện tại <span className="text-[11px] font-normal text-slate-500 dark:text-slate-400">(nếu có)</span>
                         </label>
                         <input
                           type="url"
@@ -393,7 +376,7 @@ export function LeadForm({ selectedPackage = "Chưa rõ" }) {
                     </div>
 
                     {/* Hàng 2: 3 cột dropdown */}
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-3.5">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3.5">
                       {/* 5. Vấn đề đang gặp */}
                       <div>
                         <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1 sm:mb-1.5">

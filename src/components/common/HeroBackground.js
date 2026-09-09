@@ -95,52 +95,52 @@ export function HeroBackground() {
 
       {/* 4. Left Hero Mascot: DUDI Flying Hero (Cứu hộ & Tăng tốc website) */}
       <div 
-        style={{ left: "clamp(16px, calc(25vw - 330px), 220px)" }}
-        className="hidden sm:block absolute top-[22vh] sm:top-[24vh] lg:top-[25vh] sm:w-60 sm:h-60 lg:w-[285px] lg:h-[285px] xl:w-[320px] xl:h-[320px] pointer-events-none animate-tilt-float opacity-80 lg:opacity-95 transition-all duration-700"
+        style={{ left: "clamp(6px, calc(25vw - 330px), 220px)" }}
+        className="block absolute top-[10.5vh] xs:top-[11.5vh] sm:top-[24vh] lg:top-[25vh] w-28 h-28 xs:w-32 xs:h-32 sm:w-60 sm:h-60 lg:w-[285px] lg:h-[285px] xl:w-[320px] xl:h-[320px] pointer-events-none animate-tilt-float opacity-90 sm:opacity-80 lg:opacity-95 transition-all duration-700"
       >
         {/* Glowing Speed Thruster Trail */}
-        <div className="absolute inset-4 rounded-full bg-gradient-to-r from-red-600/30 via-rose-500/20 to-cyan-400/20 blur-3xl -z-10 animate-pulse" />
+        <div className="absolute inset-1 sm:inset-4 rounded-full bg-gradient-to-r from-red-600/35 via-rose-500/20 to-cyan-400/20 blur-xl sm:blur-3xl -z-10 animate-pulse" />
         
         {/* Mascot Image */}
-        <div className="relative w-full h-full drop-shadow-[0_15px_35px_rgba(239,68,68,0.4)]">
+        <div className="relative w-full h-full drop-shadow-[0_12px_24px_rgba(239,68,68,0.35)] sm:drop-shadow-[0_15px_35px_rgba(239,68,68,0.4)]">
           <Image
-            src="/images/mascot-hero-flying-v2.webp"
+            src="/dudi/dudi_mascot_left_hero_section.webp"
             alt="Linh vật DUDI bay cứu hộ website"
             fill
             priority
             className="object-contain"
-            sizes="(max-width: 768px) 240px, (max-width: 1280px) 285px, 320px"
+            sizes="(max-width: 640px) 130px, (max-width: 768px) 240px, (max-width: 1280px) 285px, 320px"
           />
         </div>
       </div>
 
       {/* 5. Right Hero Mascot: DUDI Tech Inspector (Khảo sát & Kiểm tra website) */}
       <div 
-        style={{ right: "clamp(16px, calc(25vw - 330px), 220px)" }}
-        className="hidden sm:block absolute top-[22vh] sm:top-[24vh] lg:top-[25vh] sm:w-60 sm:h-60 lg:w-[285px] lg:h-[285px] xl:w-[320px] xl:h-[320px] pointer-events-none animate-float opacity-80 lg:opacity-95 transition-all duration-700"
+        style={{ right: "clamp(6px, calc(25vw - 330px), 220px)" }}
+        className="block absolute top-[12vh] xs:top-[13vh] sm:top-[24vh] lg:top-[25vh] w-28 h-28 xs:w-32 xs:h-32 sm:w-60 sm:h-60 lg:w-[285px] lg:h-[285px] xl:w-[320px] xl:h-[320px] pointer-events-none animate-float opacity-90 sm:opacity-80 lg:opacity-95 transition-all duration-700"
       >
         {/* Holographic Cyan Glow */}
-        <div className="absolute inset-4 rounded-full bg-gradient-to-l from-cyan-500/30 via-blue-600/20 to-red-600/15 blur-3xl -z-10 animate-pulse" />
+        <div className="absolute inset-1 sm:inset-4 rounded-full bg-gradient-to-l from-cyan-500/35 via-blue-600/20 to-red-600/15 blur-xl sm:blur-3xl -z-10 animate-pulse" />
         
-        {/* Subtle Tech Orbit Rings */}
+        {/* Subtle Tech Orbit Rings (Hidden on small mobile to avoid clutter, visible on sm+) */}
         <div
           style={{ animation: "spin 35s linear infinite" }}
-          className="absolute -inset-4 rounded-full border border-dashed border-cyan-400/20 pointer-events-none"
+          className="hidden sm:block absolute -inset-4 rounded-full border border-dashed border-cyan-400/20 pointer-events-none"
         />
         <div
           style={{ animation: "spin 28s linear infinite reverse" }}
-          className="absolute -inset-10 rounded-full border border-red-500/15 pointer-events-none"
+          className="hidden sm:block absolute -inset-10 rounded-full border border-red-500/15 pointer-events-none"
         />
 
         {/* Mascot Image */}
-        <div className="relative w-full h-full drop-shadow-[0_15px_35px_rgba(6,182,212,0.4)]">
+        <div className="relative w-full h-full drop-shadow-[0_12px_24px_rgba(6,182,212,0.35)] sm:drop-shadow-[0_15px_35px_rgba(6,182,212,0.4)]">
           <Image
             src="/images/mascot-hero-tech-v2.webp"
             alt="Linh vật DUDI kiểm tra website"
             fill
             priority
             className="object-contain"
-            sizes="(max-width: 768px) 240px, (max-width: 1280px) 285px, 320px"
+            sizes="(max-width: 640px) 130px, (max-width: 768px) 240px, (max-width: 1280px) 285px, 320px"
           />
         </div>
       </div>

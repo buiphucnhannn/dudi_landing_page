@@ -13,6 +13,7 @@ export function cn(...inputs) {
 /**
  * Smoothly scrolls to a target section with optimal framing under the fixed navbar
  * Supports both scrollToSection(href, e) and scrollToSection(e, href)
+ * Ensures URL stays clean WITHOUT appending `#hash` to the browser address bar
  */
 export function scrollToSection(arg1, arg2) {
   let href = typeof arg1 === "string" ? arg1 : "";
@@ -49,8 +50,10 @@ export function scrollToSection(arg1, arg2) {
       behavior: "smooth",
     });
 
-    if (typeof window !== "undefined" && window.history && window.history.pushState) {
-      window.history.pushState(null, "", `#${targetId}`);
+    // Clean URL: Do NOT add `#hash` to the address bar.
+    // If a hash is currently present in the URL, cleanly strip it away.
+    if (typeof window !== "undefined" && window.history && window.history.replaceState && window.location.hash) {
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
     }
   }
 }

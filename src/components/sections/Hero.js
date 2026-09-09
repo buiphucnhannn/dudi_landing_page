@@ -20,7 +20,8 @@ export function Hero() {
     return () => clearTimeout(timer);
   }, []);
 
-  const handlePrimaryCta = () => {
+  const handlePrimaryCta = (e) => {
+    scrollToSection("#form-tu-van", e);
     trackEvent("cta_click", {
       label: "Liên hệ",
       position: "hero",

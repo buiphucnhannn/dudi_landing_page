@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { Problems } from "@/components/sections/Problems";
@@ -14,6 +14,7 @@ import { LeadForm } from "@/components/sections/LeadForm";
 import { Footer } from "@/components/sections/Footer";
 import { AmbientBackground } from "@/components/common/AmbientBackground";
 import { FloatingWidgets } from "@/components/common/FloatingWidgets";
+import { scrollToSection } from "@/lib/utils";
 
 function SectionDivider() {
   return (
@@ -29,6 +30,30 @@ export default function LandingPage() {
   const handleSelectPackage = (packageName) => {
     setSelectedPackage(packageName);
   };
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // If page was loaded with a hash (e.g. /#dau-hieu), cleanly frame it and strip the hash
+      if (window.location.hash) {
+        const hash = window.location.hash;
+        setTimeout(() => {
+          scrollToSection(hash);
+          window.history.replaceState(null, "", window.location.pathname + window.location.search);
+        }, 150);
+      }
+
+      const handleHashChange = () => {
+        if (window.location.hash) {
+          const hash = window.location.hash;
+          scrollToSection(hash);
+          window.history.replaceState(null, "", window.location.pathname + window.location.search);
+        }
+      };
+
+      window.addEventListener("hashchange", handleHashChange);
+      return () => window.removeEventListener("hashchange", handleHashChange);
+    }
+  }, []);
 
   return (
     <div className="relative flex min-h-screen flex-col bg-dudi-gradient-mesh text-slate-100 selection:bg-red-600 selection:text-white transition-colors duration-300">
