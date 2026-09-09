@@ -70,10 +70,10 @@ export function Process() {
             {/* Horizontal Connector Line (hidden on very small screens, visible on md+) */}
             <div
               aria-hidden="true"
-              className="hidden lg:block absolute top-8 left-[8%] right-[8%] h-[2px] bg-slate-800 z-0"
+              className="hidden lg:block absolute top-8 left-[8%] right-[8%] h-[2px] bg-slate-200 dark:bg-slate-800 z-0"
             >
               {/* Subtle Red glow on line */}
-              <div className="h-full w-full bg-gradient-to-r from-red-600/30 via-red-500/50 to-red-600/30" />
+              <div className="h-full w-full bg-gradient-to-r from-red-600/20 via-red-500/40 to-red-600/20" />
             </div>
 
             {/* Steps Grid */}
@@ -94,10 +94,10 @@ export function Process() {
                     {/* Step Number Circle */}
                     <div className="relative mb-3">
                       <div
-                        className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full font-black text-sm sm:text-base flex items-center justify-center transition-all duration-300 border-2 border-[#04060E] shadow-lg ${
+                        className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full font-black text-sm sm:text-base flex items-center justify-center transition-all duration-300 border-2 border-white dark:border-[#04060E] shadow-md ${
                           isActive
-                            ? "bg-red-500 text-white scale-110 ring-4 ring-red-500/40 shadow-red-900/80"
-                            : "bg-red-600 text-white group-hover:scale-110 group-hover:ring-4 group-hover:ring-red-500/30 shadow-red-950/60"
+                            ? "bg-red-500 text-white scale-110 ring-4 ring-red-500/40 shadow-red-500/30 dark:shadow-red-900/80"
+                            : "bg-red-600 text-white group-hover:scale-110 group-hover:ring-4 group-hover:ring-red-500/30 shadow-red-500/20 dark:shadow-red-950/60"
                         }`}
                       >
                         {idx + 1}
@@ -108,47 +108,47 @@ export function Process() {
                     <div
                       className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center transition-all duration-300 border mb-2.5 shadow-md ${
                         isActive
-                          ? "bg-red-600 text-white border-red-500 scale-105 shadow-red-900/40"
-                          : "bg-slate-900/90 text-red-400 border-slate-700/70 group-hover:bg-red-600 group-hover:text-white group-hover:border-red-500 group-hover:scale-105"
+                          ? "bg-red-600 text-white border-red-500 scale-105 shadow-red-500/30 dark:shadow-red-900/40"
+                          : "bg-white dark:bg-slate-900/90 text-red-600 dark:text-red-400 border-slate-200 dark:border-slate-700/70 group-hover:bg-red-600 group-hover:text-white group-hover:border-red-500 group-hover:scale-105 shadow-sm"
                       }`}
                     >
                       <IconComp className="h-5 w-5" />
                     </div>
 
                     {/* Main Title (Ý chính luôn hiển thị) */}
-                    <h3 className="font-bold text-sm sm:text-base text-white group-hover:text-red-400 transition-colors leading-snug">
+                    <h3 className="font-bold text-sm sm:text-base text-slate-900 dark:text-white group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors leading-snug">
                       {shortTitles[idx] || step.title}
                     </h3>
 
                     {/* Subtitle / summary */}
-                    <p className="text-xs text-slate-400 mt-1 font-medium leading-relaxed max-w-[150px]">
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium leading-relaxed max-w-[150px]">
                       {shortDescriptions[idx]}
                     </p>
 
-                    {/* Floating Detail Card on Hover — Centered right under the step icon */}
+                    {/* Floating Detail Card on Hover (Desktop) / Tap (Mobile) */}
                     <div
-                      className={`w-[220px] sm:w-[240px] transition-all duration-200 ease-out lg:absolute lg:top-[calc(100%+10px)] lg:left-1/2 lg:-translate-x-1/2 lg:z-30 mt-3 lg:mt-0 before:content-[''] before:absolute before:-top-3 before:left-0 before:right-0 before:h-4 ${
+                      className={`w-full max-w-[200px] sm:max-w-[240px] lg:w-[240px] transition-all duration-200 ease-out lg:absolute lg:top-[calc(100%+10px)] lg:left-1/2 lg:-translate-x-1/2 lg:z-30 mt-2.5 lg:mt-0 before:content-[''] before:absolute before:-top-3 before:left-0 before:right-0 before:h-4 ${
                         isActive
-                          ? "opacity-100 translate-y-0 pointer-events-auto visible"
-                          : "opacity-0 -translate-y-2 pointer-events-none invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-hover:visible"
+                          ? "opacity-100 translate-y-0 pointer-events-auto block"
+                          : "opacity-0 -translate-y-2 pointer-events-none hidden lg:block lg:invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-hover:visible"
                       }`}
                     >
-                      <div className="p-3.5 rounded-xl bg-[#0D1527]/98 border border-slate-700/90 shadow-2xl text-left backdrop-blur-2xl ring-1 ring-white/10 shadow-black/80">
-                        <div className="flex items-center justify-between gap-2 mb-1.5 pb-1.5 border-b border-slate-800">
-                          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-red-400">
+                      <div className="p-3 sm:p-3.5 rounded-xl bg-white dark:bg-[#0D1527]/98 border border-slate-200 dark:border-slate-700/90 shadow-xl dark:shadow-2xl text-left backdrop-blur-2xl ring-1 ring-black/5 dark:ring-white/10 shadow-slate-200/50 dark:shadow-black/80">
+                        <div className="flex items-center justify-between gap-2 mb-1.5 pb-1.5 border-b border-slate-200 dark:border-slate-800">
+                          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-red-600 dark:text-red-400">
                             Chi tiết bước 0{idx + 1}
                           </span>
-                          <span className="text-[10px] font-semibold text-slate-400">
+                          <span className="text-[10px] font-semibold text-slate-500 dark:text-slate-400">
                             DUDI Software
                           </span>
                         </div>
 
-                        <p className="text-xs text-slate-300 leading-relaxed font-normal text-justify">
+                        <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-normal text-justify">
                           {step.description}
                         </p>
 
                         {isScope && (
-                          <div className="mt-2 pt-1.5 border-t border-red-900/60 text-[10px] font-semibold text-rose-400">
+                          <div className="mt-2 pt-1.5 border-t border-red-100 dark:border-red-900/60 text-[10px] font-semibold text-red-600 dark:text-rose-400">
                             ★ Cam kết không phát sinh chi phí
                           </div>
                         )}

@@ -1,27 +1,17 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #070B18;
   --foreground: #f8fafc;
+  --dudi-navy-dark: #050811;
+  --dudi-navy: #0B132B;
+  --dudi-navy-light: #16223F;
   --dudi-red: #dc2626;
   --dudi-red-dark: #b91c1c;
   --dudi-red-light: #fee2e2;
   --dudi-accent: #e11d48;
-  --dudi-navy-dark: #050811;
-  --dudi-navy: #0B132B;
-  --dudi-navy-light: #16223F;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-dudi-red: var(--dudi-red);
-  --color-dudi-red-dark: var(--dudi-red-dark);
-  --color-dudi-red-light: var(--dudi-red-light);
-  --color-dudi-navy: var(--dudi-navy);
-  --color-dudi-navy-dark: var(--dudi-navy-dark);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 html {
@@ -30,11 +20,23 @@ html {
   color-scheme: dark;
 }
 
+html.light {
+  color-scheme: light;
+  --background: #FFFFFF;
+  --foreground: #0F172A;
+}
+
+html.light body {
+  background-color: #FFFFFF;
+  color: #0F172A;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .text-justify {
@@ -43,7 +45,7 @@ body {
 }
 
 /* ========================================
-   NỀN GRADIENT DUDI - Animated Mesh
+   NỀN GRADIENT DUDI - Dark (Default) & Light
    ======================================== */
 .bg-dudi-gradient-mesh {
   background-color: #060A14;
@@ -57,6 +59,43 @@ body {
   background-attachment: fixed;
   animation: gradient-shift 25s ease-in-out infinite alternate;
   background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 200%;
+}
+
+html.light .bg-dudi-gradient-mesh {
+  background-color: #FFFFFF !important;
+  background-image:
+    radial-gradient(ellipse 75% 50% at 18% 0%, rgba(239, 68, 68, 0.08), transparent 60%),
+    radial-gradient(ellipse 65% 50% at 85% 10%, rgba(244, 63, 94, 0.06), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 10% 45%, rgba(225, 29, 72, 0.05), transparent 55%),
+    radial-gradient(ellipse 75% 55% at 90% 65%, rgba(239, 68, 68, 0.06), transparent 55%),
+    radial-gradient(ellipse 85% 60% at 30% 95%, rgba(244, 63, 94, 0.08), transparent 60%),
+    linear-gradient(180deg, #FFFFFF 0%, #FFF5F5 18%, #FFFFFF 40%, #FFF8F8 60%, #FAFBFD 80%, #F8FAFC 100%) !important;
+}
+
+/* Light Mode Overrides for Hero */
+html.light .hero-cosmic-bg,
+html.light .hero-starlight-canvas {
+  opacity: 0 !important;
+}
+
+html.light .hero-bottom-fade {
+  background: linear-gradient(to top, #FFFFFF 0%, rgba(255, 255, 255, 0.6) 50%, transparent 100%) !important;
+}
+
+html.light .hero-headline-p1 {
+  background: none !important;
+  -webkit-text-fill-color: #0F172A !important;
+  color: #0F172A !important;
+}
+
+html.light .hero-headline-p2 {
+  background: linear-gradient(to right, #DC2626, #E11D48, #EF4444) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+html.light .hero-desc {
+  color: #475569 !important;
 }
 
 /* ========================================
@@ -213,6 +252,7 @@ body {
 }
 
 .animate-marquee:hover,
+.animate-marquee:active,
 .animate-marquee:focus-within {
   animation-play-state: paused !important;
 }
@@ -225,6 +265,7 @@ body {
 }
 
 .animate-marquee-reverse:hover,
+.animate-marquee-reverse:active,
 .animate-marquee-reverse:focus-within {
   animation-play-state: paused !important;
 }

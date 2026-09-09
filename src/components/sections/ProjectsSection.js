@@ -46,22 +46,22 @@ function Card({ project, index, progress, targetScale }) {
     >
       <motion.div
         style={{ scale }}
-        className="w-full max-w-6xl rounded-[40px] sm:rounded-[50px] border-2 border-[#D7E2EA]/20 bg-[#111111] p-4 sm:p-6 md:p-8 shadow-2xl flex flex-col justify-between"
+        className="w-full max-w-6xl rounded-[40px] sm:rounded-[50px] border-2 border-slate-200/90 dark:border-[#D7E2EA]/20 bg-white dark:bg-[#111111] p-4 sm:p-6 md:p-8 shadow-xl dark:shadow-2xl flex flex-col justify-between"
       >
         {/* Top row */}
-        <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 pb-4 sm:pb-6 border-b border-[#D7E2EA]/15">
+        <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 pb-4 sm:pb-6 border-b border-slate-200 dark:border-[#D7E2EA]/15">
           <div className="flex items-start gap-4 sm:gap-6">
-            <span className="font-kanit font-black text-3xl sm:text-5xl text-[#D7E2EA]/40 select-none shrink-0">
+            <span className="font-kanit font-black text-3xl sm:text-5xl text-slate-300 dark:text-[#D7E2EA]/40 select-none shrink-0">
               {project.number}
             </span>
             <div>
-              <span className="block font-kanit text-xs uppercase tracking-widest text-[#D7E2EA]/50 mb-1">
+              <span className="block font-kanit text-xs uppercase tracking-widest text-slate-500 dark:text-[#D7E2EA]/50 mb-1">
                 {project.category}
               </span>
-              <h3 className="font-kanit font-bold text-lg sm:text-2xl md:text-3xl text-white leading-tight">
+              <h3 className="font-kanit font-bold text-lg sm:text-2xl md:text-3xl text-slate-900 dark:text-white leading-tight">
                 {project.title}
               </h3>
-              <p className="mt-2 font-kanit font-light text-xs sm:text-sm text-[#D7E2EA]/60 max-w-md leading-relaxed">
+              <p className="mt-2 font-kanit font-light text-xs sm:text-sm text-slate-600 dark:text-[#D7E2EA]/60 max-w-md leading-relaxed">
                 {project.description}
               </p>
               {/* Tags */}
@@ -69,7 +69,7 @@ function Card({ project, index, progress, targetScale }) {
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="font-kanit text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full border border-red-500/30 text-red-400 bg-red-950/20"
+                    className="font-kanit text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full border border-red-200 dark:border-red-500/30 text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/20 font-medium"
                   >
                     {tag}
                   </span>
@@ -87,7 +87,7 @@ function Card({ project, index, progress, targetScale }) {
           {project.images.map((src, i) => (
             <div
               key={i}
-              className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-[#1a1a1a] border border-white/5"
+              className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-100 dark:bg-[#1a1a1a] border border-slate-200 dark:border-white/5"
               style={{ height: i === 1 ? "clamp(140px,20vw,300px)" : "clamp(110px,16vw,240px)" }}
             >
               <Image
@@ -118,15 +118,15 @@ export function ProjectsSection() {
     <section
       id="du-an"
       ref={containerRef}
-      className="relative w-full bg-[#0C0C0C] text-white rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-12 md:-mt-14 z-20 px-5 sm:px-8 md:px-10 pt-20 pb-32"
+      className="relative w-full bg-slate-50 dark:bg-[#0C0C0C] text-slate-900 dark:text-white rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-12 md:-mt-14 z-20 px-5 sm:px-8 md:px-10 pt-20 pb-32 border-t border-slate-200/80 dark:border-transparent transition-colors"
     >
       {/* Heading */}
       <div className="text-center mb-16 sm:mb-20">
         <FadeIn delay={0} y={40} duration={0.8}>
-          <span className="inline-block font-kanit text-xs uppercase tracking-[0.3em] text-red-500 mb-4">
+          <span className="inline-block font-kanit text-xs uppercase tracking-[0.3em] text-red-600 dark:text-red-500 mb-4 font-semibold">
             Dự Án Thực Tế
           </span>
-          <h2 className="hero-heading font-kanit font-black uppercase leading-none tracking-tight text-[clamp(3rem,12vw,160px)]">
+          <h2 className="hero-heading font-kanit font-black uppercase leading-none tracking-tight text-[clamp(3rem,12vw,160px)] text-slate-900 dark:text-white">
             PROJECT
           </h2>
         </FadeIn>

@@ -44,19 +44,19 @@ export function WhyUs() {
                 className="h-full flex flex-col"
               >
                 <div
-                  className={`h-full flex-1 flex flex-col p-6 rounded-2xl border border-slate-700/60 bg-[#0D1527]/85 text-slate-100 card-glow-hover cursor-pointer backdrop-blur-xl group transition-all duration-300 hover:border-red-500/80 hover:-translate-y-2 shadow-xl shadow-black/40 hover:shadow-2xl hover:shadow-red-950/40 ${
+                  className={`h-full flex-1 flex flex-col p-5 sm:p-6 rounded-2xl border border-slate-200/90 dark:border-slate-700/60 bg-white dark:bg-[#0D1527]/85 text-slate-900 dark:text-slate-100 card-glow-hover cursor-pointer backdrop-blur-xl group transition-all duration-300 hover:border-red-500/80 hover:-translate-y-2 shadow-lg shadow-slate-200/50 dark:shadow-xl dark:shadow-black/40 hover:shadow-xl hover:shadow-red-500/10 dark:hover:shadow-red-950/40 ${
                     idx % 2 === 0 ? "sm:animate-float" : "sm:animate-float-delayed"
                   }`}
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-800/80 text-red-400 border border-slate-700/60 group-hover:bg-red-600 group-hover:text-white group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 mb-4 shadow-sm">
-                    <IconComp className="h-6 w-6" />
+                  <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-red-50 dark:bg-slate-800/80 text-red-600 dark:text-red-400 border border-red-100 dark:border-slate-700/60 group-hover:bg-red-600 group-hover:text-white group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 mb-4 shadow-sm">
+                    <IconComp className="h-5 w-5 sm:h-6 sm:w-6" />
                   </div>
 
-                  <h3 className="text-base font-bold text-white group-hover:text-red-400 transition-colors text-balance">
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors text-balance">
                     {item.title}
                   </h3>
 
-                  <p className="mt-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed text-justify">
+                  <p className="mt-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed text-justify">
                     {item.desc}
                   </p>
                 </div>

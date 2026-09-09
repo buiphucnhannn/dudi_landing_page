@@ -30,27 +30,27 @@ export function RebuildBanner({ onSelectPackage }) {
     <section className="py-10 sm:py-14 bg-transparent relative">
       <Container>
         <RevealOnScroll duration={1300}>
-          <div className="relative overflow-hidden rounded-3xl bg-[#0D1527]/90 border border-slate-700/60 p-8 sm:p-10 text-white shadow-2xl shadow-black/40 backdrop-blur-xl">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-red-50/80 via-white to-rose-50/70 dark:from-[#0D1527]/90 dark:via-[#0D1527]/90 dark:to-[#0D1527]/90 border border-red-200/80 dark:border-slate-700/60 p-8 sm:p-10 text-slate-900 dark:text-white shadow-xl shadow-red-500/5 dark:shadow-2xl dark:shadow-black/40 backdrop-blur-xl">
             {/* Subtle glow circle */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-red-600/20 blur-3xl"
+              className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-red-600/10 dark:bg-red-600/20 blur-3xl"
             />
 
             <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
               <div className="max-w-xl text-left">
-                <h3 className="text-2xl sm:text-3xl font-black tracking-tight leading-tight text-white">
+                <h3 className="text-2xl sm:text-3xl font-black tracking-tight leading-tight text-slate-900 dark:text-white">
                   <span>Website quá cũ hoặc cần làm lại </span>
-                  <span className="bg-gradient-to-r from-red-500 via-rose-500 to-red-400 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-red-600 via-rose-600 to-red-500 dark:from-red-500 dark:via-rose-500 dark:to-red-400 bg-clip-text text-transparent">
                     toàn bộ giao diện & tính năng?
                   </span>
                 </h3>
 
-                <p className="mt-3 text-sm sm:text-base text-slate-300 leading-relaxed text-justify">
+                <p className="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed text-justify">
                   {rebuildBannerContent.description}
                 </p>
 
-                <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-red-400">
+                <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-red-600 dark:text-red-400">
                   <RefreshCcw className="h-4 w-4" />
                   <span>Khảo sát, thiết kế UI/UX độc quyền và code chuẩn mới từ đầu</span>
                 </div>

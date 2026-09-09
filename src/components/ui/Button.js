@@ -7,17 +7,17 @@ const buttonVariants = {
   dudiGradient:
     "bg-gradient-to-r from-red-600 via-rose-600 to-red-700 text-white hover:from-red-700 hover:to-rose-800 shadow-lg shadow-red-600/30 active:scale-[0.98] border border-red-400/40",
   secondary:
-    "bg-slate-800 text-white hover:bg-slate-700 active:scale-[0.98] border border-slate-700",
+    "bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-white hover:bg-slate-200 dark:hover:bg-slate-700 active:scale-[0.98] border border-slate-300 dark:border-slate-700",
   outline:
-    "border border-slate-700 hover:border-red-500 bg-slate-900/60 hover:bg-red-950/30 text-slate-200 hover:text-white shadow-xs",
+    "border border-slate-300 dark:border-slate-700 hover:border-red-500 bg-white dark:bg-slate-900/60 hover:bg-red-50 dark:hover:bg-red-950/30 text-slate-800 dark:text-slate-200 hover:text-red-600 dark:hover:text-white shadow-xs",
   outlineRed:
-    "border-2 border-red-500 bg-red-950/20 text-red-400 hover:bg-red-600 hover:text-white hover:border-red-600",
+    "border-2 border-red-500 bg-red-50/50 dark:bg-red-950/20 text-red-600 dark:text-red-400 hover:bg-red-600 hover:text-white hover:border-red-600",
   ghost:
-    "bg-transparent hover:bg-white/10 text-slate-300 hover:text-white",
+    "bg-transparent hover:bg-slate-100 dark:hover:bg-white/10 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white",
   zalo:
     "bg-[#0068FF] text-white hover:bg-[#0052cc] border border-blue-400/30 shadow-md shadow-blue-600/30 active:scale-[0.98]",
   outlineZalo:
-    "border border-blue-500/50 hover:border-[#0068FF] bg-blue-950/25 hover:bg-blue-900/40 text-blue-300 hover:text-white shadow-xs hover:shadow-[0_0_20px_rgba(0,104,255,0.25)]",
+    "border border-blue-500/50 hover:border-[#0068FF] bg-blue-50/50 dark:bg-blue-950/25 hover:bg-blue-100 dark:hover:bg-blue-900/40 text-[#0068FF] dark:text-blue-300 hover:text-[#0052cc] dark:hover:text-white shadow-xs hover:shadow-[0_0_20px_rgba(0,104,255,0.25)]",
 };
 
 const buttonSizes = {

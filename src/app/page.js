@@ -30,7 +30,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="relative flex min-h-screen flex-col bg-dudi-gradient-mesh text-slate-100 selection:bg-red-600 selection:text-white">
+    <div className="relative flex min-h-screen flex-col bg-dudi-gradient-mesh text-slate-100 selection:bg-red-600 selection:text-white transition-colors duration-300">
       {/* Soft Ambient Background Orbs & Subtle Grid */}
       <AmbientBackground />
 

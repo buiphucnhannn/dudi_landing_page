@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono, Caveat } from "next/font/google";
 import { siteConfig } from "@/constants/site-config";
 import { faqContent } from "@/constants/landing-content";
+import { ThemeProvider } from "@/context/ThemeContext";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -115,16 +116,24 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="vi"
-      className={`${geistSans.variable} ${geistMono.variable} ${caveat.variable} scroll-smooth antialiased`}
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable} ${caveat.variable} dark scroll-smooth antialiased`}
     >
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("dudi-theme")||"dark";if(t==="light"){document.documentElement.classList.remove("dark");document.documentElement.classList.add("light");document.documentElement.style.colorScheme="light";}else{document.documentElement.classList.add("dark");document.documentElement.classList.remove("light");document.documentElement.style.colorScheme="dark";}}catch(e){document.documentElement.classList.add("dark");}})();`,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full font-sans antialiased bg-white text-slate-900">
-        {children}
+      <body className="min-h-full font-sans antialiased bg-[#060A14] text-slate-100 transition-colors duration-300">
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

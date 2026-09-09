@@ -72,13 +72,13 @@ export function HeroBackground() {
       className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
     >
       {/* 1. Cosmic Universe SVG Wallpaper */}
-      <div className="absolute inset-0 w-full h-full">
+      <div className="hero-cosmic-bg absolute inset-0 w-full h-full opacity-70 transition-opacity duration-500">
         <Image
           src="/images/hero-cosmic-bg.svg"
           alt="DUDI Cosmic Space Background"
           fill
           priority
-          className="object-cover opacity-70"
+          className="object-cover"
           sizes="100vw"
         />
       </div>
@@ -86,7 +86,7 @@ export function HeroBackground() {
       {/* 2. Twinkling Starlight Canvas */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full opacity-65 pointer-events-none"
+        className="hero-starlight-canvas absolute inset-0 w-full h-full opacity-65 transition-opacity duration-500 pointer-events-none"
       />
 
       {/* 3. Breathing Nebulas — asymmetric for depth */}
@@ -96,7 +96,7 @@ export function HeroBackground() {
       {/* 4. Left Hero Mascot: DUDI Flying Hero (Cứu hộ & Tăng tốc website) */}
       <div 
         style={{ left: "clamp(16px, calc(25vw - 330px), 220px)" }}
-        className="absolute top-[22vh] sm:top-[24vh] lg:top-[25vh] w-44 h-44 sm:w-60 sm:h-60 lg:w-[285px] lg:h-[285px] xl:w-[320px] xl:h-[320px] pointer-events-none animate-tilt-float opacity-35 sm:opacity-80 lg:opacity-95 transition-all duration-700"
+        className="hidden sm:block absolute top-[22vh] sm:top-[24vh] lg:top-[25vh] sm:w-60 sm:h-60 lg:w-[285px] lg:h-[285px] xl:w-[320px] xl:h-[320px] pointer-events-none animate-tilt-float opacity-80 lg:opacity-95 transition-all duration-700"
       >
         {/* Glowing Speed Thruster Trail */}
         <div className="absolute inset-4 rounded-full bg-gradient-to-r from-red-600/30 via-rose-500/20 to-cyan-400/20 blur-3xl -z-10 animate-pulse" />
@@ -117,7 +117,7 @@ export function HeroBackground() {
       {/* 5. Right Hero Mascot: DUDI Tech Inspector (Khảo sát & Kiểm tra website) */}
       <div 
         style={{ right: "clamp(16px, calc(25vw - 330px), 220px)" }}
-        className="absolute top-[22vh] sm:top-[24vh] lg:top-[25vh] w-44 h-44 sm:w-60 sm:h-60 lg:w-[285px] lg:h-[285px] xl:w-[320px] xl:h-[320px] pointer-events-none animate-float opacity-35 sm:opacity-80 lg:opacity-95 transition-all duration-700"
+        className="hidden sm:block absolute top-[22vh] sm:top-[24vh] lg:top-[25vh] sm:w-60 sm:h-60 lg:w-[285px] lg:h-[285px] xl:w-[320px] xl:h-[320px] pointer-events-none animate-float opacity-80 lg:opacity-95 transition-all duration-700"
       >
         {/* Holographic Cyan Glow */}
         <div className="absolute inset-4 rounded-full bg-gradient-to-l from-cyan-500/30 via-blue-600/20 to-red-600/15 blur-3xl -z-10 animate-pulse" />
@@ -146,7 +146,7 @@ export function HeroBackground() {
       </div>
 
       {/* 6. Bottom fade */}
-      <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#060A14] via-[#060A14]/60 to-transparent" />
+      <div className="hero-bottom-fade absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#060A14] via-[#060A14]/60 to-transparent transition-colors duration-500" />
     </div>
   );
 }

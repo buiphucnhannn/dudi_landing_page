@@ -46,7 +46,7 @@ export function SectionHeading({
     <div
       className={cn(
         "mb-6 sm:mb-8",
-        showBorder && "pb-3.5 border-b border-slate-800/60",
+        showBorder && "pb-3.5 border-b border-slate-200 dark:border-slate-800/60",
         className
       )}
     >
@@ -57,14 +57,14 @@ export function SectionHeading({
         )}
       >
         <div className="max-w-3xl">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white leading-[1.25]">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.25]">
             <span className={breakLine && p2 ? "block" : "inline"}>
               {p1}{!breakLine || !p2 ? " " : ""}
             </span>
             {p2 ? (
               <span
                 className={cn(
-                  "bg-gradient-to-r from-red-500 via-rose-500 to-red-400 bg-clip-text text-transparent",
+                  "bg-gradient-to-r from-red-600 via-rose-600 to-red-500 dark:from-red-500 dark:via-rose-500 dark:to-red-400 bg-clip-text text-transparent",
                   breakLine ? "block mt-1 sm:mt-1.5" : "inline"
                 )}
               >
@@ -74,7 +74,7 @@ export function SectionHeading({
           </h2>
 
           {description && (
-            <p className="mt-2.5 text-sm sm:text-base text-slate-400 max-w-2xl leading-relaxed text-justify">
+            <p className="mt-2.5 text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed text-justify">
               {description}
             </p>
           )}
@@ -94,7 +94,7 @@ export function SectionHeading({
               }}
               target={action.external ? "_blank" : undefined}
               rel={action.external ? "noopener noreferrer" : undefined}
-              className="inline-flex items-center gap-1.5 text-sm sm:text-base font-semibold text-red-400 hover:text-red-300 transition-colors group cursor-pointer"
+              className="inline-flex items-center gap-1.5 text-sm sm:text-base font-semibold text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 transition-colors group cursor-pointer"
             >
               {action.label && action.label.toLowerCase().includes("zalo") && (
                 <ZaloIcon className="h-4 w-4 shrink-0" />
