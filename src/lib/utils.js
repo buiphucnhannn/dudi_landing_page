@@ -33,12 +33,16 @@ export function scrollToSection(arg1, arg2) {
 
   const targetElement = document.getElementById(targetId);
   if (targetElement) {
-    // Beautiful framing: Heading sits comfortably ~22-26px below fixed navbar
-    // with the previous section completely off-screen above the viewport.
+    // Dynamic framing: measures exact navbar height + comfortable breathing clearance
+    // ensures section title, badges, or top wave are 100% visible and beautifully framed
     const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
-    const offset = isMobile ? 20 : 28;
+    const navHeader = document.querySelector("header");
+    const navHeight = navHeader ? navHeader.getBoundingClientRect().height : (isMobile ? 64 : 72);
+    const extraPadding = isMobile ? 14 : 22;
+    const totalOffset = navHeight + extraPadding;
+
     const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
-    const targetScrollTop = Math.max(0, elementPosition - offset);
+    const targetScrollTop = Math.max(0, elementPosition - totalOffset);
 
     window.scrollTo({
       top: targetScrollTop,

@@ -23,5 +23,6 @@ export const siteConfig = {
     { label: "Quy trình", href: "#quy-trinh" },
     { label: "Bảng giá", href: "#bang-gia" },
     { label: "Hỏi đáp", href: "#faq" },
+    { label: "dudisoftware.com", href: "https://dudisoftware.com", isExternal: true },
   ],
 };

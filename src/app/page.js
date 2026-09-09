@@ -13,6 +13,7 @@ import { FAQ } from "@/components/sections/FAQ";
 import { LeadForm } from "@/components/sections/LeadForm";
 import { Footer } from "@/components/sections/Footer";
 import { AmbientBackground } from "@/components/common/AmbientBackground";
+import { FloatingWidgets } from "@/components/common/FloatingWidgets";
 
 function SectionDivider() {
   return (
@@ -56,12 +57,8 @@ export default function LandingPage() {
         {/* S05 - Case thực tế trung thực */}
         <CaseStudies />
 
-        <SectionDivider />
-
-        {/* S06 - Quy trình 6 bước rõ ràng */}
+        {/* S06 - Quy trình 6 bước rõ ràng (Full-width Anamorphic Mountain Banner) */}
         <Process />
-
-        <SectionDivider />
 
         {/* S07 - Bảng giá 3 gói (GIÁ/GÓI) */}
         <Pricing onSelectPackage={handleSelectPackage} />
@@ -84,6 +81,9 @@ export default function LandingPage() {
 
       {/* S13 - Footer thông tin pháp lý DUDI */}
       <Footer />
+
+      {/* Floating Quick Action Widgets: Scroll to Top, Phone & Zalo */}
+      <FloatingWidgets />
     </div>
   );
 }

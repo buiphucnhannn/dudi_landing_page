@@ -23,7 +23,7 @@ const problemIconMap = {
 
 export function Problems() {
   return (
-    <section id="dau-hieu" className="pt-10 pb-9 sm:pt-12 sm:pb-11 bg-transparent relative scroll-mt-6 sm:scroll-mt-8">
+    <section id="dau-hieu" className="pt-10 pb-9 sm:pt-12 sm:pb-11 bg-transparent relative scroll-mt-20 sm:scroll-mt-24 lg:scroll-mt-28">
       <Container>
         <RevealOnScroll duration={1200}>
           <SectionHeading

@@ -16,7 +16,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 1.75rem;
+  scroll-padding-top: 5.5rem;
   color-scheme: dark;
 }
 
@@ -390,4 +390,60 @@ div[class*="nextjs-portal"] {
    ======================================== */
 .font-handwriting {
   font-family: var(--font-caveat), 'Caveat', cursive, sans-serif;
+}
+
+/* ========================================
+   FLOATING WIDGET RIPPLE WAVE & WIGGLE
+   ======================================== */
+@keyframes ripple-wave {
+  0% {
+    transform: scale(0.98);
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.35;
+  }
+  80% {
+    opacity: 0.1;
+  }
+  100% {
+    transform: scale(1.42);
+    opacity: 0;
+  }
+}
+
+@keyframes phone-wiggle {
+  0%, 70%, 100% {
+    transform: rotate(0deg);
+  }
+  74% {
+    transform: rotate(-14deg);
+  }
+  78% {
+    transform: rotate(14deg);
+  }
+  82% {
+    transform: rotate(-10deg);
+  }
+  86% {
+    transform: rotate(10deg);
+  }
+  90% {
+    transform: rotate(-4deg);
+  }
+  94% {
+    transform: rotate(4deg);
+  }
+}
+
+.animate-ripple-1 {
+  animation: ripple-wave 3.5s cubic-bezier(0.15, 0.3, 0.4, 1) infinite;
+}
+
+.animate-ripple-2 {
+  animation: ripple-wave 3.5s cubic-bezier(0.15, 0.3, 0.4, 1) infinite 1.25s;
+}
+
+.animate-phone-ring {
+  animation: phone-wiggle 4s ease-in-out infinite;
 }

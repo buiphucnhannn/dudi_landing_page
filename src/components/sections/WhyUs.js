@@ -18,7 +18,7 @@ const whyUsIcons = [
 
 export function WhyUs() {
   return (
-    <section id="vi-sao-chon-dudi" className="pt-10 pb-10 sm:pt-12 sm:pb-12 bg-transparent relative scroll-mt-6 sm:scroll-mt-8">
+    <section id="vi-sao-chon-dudi" className="pt-10 pb-10 sm:pt-12 sm:pb-12 bg-transparent relative scroll-mt-20 sm:scroll-mt-24 lg:scroll-mt-28">
       <Container>
         <RevealOnScroll duration={1200}>
           <SectionHeading

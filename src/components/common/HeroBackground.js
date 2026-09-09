@@ -104,7 +104,7 @@ export function HeroBackground() {
         {/* Mascot Image */}
         <div className="relative w-full h-full drop-shadow-[0_15px_35px_rgba(239,68,68,0.4)]">
           <Image
-            src="/images/mascot-hero-flying.webp"
+            src="/images/mascot-hero-flying-v2.webp"
             alt="Linh vật DUDI bay cứu hộ website"
             fill
             priority
@@ -135,7 +135,7 @@ export function HeroBackground() {
         {/* Mascot Image */}
         <div className="relative w-full h-full drop-shadow-[0_15px_35px_rgba(6,182,212,0.4)]">
           <Image
-            src="/images/mascot-hero-tech.webp"
+            src="/images/mascot-hero-tech-v2.webp"
             alt="Linh vật DUDI kiểm tra website"
             fill
             priority

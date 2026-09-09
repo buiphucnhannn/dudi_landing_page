@@ -6,7 +6,7 @@ import { RevealOnScroll } from "@/components/common/RevealOnScroll";
 
 export function FAQ() {
   return (
-    <section id="faq" className="pt-10 pb-10 sm:pt-12 sm:pb-12 bg-transparent relative scroll-mt-6 sm:scroll-mt-8">
+    <section id="faq" className="pt-10 pb-10 sm:pt-12 sm:pb-12 bg-transparent relative scroll-mt-20 sm:scroll-mt-24 lg:scroll-mt-28">
       <Container className="max-w-6xl">
         <RevealOnScroll duration={1200}>
           <SectionHeading

@@ -170,10 +170,10 @@ export function LeadForm({ selectedPackage = "Chưa rõ" }) {
   };
 
   return (
-    <section id="form-tu-van" className="pt-10 pb-10 sm:pt-12 sm:pb-12 bg-transparent relative scroll-mt-6 sm:scroll-mt-8">
+    <section id="form-tu-van" className="pt-4 pb-4 sm:pt-5 sm:pb-5 lg:pt-6 lg:pb-6 bg-transparent relative scroll-mt-20 sm:scroll-mt-24 lg:scroll-mt-28">
       <Container className="max-w-7xl">
-        <RevealOnScroll duration={1200}>
-          <div className="relative rounded-3xl border border-slate-200/90 dark:border-slate-700/60 bg-white dark:bg-[#0D1527]/90 p-5 sm:p-7 lg:p-9 shadow-xl shadow-slate-200/50 dark:shadow-2xl backdrop-blur-2xl ring-1 ring-black/5 dark:ring-white/10 dark:shadow-black/40">
+        <RevealOnScroll duration={1100}>
+          <div className="relative rounded-3xl border border-slate-200/90 dark:border-slate-700/60 bg-white dark:bg-[#0D1527]/90 p-3.5 sm:p-5 lg:p-6 shadow-xl shadow-slate-200/50 dark:shadow-2xl backdrop-blur-2xl ring-1 ring-black/5 dark:ring-white/10 dark:shadow-black/40">
             {/* Ambient Red Glow */}
             <div
               aria-hidden="true"
@@ -229,15 +229,15 @@ export function LeadForm({ selectedPackage = "Chưa rõ" }) {
               </div>
             ) : (
               /* Layout chia 2 phần: Mascot (trái) và Form nhập liệu (phải) */
-              <div className="relative z-10 flex flex-col lg:flex-row items-center lg:items-center justify-between gap-6 lg:gap-8 xl:gap-10">
+              <div className="relative z-10 flex flex-col lg:flex-row items-center lg:items-center justify-between gap-4 lg:gap-6 xl:gap-8">
                 {/* Mascot Cột Trái */}
-                <div className="w-full lg:w-[260px] xl:w-[290px] shrink-0 flex flex-col items-center justify-center text-center">
+                <div className="w-full lg:w-[220px] xl:w-[250px] shrink-0 flex flex-col items-center justify-center text-center">
                   {/* Lời nói nghệ thuật phong cách viết tay & nét vẽ tay (Artistic Hand-drawn Speech) */}
-                  <div className="relative mb-2 inline-flex items-center justify-center select-none animate-float">
+                  <div className="relative mb-1 inline-flex items-center justify-center select-none animate-float">
                     {/* Nét ngoặc vẽ tay trái */}
                     <svg
-                      width="20"
-                      height="54"
+                      width="18"
+                      height="48"
                       viewBox="0 0 20 54"
                       fill="none"
                       className="text-red-500/90 shrink-0 drop-shadow-[0_0_8px_rgba(239,68,68,0.35)]"
@@ -252,19 +252,19 @@ export function LeadForm({ selectedPackage = "Chưa rõ" }) {
                     </svg>
 
                     {/* Chữ viết tay nghệ thuật */}
-                    <div className="px-1.5 text-center -rotate-3 font-handwriting">
-                      <p className="text-xl sm:text-2xl font-bold text-red-600 dark:text-red-400 tracking-wide leading-none">
+                    <div className="px-1 text-center -rotate-2 font-handwriting">
+                      <p className="text-lg sm:text-xl font-bold text-red-600 dark:text-red-400 tracking-wide leading-none">
                         Gửi ngay website
                       </p>
-                      <p className="text-xl sm:text-2xl font-extrabold text-red-700 dark:text-red-500 tracking-wide leading-none mt-1">
+                      <p className="text-lg sm:text-xl font-extrabold text-red-700 dark:text-red-500 tracking-wide leading-none mt-0.5">
                         DUDI kiểm tra giúp bạn!
                       </p>
                     </div>
 
                     {/* Nét ngoặc vẽ tay phải */}
                     <svg
-                      width="20"
-                      height="54"
+                      width="18"
+                      height="48"
                       viewBox="0 0 20 54"
                       fill="none"
                       className="text-red-500/90 shrink-0 drop-shadow-[0_0_8px_rgba(239,68,68,0.35)]"
@@ -279,14 +279,14 @@ export function LeadForm({ selectedPackage = "Chưa rõ" }) {
                     </svg>
                   </div>
 
-                  {/* Ảnh Linh vật HD chỉ tay lên (Chuẩn mẫu linh vật DUDI 100%, Đã tách nền trong suốt) */}
-                  <div className="relative w-36 h-48 sm:w-52 sm:h-72 lg:w-64 lg:h-84 xl:w-72 xl:h-92 drop-shadow-[0_15px_30px_rgba(220,38,38,0.25)] dark:drop-shadow-[0_20px_35px_rgba(220,38,38,0.35)] transition-transform duration-500 hover:scale-105">
+                  {/* Ảnh Linh vật HD chỉ tay lên */}
+                  <div className="relative w-32 h-44 sm:w-44 sm:h-58 lg:w-48 lg:h-64 xl:w-52 xl:h-70 drop-shadow-[0_12px_25px_rgba(220,38,38,0.22)] dark:drop-shadow-[0_16px_30px_rgba(220,38,38,0.3)] transition-transform duration-500 hover:scale-105">
                     <Image
-                      src="/images/dudi-mascot-pointing-v3.webp"
+                      src="/images/dudi-mascot-pointing-v4.webp"
                       alt="Linh vật DUDI Software chỉ tay tư vấn"
                       fill
                       className="object-contain"
-                      sizes="(max-width: 768px) 200px, 300px"
+                      sizes="(max-width: 768px) 180px, 240px"
                       priority
                     />
                   </div>
@@ -295,18 +295,18 @@ export function LeadForm({ selectedPackage = "Chưa rõ" }) {
                 {/* Form Card Cột Phải */}
                 <div className="flex-1 w-full">
                   {/* Tiêu đề & phụ đề form */}
-                  <div className="mb-4 sm:mb-6 text-left">
-                    <h3 className="text-lg sm:text-2xl lg:text-3xl font-black text-slate-900 dark:text-white tracking-tight leading-snug">
+                  <div className="mb-3 sm:mb-3.5 text-left">
+                    <h3 className="text-lg sm:text-xl lg:text-2xl font-black text-slate-900 dark:text-white tracking-tight leading-snug">
                       Gửi website để được kiểm tra và tư vấn
                     </h3>
-                    <p className="mt-1 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+                    <p className="mt-0.5 text-xs text-slate-600 dark:text-slate-300">
                       Điền thông tin bên dưới, chúng tôi sẽ liên hệ trong thời gian sớm nhất.
                     </p>
                   </div>
 
-                  <form onSubmit={handleSubmit} noValidate className="space-y-3.5 sm:space-y-4 text-left">
+                  <form onSubmit={handleSubmit} noValidate className="space-y-2.5 sm:space-y-3 text-left">
                     {/* Hàng 1: 4 cột trên desktop, 2 cột trên tablet/mobile */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-3.5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-2.5 sm:gap-3">
                       {/* 1. Họ và tên * */}
                       <div>
                         <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1 sm:mb-1.5">
