@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowRight, Zap, ShieldCheck, Users, Award, Heart, Briefcase, ChevronUp } from "lucide-react";
+import { ArrowRight, Zap, ShieldCheck, Users, ChevronUp } from "lucide-react";
 import { ScrollReveal } from "@/components/common/ScrollReveal";
 import { scrollToSection } from "@/lib/utils";
 import { trackEvent } from "@/lib/tracking";
@@ -22,12 +22,6 @@ const TRUST_BADGES = [
     title: "Minh bạch chi phí",
     subtitle: "báo giá trước khi làm",
   },
-];
-
-const STATS = [
-  { icon: Award, value: "200+", label: "Dự án hoàn thành" },
-  { icon: Heart, value: "98%", label: "Khách hài lòng" },
-  { icon: Briefcase, value: "3+", label: "Năm kinh nghiệm" },
 ];
 
 export function Hero() {
@@ -51,9 +45,9 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="scroll-mt-16 sm:scroll-mt-20 lg:scroll-mt-24 relative isolate w-full overflow-hidden bg-[#FFF9F5]"
+      className="scroll-mt-16 sm:scroll-mt-20 lg:scroll-mt-24 relative isolate w-full overflow-hidden bg-[#FFF9F5] lg:h-[100svh] lg:min-h-[660px] lg:max-h-[940px] flex flex-col justify-center"
     >
-      {/* ===== DESKTOP ONLY: ảnh nền full-bleed + phủ mờ trái ===== */}
+      {/* ===== DESKTOP ONLY: nền full-bleed, robot nằm gọn nửa phải ===== */}
       <div className="hidden lg:block absolute inset-0 z-0 select-none pointer-events-none" aria-hidden="true">
         <Image
           src="/dudi/DUDI_herosection.webp"
@@ -62,25 +56,20 @@ export function Hero() {
           priority
           unoptimized
           sizes="100vw"
-          className="object-cover object-[96%_center] xl:object-[98%_center] select-none pointer-events-none"
+          className="object-cover object-[70%_38%] xl:object-[72%_38%] select-none pointer-events-none"
         />
       </div>
-      {/* Lớp backdrop-blur cục bộ bên trái (desktop) */}
+      {/* Lớp phủ cream nhẹ bên trái để chữ đọc rõ mà nền vẫn thoáng, tan dần sang phải */}
       <div
-        className="hidden lg:block absolute inset-y-0 left-0 w-full lg:w-[46%] xl:w-[44%] z-[1] pointer-events-none select-none [mask-image:linear-gradient(to_right,black_30%,transparent_100%)] backdrop-blur-[5px]"
-        aria-hidden="true"
-      />
-      {/* Lớp gradient phủ ấm (desktop) */}
-      <div
-        className="hidden lg:block absolute inset-0 z-[1] bg-gradient-to-r from-[#FFF9F5]/93 via-[#FFF9F5]/70 via-[26%] via-[#FFF9F5]/20 via-[38%] to-transparent to-[46%] pointer-events-none select-none"
+        className="hidden lg:block absolute inset-0 z-[1] bg-gradient-to-r from-[#FFF9F5]/90 via-[#FFF9F5]/70 via-[25%] via-[#FFF9F5]/35 via-[42%] to-transparent to-[60%] pointer-events-none select-none"
         aria-hidden="true"
       />
 
       {/* ===== CONTENT ===== */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 lg:items-center lg:min-h-[100svh] lg:max-h-[1020px]">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 lg:h-full lg:flex lg:flex-col lg:justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 lg:items-center lg:h-full">
           {/* Cột chữ */}
-          <div className="lg:col-span-7 xl:col-span-6 w-full max-w-none sm:max-w-lg lg:max-w-[460px] xl:max-w-[490px] flex flex-col items-stretch sm:items-start text-left pt-[84px] sm:pt-[96px] pb-6 sm:pb-8 lg:py-24 lg:transform lg:-translate-x-5 xl:-translate-x-7">
+          <div className="lg:col-span-7 xl:col-span-6 w-full max-w-none sm:max-w-lg lg:max-w-[460px] xl:max-w-[490px] flex flex-col items-stretch sm:items-start justify-center text-left pt-[84px] sm:pt-[96px] pb-6 sm:pb-8 lg:py-14 xl:py-16 lg:transform lg:-translate-x-5 xl:-translate-x-7">
             {/* Eyebrow */}
             <ScrollReveal variant="fade-up" delay={50} duration={800}>
               <span className="text-[#FF6500] font-black text-[11px] sm:text-[13px] tracking-[0.22em] uppercase mb-3 sm:mb-4 inline-block">
@@ -90,7 +79,7 @@ export function Hero() {
 
             {/* H1: bỏ whitespace-nowrap trên mobile để không tràn 320px */}
             <ScrollReveal variant="fade-up" delay={120} duration={800}>
-              <h1 className="text-balance text-[27px] min-[400px]:text-[29px] sm:text-[32px] md:text-[34px] lg:text-[34px] xl:text-[38px] font-black text-slate-900 leading-[1.2] sm:leading-[1.22] tracking-tight mb-3.5 sm:mb-4 lg:mb-5">
+              <h1 className="text-balance text-[27px] min-[400px]:text-[29px] sm:text-[32px] md:text-[34px] lg:text-[34px] xl:text-[38px] font-black text-slate-900 leading-[1.2] sm:leading-[1.22] tracking-tight mb-3.5 sm:mb-4 lg:mb-4">
                 <span className="block">Cập nhật &amp; Nâng cấp</span>
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#FF2B14] via-[#FF6800] to-[#FFA000] lg:whitespace-nowrap">
                   Website Doanh Nghiệp
@@ -103,14 +92,14 @@ export function Hero() {
 
             {/* Mô tả: mobile căn trái cho dễ đọc, sm+ justify */}
             <ScrollReveal variant="fade-up" delay={200} duration={800}>
-              <p className="text-[13.5px] sm:text-[14.5px] lg:text-[15px] text-slate-700 font-medium leading-[1.7] text-left sm:text-justify mb-5 sm:mb-7 lg:mb-8 max-w-none sm:max-w-[390px] lg:max-w-[400px]">
+              <p className="text-[13.5px] sm:text-[14.5px] lg:text-[14.5px] xl:text-[15px] text-slate-700 font-medium leading-[1.7] text-left sm:text-justify mb-5 sm:mb-7 lg:mb-6 max-w-none sm:max-w-[390px] lg:max-w-[400px]">
                 DUDI Software tối ưu đúng phần website chậm, lỗi thời hoặc khó ra khách: tăng tốc tải trang, chuẩn hóa di động và sửa lỗi triệt để — giữ chân khách hàng hiệu quả, không cần làm lại từ đầu.
               </p>
             </ScrollReveal>
 
             {/* CTA: mobile full-width xếp dọc như mẫu, sm+ xếp ngang */}
             <ScrollReveal variant="fade-up" delay={280} duration={800} className="w-full sm:w-auto">
-              <div className="flex flex-col min-[420px]:flex-row min-[420px]:flex-wrap min-[420px]:items-center gap-2.5 sm:gap-3.5 mb-6 sm:mb-8 lg:mb-9 w-full sm:w-auto">
+              <div className="flex flex-col min-[420px]:flex-row min-[420px]:flex-wrap min-[420px]:items-center gap-2.5 sm:gap-3.5 mb-7 sm:mb-8 lg:mb-8 w-full sm:w-auto">
                 <a
                   href="#form-tu-van"
                   onClick={handlePrimaryCta}
@@ -129,7 +118,7 @@ export function Hero() {
               </div>
             </ScrollReveal>
 
-            {/* Trust badges: mobile card 1 cột / 3 cột nhỏ, không đè lên ảnh nữa */}
+            {/* Trust badges: hàng cuối của cụm nội dung */}
             <ScrollReveal variant="fade-up" delay={360} duration={800} className="w-full">
               <div className="w-full">
                 <div className="grid grid-cols-1 min-[420px]:grid-cols-3 gap-2 sm:flex sm:flex-wrap sm:items-center sm:gap-x-4 lg:gap-x-4.5 sm:gap-y-2.5">
@@ -158,24 +147,6 @@ export function Hero() {
               </div>
             </ScrollReveal>
 
-            {/* Stats như mẫu: 200+ / 98% / 3+ */}
-            <ScrollReveal variant="fade-up" delay={440} duration={800} className="w-full">
-              <dl className="mt-6 sm:mt-7 grid grid-cols-3 divide-x divide-orange-100 rounded-2xl bg-white/70 border border-orange-100/70 backdrop-blur-sm px-2 py-4 sm:bg-transparent sm:border-0 sm:backdrop-blur-none sm:px-0 sm:py-0 sm:mt-7">
-                {STATS.map((s) => (
-                  <div key={s.label} className="flex flex-col items-center text-center px-1 min-w-0">
-                    <span className="inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-amber-100/80 text-[#FF6B00] mb-1.5">
-                      <s.icon className="h-4 w-4" strokeWidth={2.2} />
-                    </span>
-                    <dt className="order-2 text-[10px] sm:text-[11px] text-slate-500 font-medium leading-tight mt-1">
-                      {s.label}
-                    </dt>
-                    <dd className="order-1 text-lg sm:text-xl font-black text-slate-900 tabular-nums leading-none">
-                      {s.value}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </ScrollReveal>
           </div>
 
           {/* Cột phải desktop để trống cho linh vật */}
