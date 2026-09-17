@@ -52,43 +52,43 @@ export function FloatingWidgets() {
           type="button"
           onClick={scrollToTop}
           aria-label="Cuộn lên đầu trang"
-          className="group relative flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-white/95 dark:bg-[#0E172E]/95 text-slate-700 dark:text-slate-200 shadow-lg shadow-black/15 dark:shadow-black/40 border border-slate-200/90 dark:border-slate-700/80 backdrop-blur-md transition-all duration-300 hover:text-red-600 dark:hover:text-red-400 hover:border-red-500/40 hover:shadow-red-500/20 hover:scale-110 active:scale-95 cursor-pointer"
+          className="group relative flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-white text-slate-700 shadow-lg shadow-black/10 border border-slate-200/90 backdrop-blur-md transition-all duration-300 hover:text-[#E52E20] hover:border-orange-300/60 hover:shadow-orange-500/20 hover:scale-110 active:scale-95 cursor-pointer"
         >
           <ChevronUp className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5" />
 
           {/* Tooltip */}
-          <span className="absolute right-full mr-3.5 px-2.5 py-1 text-[11px] font-semibold tracking-wide text-white bg-slate-900/95 dark:bg-slate-800/95 border border-white/10 rounded-lg shadow-xl whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 hidden sm:block">
+          <span className="absolute right-full mr-3.5 px-2.5 py-1 text-[11px] font-semibold tracking-wide text-white bg-slate-900/95 border border-white/10 rounded-lg shadow-xl whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 hidden sm:block">
             Lên đầu trang
-            <span className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-slate-900/95 dark:bg-slate-800/95 border-r border-t border-white/10 rotate-45" />
+            <span className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-slate-900/95 border-r border-t border-white/10 rotate-45" />
           </span>
         </button>
       </div>
 
-      {/* 2. Nút Gọi Hotline (Với hiệu ứng sóng lan tỏa đỏ) */}
+      {/* 2. Nút Gọi Hotline (Với hiệu ứng sóng lan tỏa cam DUDI) */}
       <div className="relative flex items-center justify-center">
-        {/* Radiating Ripple Wave Rings (Đỏ) */}
+        {/* Radiating Ripple Wave Rings (Cam) */}
         <span
           aria-hidden="true"
-          className="absolute inset-0 rounded-full bg-red-600/30 pointer-events-none animate-ripple-1"
+          className="absolute inset-0 rounded-full bg-[#FF4500]/30 pointer-events-none animate-ripple-1"
         />
         <span
           aria-hidden="true"
-          className="absolute inset-0 rounded-full border border-red-500/40 pointer-events-none animate-ripple-2"
+          className="absolute inset-0 rounded-full border border-[#FF6500]/40 pointer-events-none animate-ripple-2"
         />
 
         <a
           href={siteConfig.hotlineTel}
           onClick={handlePhoneClick}
           aria-label={`Gọi ngay hotline ${siteConfig.hotline}`}
-          className="group relative z-10 flex h-12 w-12 sm:h-13 sm:w-13 items-center justify-center rounded-full bg-gradient-to-tr from-red-600 via-rose-600 to-red-500 text-white shadow-xl shadow-red-600/40 border border-white/20 transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
+          className="group relative z-10 flex h-12 w-12 sm:h-13 sm:w-13 items-center justify-center rounded-full bg-gradient-to-tr from-[#FF3B30] to-[#FF6500] text-white shadow-xl shadow-[#FF6500]/40 border border-white/20 transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
         >
           <Phone className="h-5 w-5 sm:h-5.5 sm:w-5.5 animate-phone-ring" />
 
           {/* Tooltip */}
-          <span className="absolute right-full mr-3.5 px-3 py-1.5 text-xs font-bold tracking-wide text-white bg-slate-900/95 dark:bg-slate-800/95 border border-white/10 rounded-lg shadow-xl whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 hidden sm:block">
-            <span className="text-red-400 font-semibold mr-1">Hotline:</span>
+          <span className="absolute right-full mr-3.5 px-3 py-1.5 text-xs font-bold tracking-wide text-white bg-slate-900/95 border border-white/10 rounded-lg shadow-xl whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 hidden sm:block">
+            <span className="text-[#FF7A00] font-semibold mr-1">Hotline:</span>
             {siteConfig.hotline}
-            <span className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-slate-900/95 dark:bg-slate-800/95 border-r border-t border-white/10 rotate-45" />
+            <span className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-slate-900/95 border-r border-t border-white/10 rotate-45" />
           </span>
         </a>
       </div>
@@ -116,10 +116,10 @@ export function FloatingWidgets() {
           <ZaloIcon className="h-6 w-6 sm:h-7 sm:w-7 drop-shadow-sm" />
 
           {/* Tooltip */}
-          <span className="absolute right-full mr-3.5 px-3 py-1.5 text-xs font-bold tracking-wide text-white bg-slate-900/95 dark:bg-slate-800/95 border border-white/10 rounded-lg shadow-xl whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 hidden sm:block">
+          <span className="absolute right-full mr-3.5 px-3 py-1.5 text-xs font-bold tracking-wide text-white bg-slate-900/95 border border-white/10 rounded-lg shadow-xl whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 hidden sm:block">
             <span className="text-blue-400 font-semibold mr-1">Zalo:</span>
             Chat ngay với DUDI
-            <span className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-slate-900/95 dark:bg-slate-800/95 border-r border-t border-white/10 rotate-45" />
+            <span className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-slate-900/95 border-r border-t border-white/10 rotate-45" />
           </span>
         </a>
       </div>

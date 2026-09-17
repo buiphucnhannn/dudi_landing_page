@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono, Caveat } from "next/font/google";
+import { Geist, Geist_Mono, Caveat, Dancing_Script } from "next/font/google";
 import { siteConfig } from "@/constants/site-config";
 import { faqContent } from "@/constants/landing-content";
 import { ThemeProvider } from "@/context/ThemeContext";
@@ -18,6 +18,12 @@ const caveat = Caveat({
   variable: "--font-caveat",
   subsets: ["latin", "vietnamese"],
   weight: ["600", "700"],
+});
+
+const dancingScript = Dancing_Script({
+  variable: "--font-dancing",
+  subsets: ["latin", "vietnamese"],
+  weight: ["500", "600", "700"],
 });
 
 export const metadata = {
@@ -46,7 +52,7 @@ export const metadata = {
         url: "/dudi/dudisoftware1.webp",
         width: 1200,
         height: 630,
-        alt: "DUDI Software - Dịch vụ sửa & nâng cấp website cũ",
+        alt: "DUDI Software | Cập nhật & Nâng cấp website doanh nghiệp",
       },
     ],
   },
@@ -87,7 +93,7 @@ export default function RootLayout({ children }) {
       {
         "@type": "Service",
         "@id": "https://dudisoftware.com/#service",
-        name: "Dịch vụ cập nhật & nâng cấp website doanh nghiệp",
+        name: "Cập nhật & Nâng cấp website doanh nghiệp",
         provider: { "@id": "https://dudisoftware.com/#organization" },
         description: siteConfig.description,
         offers: {
@@ -117,20 +123,15 @@ export default function RootLayout({ children }) {
     <html
       lang="vi"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} ${caveat.variable} dark scroll-smooth antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${caveat.variable} ${dancingScript.variable} scroll-smooth antialiased`}
     >
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem("dudi-theme")||"dark";if(t==="light"){document.documentElement.classList.remove("dark");document.documentElement.classList.add("light");document.documentElement.style.colorScheme="light";}else{document.documentElement.classList.add("dark");document.documentElement.classList.remove("light");document.documentElement.style.colorScheme="dark";}}catch(e){document.documentElement.classList.add("dark");}})();`,
-          }}
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full font-sans antialiased bg-[#060A14] text-slate-100 transition-colors duration-300">
+      <body className="min-h-full font-sans antialiased text-slate-800 bg-[#FFF9F5] selection:bg-orange-500 selection:text-white">
         <ThemeProvider>
           {children}
         </ThemeProvider>

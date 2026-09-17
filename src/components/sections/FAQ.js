@@ -2,13 +2,13 @@ import { faqContent } from "@/constants/landing-content";
 import { Container } from "@/components/common/Container";
 import { SectionHeading } from "@/components/common/SectionHeading";
 import { Accordion } from "@/components/ui/Accordion";
-import { RevealOnScroll } from "@/components/common/RevealOnScroll";
+import { ScrollReveal } from "@/components/common/ScrollReveal";
 
 export function FAQ() {
   return (
-    <section id="faq" className="pt-10 pb-10 sm:pt-12 sm:pb-12 bg-transparent relative scroll-mt-20 sm:scroll-mt-24 lg:scroll-mt-28">
+    <section id="faq" className="scroll-mt-[58px] sm:scroll-mt-[68px] lg:scroll-mt-[72px] py-8 sm:py-10 lg:py-12 bg-transparent relative">
       <Container className="max-w-6xl">
-        <RevealOnScroll duration={1200}>
+        <ScrollReveal variant="fade-up" duration={900}>
           <SectionHeading
             titlePart1="Câu hỏi"
             titlePart2="thường gặp"
@@ -20,11 +20,11 @@ export function FAQ() {
             }}
             breakLine={false}
           />
-        </RevealOnScroll>
+        </ScrollReveal>
 
-        <RevealOnScroll delay={150} duration={1300}>
+        <ScrollReveal variant="card-3d" delay={150} duration={850}>
           <Accordion items={faqContent} />
-        </RevealOnScroll>
+        </ScrollReveal>
       </Container>
     </section>
   );

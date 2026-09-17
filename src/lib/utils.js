@@ -34,16 +34,20 @@ export function scrollToSection(arg1, arg2) {
 
   const targetElement = document.getElementById(targetId);
   if (targetElement) {
-    // Dynamic framing: measures exact navbar height + comfortable breathing clearance
-    // ensures section title, badges, or top wave are 100% visible and beautifully framed
-    const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
-    const navHeader = document.querySelector("header");
-    const navHeight = navHeader ? navHeader.getBoundingClientRect().height : (isMobile ? 64 : 72);
-    const extraPadding = isMobile ? 14 : 22;
-    const totalOffset = navHeight + extraPadding;
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+    
+    // Header height calculation: clamped to prevent mobile drawer expansion skewing the offset
+    const header = document.querySelector("header");
+    let navHeight = isMobile ? 56 : 64;
+    if (header) {
+      const rect = header.getBoundingClientRect();
+      navHeight = Math.min(rect.height, isMobile ? 58 : 68);
+    }
 
+    // Scroll accurately to align the section start right under the fixed navbar
+    // The section's internal padding (py-8/py-10/py-12) provides the perfect framing for the heading
     const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
-    const targetScrollTop = Math.max(0, elementPosition - totalOffset);
+    const targetScrollTop = Math.max(0, Math.round(elementPosition - navHeight));
 
     window.scrollTo({
       top: targetScrollTop,
@@ -51,7 +55,6 @@ export function scrollToSection(arg1, arg2) {
     });
 
     // Clean URL: Do NOT add `#hash` to the address bar.
-    // If a hash is currently present in the URL, cleanly strip it away.
     if (typeof window !== "undefined" && window.history && window.history.replaceState && window.location.hash) {
       window.history.replaceState(null, "", window.location.pathname + window.location.search);
     }

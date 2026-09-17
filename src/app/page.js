@@ -12,17 +12,10 @@ import { WhyUs } from "@/components/sections/WhyUs";
 import { FAQ } from "@/components/sections/FAQ";
 import { LeadForm } from "@/components/sections/LeadForm";
 import { Footer } from "@/components/sections/Footer";
-import { AmbientBackground } from "@/components/common/AmbientBackground";
 import { FloatingWidgets } from "@/components/common/FloatingWidgets";
 import { scrollToSection } from "@/lib/utils";
 
-function SectionDivider() {
-  return (
-    <div className="section-divider" aria-hidden="true">
-      <span className="dot" />
-    </div>
-  );
-}
+import { SectionDivider } from "@/components/common/SectionDivider";
 
 export default function LandingPage() {
   const [selectedPackage, setSelectedPackage] = useState("Chưa rõ");
@@ -56,18 +49,13 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div className="relative flex min-h-screen flex-col bg-dudi-gradient-mesh text-slate-100 selection:bg-red-600 selection:text-white transition-colors duration-300">
-      {/* Soft Ambient Background Orbs & Subtle Grid */}
-      <AmbientBackground />
-
+    <div className="relative flex min-h-screen flex-col bg-[#FFF9F5] text-slate-800 selection:bg-orange-500 selection:text-white transition-colors duration-300">
       {/* S01 - Header / Navbar */}
       <Navbar />
 
-      <main className="relative z-10 flex-1">
+      <main className="relative z-10 flex-1 bg-[#FFF9F5]">
         {/* S02 - Hero Section */}
         <Hero />
-
-        <SectionDivider />
 
         {/* S03 - 6 Dấu hiệu cần nâng cấp */}
         <Problems />
@@ -82,7 +70,7 @@ export default function LandingPage() {
         {/* S05 - Case thực tế trung thực */}
         <CaseStudies />
 
-        {/* S06 - Quy trình 6 bước rõ ràng (Full-width Anamorphic Mountain Banner) */}
+        {/* S06 - Quy trình 6 bước rõ ràng */}
         <Process />
 
         {/* S07 - Bảng giá 3 gói (GIÁ/GÓI) */}

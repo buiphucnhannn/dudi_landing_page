@@ -12,7 +12,7 @@ export function SectionHeading({
   className,
   showBorder = true,
   action, // { label: string, href: string, onClick?: () => void, external?: boolean }
-  breakLine = true,
+  breakLine = false,
 }) {
   const isCenter = align === "center";
 
@@ -46,7 +46,7 @@ export function SectionHeading({
     <div
       className={cn(
         "mb-6 sm:mb-8",
-        showBorder && "pb-3.5 border-b border-slate-200 dark:border-slate-800/60",
+        showBorder && "pb-3.5 border-b border-[#FFE4D6]",
         className
       )}
     >
@@ -56,16 +56,16 @@ export function SectionHeading({
           isCenter ? "text-center" : "text-left"
         )}
       >
-        <div className="max-w-3xl">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.25]">
+        <div className="flex-1 min-w-0 max-w-4xl xl:max-w-5xl">
+          <h2 className="text-[23px] sm:text-[28px] lg:text-[32px] xl:text-[35px] font-black tracking-tight text-slate-900 leading-[1.25]">
             <span className={breakLine && p2 ? "block" : "inline"}>
               {p1}{!breakLine || !p2 ? " " : ""}
             </span>
             {p2 ? (
               <span
                 className={cn(
-                  "bg-gradient-to-r from-red-600 via-rose-600 to-red-500 dark:from-red-500 dark:via-rose-500 dark:to-red-400 bg-clip-text text-transparent",
-                  breakLine ? "block mt-1 sm:mt-1.5" : "inline"
+                  "bg-gradient-to-r from-[#FF2B14] via-[#FF6800] to-[#FFA000] bg-clip-text text-transparent",
+                  breakLine ? "block mt-1 sm:mt-1.5" : "inline sm:whitespace-nowrap"
                 )}
               >
                 {p2}
@@ -74,7 +74,7 @@ export function SectionHeading({
           </h2>
 
           {description && (
-            <p className="mt-2.5 text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed text-justify">
+            <p className="mt-2.5 text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed text-justify">
               {description}
             </p>
           )}
@@ -94,7 +94,7 @@ export function SectionHeading({
               }}
               target={action.external ? "_blank" : undefined}
               rel={action.external ? "noopener noreferrer" : undefined}
-              className="inline-flex items-center gap-1.5 text-sm sm:text-base font-semibold text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 transition-colors group cursor-pointer"
+              className="inline-flex items-center gap-1.5 text-sm sm:text-base font-bold text-[#FF6500] hover:text-[#E52E20] transition-colors group cursor-pointer"
             >
               {action.label && action.label.toLowerCase().includes("zalo") && (
                 <ZaloIcon className="h-4 w-4 shrink-0" />

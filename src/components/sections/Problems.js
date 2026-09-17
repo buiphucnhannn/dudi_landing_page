@@ -12,7 +12,7 @@ import {
 import { problemsContent } from "@/constants/landing-content";
 import { Container } from "@/components/common/Container";
 import { SectionHeading } from "@/components/common/SectionHeading";
-import { RevealOnScroll } from "@/components/common/RevealOnScroll";
+import { ScrollReveal } from "@/components/common/ScrollReveal";
 
 const problemIconMap = {
   Gauge,
@@ -36,31 +36,38 @@ export function Problems() {
     const el = scrollRef.current;
     if (!el) return;
 
-    // Start in the middle of triplicated list so user can scroll both directions immediately
-    const singleSetWidth = el.scrollWidth / 3;
-    if (el.scrollLeft === 0) {
-      el.scrollLeft = singleSetWidth;
-    }
-
     let reqId;
     const speed = 0.6; // smooth auto-scroll speed (px per frame)
 
+    // Ensure initial scroll position starts in the middle set
+    const initTimer = setTimeout(() => {
+      if (el && el.scrollWidth > 0 && el.scrollLeft === 0) {
+        el.scrollLeft = el.scrollWidth / 3;
+      }
+    }, 50);
+
     const tick = () => {
       if (!isPaused.current && el) {
-        el.scrollLeft += speed;
+        const singleSetWidth = el.scrollWidth / 3;
+        if (singleSetWidth > 50) {
+          el.scrollLeft += speed;
 
-        // Seamless loop
-        if (el.scrollLeft >= singleSetWidth * 2) {
-          el.scrollLeft -= singleSetWidth;
-        } else if (el.scrollLeft <= 0) {
-          el.scrollLeft += singleSetWidth;
+          // Seamless loop
+          if (el.scrollLeft >= singleSetWidth * 2) {
+            el.scrollLeft -= singleSetWidth;
+          } else if (el.scrollLeft <= 0) {
+            el.scrollLeft += singleSetWidth;
+          }
         }
       }
       reqId = requestAnimationFrame(tick);
     };
 
     reqId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(reqId);
+    return () => {
+      clearTimeout(initTimer);
+      cancelAnimationFrame(reqId);
+    };
   }, []);
 
   // Handle boundary wrapping during manual swipe or drag
@@ -137,73 +144,75 @@ export function Problems() {
   const cardsList = [...problemsContent, ...problemsContent, ...problemsContent];
 
   return (
-    <section id="dau-hieu" className="pt-10 pb-9 sm:pt-12 sm:pb-11 bg-transparent relative scroll-mt-20 sm:scroll-mt-24 lg:scroll-mt-28">
+    <section id="dau-hieu" className="scroll-mt-[58px] sm:scroll-mt-[68px] lg:scroll-mt-[72px] py-8 sm:py-10 lg:py-12 bg-transparent relative">
       <Container>
-        <RevealOnScroll duration={1200}>
+        <ScrollReveal variant="fade-up" duration={900}>
           <SectionHeading
             title="Website Của Bạn Có Đang Gặp Phải — 6 Vấn Đề Này?"
             description="Đừng để những lỗi kỹ thuật âm thầm làm giảm uy tín thương hiệu và đánh mất khách hàng tiềm năng mỗi ngày."
+            showBorder={false}
+            breakLine={false}
             action={{
               label: "Xem giải pháp DUDI",
               href: "#giai-phap",
             }}
           />
-        </RevealOnScroll>
+        </ScrollReveal>
       </Container>
 
       {/* Interactive Horizontal Track */}
       <div
         className="relative w-full overflow-hidden pt-1 pb-2"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeaveContainer}
-      >
-        {/* Soft edge gradient masks */}
-        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-6 sm:w-16 bg-gradient-to-r from-white/90 dark:from-[#070B18]/90 to-transparent z-10" />
-        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-6 sm:w-16 bg-gradient-to-l from-white/90 dark:from-[#070B18]/90 to-transparent z-10" />
-
-        {/* Scrollable & Draggable Track */}
-        <div
-          ref={scrollRef}
-          onScroll={handleScroll}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUpOrLeave}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-          className="flex gap-4 sm:gap-6 overflow-x-auto no-scrollbar touch-pan-x cursor-grab active:cursor-grabbing select-none px-4 sm:px-8 py-2"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeaveContainer}
         >
-          {cardsList.map((item, idx) => {
-            const IconComp = problemIconMap[item.icon] || Gauge;
-            const number = (idx % problemsContent.length) + 1;
+          {/* Soft edge gradient masks */}
+          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-6 sm:w-16 bg-gradient-to-r from-[#FFF9F5] to-transparent z-10" />
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-6 sm:w-16 bg-gradient-to-l from-[#FFF9F5] to-transparent z-10" />
 
-            return (
-              <div
-                key={`${item.id}-${idx}`}
-                className="w-[280px] sm:w-[325px] shrink-0 flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#0D1527]/85 border border-slate-200/90 dark:border-slate-700/60 hover:border-red-500/80 shadow-lg shadow-slate-200/50 dark:shadow-xl dark:shadow-black/40 hover:shadow-xl hover:shadow-red-500/10 dark:hover:shadow-red-950/40 backdrop-blur-xl transition-all duration-300 group cursor-pointer hover:-translate-y-1.5 min-h-[230px]"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-red-50 dark:bg-slate-800/80 text-red-600 dark:text-red-400 border border-red-100 dark:border-slate-700/60 group-hover:bg-red-600 group-hover:text-white group-hover:border-red-600 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-xs">
-                      <IconComp className="h-5 w-5" />
+          {/* Scrollable & Draggable Track */}
+          <div
+            ref={scrollRef}
+            onScroll={handleScroll}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUpOrLeave}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            className="flex gap-4 sm:gap-6 overflow-x-auto no-scrollbar touch-pan-x cursor-grab active:cursor-grabbing select-none px-4 sm:px-8 py-2"
+          >
+            {cardsList.map((item, idx) => {
+              const IconComp = problemIconMap[item.icon] || Gauge;
+              const number = (idx % problemsContent.length) + 1;
+
+              return (
+                <div
+                  key={`${item.id}-${idx}`}
+                  className="w-[280px] sm:w-[325px] shrink-0 flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-white border border-[#FFE4D6] hover:border-[#FF6500] shadow-sm hover:shadow-xl hover:shadow-orange-500/10 transition-all duration-300 group cursor-pointer hover:-translate-y-1.5 min-h-[230px]"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-50 text-[#FF6500] border border-orange-100 group-hover:bg-[#FF6500] group-hover:text-white group-hover:border-[#FF6500] group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-xs">
+                        <IconComp className="h-5 w-5" />
+                      </div>
+                      <span className="text-xs font-mono font-bold text-[#FF6500] bg-orange-50 px-2.5 py-0.5 rounded-full border border-orange-200/80">
+                        0{number}
+                      </span>
                     </div>
-                    <span className="text-xs font-mono font-bold text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/50 px-2.5 py-0.5 rounded-full border border-red-200/80 dark:border-red-900/40">
-                      0{number}
-                    </span>
+
+                    <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#FF6500] transition-colors">
+                      {item.title}
+                    </h3>
+
+                    <p className="mt-2.5 text-sm text-slate-600 leading-relaxed font-normal text-justify">
+                      {item.description}
+                    </p>
                   </div>
-
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
-                    {item.title}
-                  </h3>
-
-                  <p className="mt-2.5 text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal text-justify">
-                    {item.description}
-                  </p>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      </div>
     </section>
   );
 }

@@ -3,21 +3,21 @@ import { cn } from "@/lib/utils";
 
 const buttonVariants = {
   primary:
-    "bg-red-600 text-white hover:bg-red-700 shadow-md shadow-red-600/30 active:scale-[0.98] border border-red-500/40",
+    "bg-gradient-to-r from-[#FF3B30] to-[#FF6500] hover:from-[#E52E20] hover:to-[#E55A00] text-white shadow-md shadow-orange-500/25 active:scale-[0.98] border border-orange-400/30",
   dudiGradient:
-    "bg-gradient-to-r from-red-600 via-rose-600 to-red-700 text-white hover:from-red-700 hover:to-rose-800 shadow-lg shadow-red-600/30 active:scale-[0.98] border border-red-400/40",
+    "bg-gradient-to-r from-[#FF3823] via-[#FF6500] to-[#FF8A00] text-white hover:from-[#E52E20] hover:to-[#FF6500] shadow-lg shadow-orange-500/30 active:scale-[0.98] border border-orange-400/40",
   secondary:
-    "bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-white hover:bg-slate-200 dark:hover:bg-slate-700 active:scale-[0.98] border border-slate-300 dark:border-slate-700",
+    "bg-[#FFF0E6] text-slate-800 hover:bg-[#FFE5D4] active:scale-[0.98] border border-[#FFDEC9]",
   outline:
-    "border border-slate-300 dark:border-slate-700 hover:border-red-500 bg-white dark:bg-slate-900/60 hover:bg-red-50 dark:hover:bg-red-950/30 text-slate-800 dark:text-slate-200 hover:text-red-600 dark:hover:text-white shadow-xs",
+    "border border-[#FFDEC9] hover:border-[#FF7A00] bg-white hover:bg-[#FFF5EE] text-slate-800 hover:text-[#FF6500] shadow-xs",
   outlineRed:
-    "border-2 border-red-500 bg-red-50/50 dark:bg-red-950/20 text-red-600 dark:text-red-400 hover:bg-red-600 hover:text-white hover:border-red-600",
+    "border-2 border-[#FF6500] bg-orange-50/50 text-[#FF6500] hover:bg-[#FF6500] hover:text-white hover:border-[#FF6500]",
   ghost:
-    "bg-transparent hover:bg-slate-100 dark:hover:bg-white/10 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white",
+    "bg-transparent hover:bg-orange-50/80 text-slate-700 hover:text-[#FF6500]",
   zalo:
     "bg-[#0068FF] text-white hover:bg-[#0052cc] border border-blue-400/30 shadow-md shadow-blue-600/30 active:scale-[0.98]",
   outlineZalo:
-    "border border-blue-500/50 hover:border-[#0068FF] bg-blue-50/50 dark:bg-blue-950/25 hover:bg-blue-100 dark:hover:bg-blue-900/40 text-[#0068FF] dark:text-blue-300 hover:text-[#0052cc] dark:hover:text-white shadow-xs hover:shadow-[0_0_20px_rgba(0,104,255,0.25)]",
+    "border border-blue-500/50 hover:border-[#0068FF] bg-blue-50/50 hover:bg-blue-100 text-[#0068FF] hover:text-[#0052cc] shadow-xs hover:shadow-[0_0_20px_rgba(0,104,255,0.25)]",
 };
 
 const buttonSizes = {

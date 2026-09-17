@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { MapPin, Phone, Mail, ChevronUp } from "lucide-react";
 import { Container } from "@/components/common/Container";
+import { ScrollReveal } from "@/components/common/ScrollReveal";
 
 const servicesList = [
   "Phát triển ứng dụng",
@@ -27,13 +28,14 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative bg-[#060913] text-slate-300 pt-14 sm:pt-16 pb-7 border-t border-slate-800/80 overflow-hidden select-none">
+    <footer className="relative bg-[#060913] text-slate-300 pt-10 sm:pt-12 pb-7 border-t border-slate-800/80 overflow-hidden select-none">
       {/* Subtle Atmospheric Ambient Glow at Top */}
-      <div className="pointer-events-none absolute top-0 left-1/4 -translate-x-1/2 w-[650px] h-[260px] bg-gradient-to-b from-purple-900/15 via-rose-950/10 to-transparent blur-[110px]" />
+      <div className="pointer-events-none absolute top-0 left-1/4 -translate-x-1/2 w-[650px] h-[260px] bg-gradient-to-b from-orange-500/10 via-amber-500/5 to-transparent blur-[110px]" />
 
       <Container className="relative z-10">
-        {/* Main 4-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-9 lg:gap-8 mb-12">
+        <ScrollReveal variant="fade-up" duration={800}>
+          {/* Main 4-Column Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-9 lg:gap-8 mb-12">
           {/* Cột 1: Logo (Không bo góc), Đoạn giới thiệu, Thông tin pháp nhân & Mạng xã hội */}
           <div className="lg:col-span-4 space-y-4 text-left">
             {/* Logo DUDI (Sharp corners, rounded-none) + Text DUDI Software */}
@@ -171,7 +173,7 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Cột 2: Dịch vụ của chúng tôi (Chấm đỏ •) */}
+          {/* Cột 2: Dịch vụ của chúng tôi (Chấm cam •) */}
           <div className="lg:col-span-3 text-left">
             <h4 className="text-base font-bold text-white mb-4 sm:mb-5">
               Dịch vụ của chúng tôi
@@ -179,12 +181,12 @@ export function Footer() {
             <ul className="space-y-3 text-xs sm:text-[13px] text-slate-300">
               {servicesList.map((item, idx) => (
                 <li key={idx} className="flex items-center gap-2">
-                  <span className="text-red-500 font-bold text-base leading-none select-none">•</span>
+                  <span className="text-[#E52E20] font-bold text-base leading-none select-none">•</span>
                   <a
                     href="https://dudisoftware.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-white transition-colors"
+                    className="hover:text-orange-400 transition-colors"
                   >
                     {item}
                   </a>
@@ -193,7 +195,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Cột 3: Khám phá (Chấm xanh •) */}
+          {/* Cột 3: Khám phá (Chấm cam •) */}
           <div className="lg:col-span-2 text-left">
             <h4 className="text-base font-bold text-white mb-4 sm:mb-5">
               Khám phá
@@ -201,12 +203,12 @@ export function Footer() {
             <ul className="space-y-3 text-xs sm:text-[13px] text-slate-300">
               {exploreList.map((item, idx) => (
                 <li key={idx} className="flex items-center gap-2">
-                  <span className="text-blue-500 font-bold text-base leading-none select-none">•</span>
+                  <span className="text-[#E52E20] font-bold text-base leading-none select-none">•</span>
                   <a
                     href="https://dudisoftware.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-white transition-colors"
+                    className="hover:text-orange-400 transition-colors"
                   >
                     {item}
                   </a>
@@ -299,13 +301,14 @@ export function Footer() {
             <button
               onClick={scrollToTop}
               aria-label="Cuộn lên đầu trang"
-              className="h-8 w-8 rounded-full bg-[#131B2E] hover:bg-[#1C2740] border border-slate-700/60 text-slate-400 hover:text-white flex items-center justify-center transition-all cursor-pointer"
+              className="h-8 w-8 rounded-full bg-[#131B2E] hover:bg-[#1C2740] border border-slate-700/60 text-slate-400 hover:text-orange-400 hover:border-orange-400/40 flex items-center justify-center transition-all cursor-pointer"
             >
               <ChevronUp className="h-4 w-4" />
             </button>
           </div>
         </div>
-      </Container>
-    </footer>
+      </ScrollReveal>
+    </Container>
+  </footer>
   );
 }

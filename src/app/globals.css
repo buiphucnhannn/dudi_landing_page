@@ -1,42 +1,41 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
+@theme {
+  --breakpoint-xs: 480px;
+}
 
 :root {
-  --background: #070B18;
-  --foreground: #f8fafc;
-  --dudi-navy-dark: #050811;
-  --dudi-navy: #0B132B;
-  --dudi-navy-light: #16223F;
-  --dudi-red: #dc2626;
-  --dudi-red-dark: #b91c1c;
-  --dudi-red-light: #fee2e2;
-  --dudi-accent: #e11d48;
+  --primary-red: #E52E20;
+  --primary-orange: #FF6B00;
+  --primary-gradient: linear-gradient(135deg, #FF3B30 0%, #FF6500 100%);
+  --bg-warm-light: #FFF9F5;
+  --bg-warm-card: #FFFFFF;
+  --border-warm: #FFE4D6;
+  --background: #FFF9F5;
+  --foreground: #1E293B;
+  --dudi-orange: #FF6B00;
+  --dudi-orange-light: #FFF9F5;
+  --dudi-orange-dark: #E52E20;
 }
 
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5.5rem;
-  color-scheme: dark;
-}
-
-html.light {
+  background-color: #FFF9F5;
   color-scheme: light;
-  --background: #FFFFFF;
-  --foreground: #0F172A;
-}
-
-html.light body {
-  background-color: #FFFFFF;
-  color: #0F172A;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background-color: #FFF9F5;
+  color: #1E293B;
   font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   overflow-x: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  max-width: 100vw;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 .text-justify {
@@ -44,58 +43,54 @@ body {
   text-justify: inter-word;
 }
 
+/* Responsive guard: không để tiêu đề dài tràn màn hình nhỏ */
+h1, h2, h3, p {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+img, video, canvas, svg {
+  max-width: 100%;
+}
+
 /* ========================================
-   NỀN GRADIENT DUDI - Dark (Default) & Light
+   NỀN DUDI - Uniform Warm Light Tone (Đồng bộ LandingPage5)
    ======================================== */
 .bg-dudi-gradient-mesh {
-  background-color: #060A14;
-  background-image:
-    radial-gradient(ellipse 70% 45% at 20% 0%, rgba(220, 38, 38, 0.18), transparent 55%),
-    radial-gradient(ellipse 60% 45% at 85% 12%, rgba(29, 78, 216, 0.18), transparent 55%),
-    radial-gradient(ellipse 65% 45% at 10% 45%, rgba(185, 28, 28, 0.14), transparent 55%),
-    radial-gradient(ellipse 70% 50% at 88% 65%, rgba(220, 38, 38, 0.15), transparent 55%),
-    radial-gradient(ellipse 80% 55% at 30% 92%, rgba(220, 38, 38, 0.18), transparent 60%),
-    linear-gradient(180deg, #070B16 0%, #091024 20%, #0B132B 40%, #0D1224 60%, #080D1D 80%, #050811 100%);
-  background-attachment: fixed;
-  animation: gradient-shift 25s ease-in-out infinite alternate;
-  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 200%;
+  background-color: #FFF9F5;
 }
 
-html.light .bg-dudi-gradient-mesh {
-  background-color: #FFFFFF !important;
-  background-image:
-    radial-gradient(ellipse 75% 50% at 18% 0%, rgba(239, 68, 68, 0.08), transparent 60%),
-    radial-gradient(ellipse 65% 50% at 85% 10%, rgba(244, 63, 94, 0.06), transparent 55%),
-    radial-gradient(ellipse 70% 50% at 10% 45%, rgba(225, 29, 72, 0.05), transparent 55%),
-    radial-gradient(ellipse 75% 55% at 90% 65%, rgba(239, 68, 68, 0.06), transparent 55%),
-    radial-gradient(ellipse 85% 60% at 30% 95%, rgba(244, 63, 94, 0.08), transparent 60%),
-    linear-gradient(180deg, #FFFFFF 0%, #FFF5F5 18%, #FFFFFF 40%, #FFF8F8 60%, #FAFBFD 80%, #F8FAFC 100%) !important;
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #FF3823 0%, #FF6B00 100%);
 }
 
-/* Light Mode Overrides for Hero */
-html.light .hero-cosmic-bg,
-html.light .hero-starlight-canvas {
-  opacity: 0 !important;
+.bg-gradient-hero {
+  background: radial-gradient(circle at 80% 20%, rgba(255, 107, 0, 0.12) 0%, rgba(255, 245, 238, 0.5) 50%, #FFFDFB 100%);
 }
 
-html.light .hero-bottom-fade {
-  background: linear-gradient(to top, #FFFFFF 0%, rgba(255, 255, 255, 0.6) 50%, transparent 100%) !important;
+.text-gradient-orange {
+  background: linear-gradient(135deg, #E52E20 0%, #FF5500 50%, #FF7A00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-html.light .hero-headline-p1 {
-  background: none !important;
-  -webkit-text-fill-color: #0F172A !important;
-  color: #0F172A !important;
+.glass-nav {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 228, 214, 0.7);
 }
 
-html.light .hero-headline-p2 {
-  background: linear-gradient(to right, #DC2626, #E11D48, #EF4444) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
+.glass-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 230, 215, 0.85);
+  box-shadow: 0 10px 30px -5px rgba(255, 110, 50, 0.07), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
 }
 
-html.light .hero-desc {
-  color: #475569 !important;
+.glass-card:hover {
+  box-shadow: 0 20px 40px -5px rgba(255, 100, 30, 0.14), 0 8px 16px -2px rgba(0, 0, 0, 0.04);
 }
 
 /* ========================================
@@ -177,6 +172,39 @@ html.light .hero-desc {
 @keyframes grid-drift {
   0% { transform: translate(0, 0); }
   100% { transform: translate(44px, 44px); }
+}
+
+@keyframes sparkle-twinkle {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(0.75) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.25) rotate(90deg);
+    filter: drop-shadow(0 0 8px rgba(255, 140, 0, 0.9));
+  }
+}
+
+@keyframes light-sweep {
+  0% {
+    transform: translateX(-150%) rotate(-45deg);
+  }
+  35%, 100% {
+    transform: translateX(250%) rotate(-45deg);
+  }
+}
+
+.animate-sparkle {
+  animation: sparkle-twinkle 2s ease-in-out infinite;
+}
+
+.animate-sparkle-delayed {
+  animation: sparkle-twinkle 2.4s ease-in-out 0.8s infinite;
+}
+
+.animate-light-sweep {
+  animation: light-sweep 3.5s ease-in-out infinite;
 }
 
 @keyframes scale-in {
@@ -338,7 +366,7 @@ html.light .hero-desc {
 }
 
 /* ========================================
-   SECTION DIVIDER — Diamond Dots
+   SECTION DIVIDER — Diamond SVG & Fading Orange Gradients
    ======================================== */
 .section-divider {
   display: flex;
@@ -346,7 +374,7 @@ html.light .hero-desc {
   justify-content: center;
   gap: 12px;
   padding: 0;
-  height: 0;
+  height: 16px;
   position: relative;
   z-index: 10;
 }
@@ -355,18 +383,111 @@ html.light .hero-desc {
 .section-divider::after {
   content: '';
   flex: 1;
-  max-width: 120px;
+  max-width: 140px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.25), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 122, 26, 0.45), transparent);
 }
 
 .section-divider .dot {
-  width: 5px;
-  height: 5px;
-  background: rgba(220, 38, 38, 0.45);
+  width: 7px;
+  height: 7px;
+  background: #FF7A1A;
   transform: rotate(45deg);
   border-radius: 1px;
   flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(255, 122, 26, 0.6);
+}
+
+/* Custom warm orange scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FFF5EE;
+}
+::-webkit-scrollbar-thumb {
+  background: #FFB38A;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FF6B00;
+}
+
+/* ========================================================
+   SCROLL REVEAL / LAZY LOADING ANIMATIONS (Đồng bộ LandingPage5)
+   GPU-accelerated, cinematic smooth transitions
+   Slow, deliberate & elegant easing so user can clearly see movement
+   Both scroll-down and scroll-up trigger support
+   ======================================================== */
+.reveal-init {
+  opacity: 0 !important;
+  will-change: transform, opacity;
+  transition-property: transform, opacity !important;
+  transition-timing-function: cubic-bezier(0.25, 1, 0.4, 1) !important;
+  transition-duration: 350ms !important;
+  transition-delay: 0ms !important;
+}
+
+.reveal-init.is-revealed {
+  opacity: 1 !important;
+  transition-duration: var(--reveal-duration, 900ms) !important;
+  transition-delay: var(--reveal-delay, 0ms) !important;
+}
+
+/* Variant 1: Fade Up */
+.reveal-fade-up {
+  transform: translate3d(0, 36px, 0);
+}
+.reveal-fade-up.is-revealed {
+  transform: translate3d(0, 0, 0);
+}
+
+/* Variant 2: Fade Down */
+.reveal-fade-down {
+  transform: translate3d(0, -32px, 0);
+}
+.reveal-fade-down.is-revealed {
+  transform: translate3d(0, 0, 0);
+}
+
+/* Variant 3: Slide In from Left */
+.reveal-slide-left {
+  transform: translate3d(-40px, 0, 0);
+}
+.reveal-slide-left.is-revealed {
+  transform: translate3d(0, 0, 0);
+}
+
+/* Variant 4: Slide In from Right */
+.reveal-slide-right {
+  transform: translate3d(40px, 0, 0);
+}
+.reveal-slide-right.is-revealed {
+  transform: translate3d(0, 0, 0);
+}
+
+/* Variant 5: Zoom In */
+.reveal-zoom-in {
+  transform: scale(0.9) translate3d(0, 22px, 0);
+}
+.reveal-zoom-in.is-revealed {
+  transform: scale(1) translate3d(0, 0, 0);
+}
+
+/* Variant 6: 3D Perspective Card */
+.reveal-card-3d {
+  transform: perspective(1000px) rotateX(10deg) translate3d(0, 36px, 0);
+}
+.reveal-card-3d.is-revealed {
+  transform: perspective(1000px) rotateX(0deg) translate3d(0, 0, 0);
+}
+
+/* Variant 7: Flip In */
+.reveal-flip-in {
+  transform: perspective(1000px) rotateY(-10deg) translate3d(-24px, 0, 0);
+}
+.reveal-flip-in.is-revealed {
+  transform: perspective(1000px) rotateY(0deg) translate3d(0, 0, 0);
 }
 
 /* ========================================
@@ -390,6 +511,10 @@ div[class*="nextjs-portal"] {
    ======================================== */
 .font-handwriting {
   font-family: var(--font-caveat), 'Caveat', cursive, sans-serif;
+}
+
+.font-dancing-script {
+  font-family: var(--font-dancing), 'Dancing Script', cursive, sans-serif;
 }
 
 /* ========================================
