@@ -9,6 +9,8 @@ export const siteConfig = {
   hotline: "0909 163 821",
   hotlineTel: "tel:0909163821",
   zaloUrl: "https://zalo.me/2871243904030074512",
+  // TODO: thay bằng URL chatbot trợ lý AI DU thật khi có (hiện placeholder "#")
+  aiChatUrl: "#",
   email: "contact@dudisoftware.com",
   emailMailto: "mailto:contact@dudisoftware.com",
   address: "49/2 Đường 14, Phường Thủ Đức, TP. Hồ Chí Minh",

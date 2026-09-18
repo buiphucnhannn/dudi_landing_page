@@ -1,10 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { Phone, ChevronUp } from "lucide-react";
 import { siteConfig } from "@/constants/site-config";
-import { ZaloIcon } from "@/components/ui/ZaloIcon";
 import { trackEvent } from "@/lib/tracking";
+
+const TOOLTIP_BASE =
+  "pointer-events-none absolute top-1/2 right-full mr-3.5 hidden -translate-y-1/2 items-center gap-1.5 rounded-full border border-slate-100 bg-white px-3 py-1.5 text-xs font-extrabold whitespace-nowrap shadow-[0_4px_16px_rgba(0,0,0,0.15)] opacity-0 transition-opacity duration-200 group-hover:opacity-100 sm:flex";
 
 export function FloatingWidgets() {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -35,12 +38,20 @@ export function FloatingWidgets() {
     trackEvent("zalo_click", { position: "floating_widget" });
   };
 
+  const aiChatUrl = siteConfig.aiChatUrl || "#";
+  const isExternalAi = aiChatUrl.startsWith("http");
+
+  const handleAiClick = () => {
+    trackEvent("ai_chat_click", { position: "floating_widget" });
+    window.dispatchEvent(new CustomEvent("open-ai-chat"));
+  };
+
   return (
     <aside
       aria-label="Liên hệ nhanh và điều hướng"
       className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-center gap-3 select-none pointer-events-auto"
     >
-      {/* 1. Nút Cuộn lên đầu trang (Scroll to Top) */}
+      {/* 1. Nút Cuộn lên đầu trang (trên cùng) */}
       <div
         className={`transition-all duration-300 ease-out ${
           showScrollTop
@@ -56,44 +67,45 @@ export function FloatingWidgets() {
         >
           <ChevronUp className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5" />
 
-          {/* Tooltip */}
-          <span className="absolute right-full mr-3.5 px-2.5 py-1 text-[11px] font-semibold tracking-wide text-white bg-slate-900/95 border border-white/10 rounded-lg shadow-xl whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 hidden sm:block">
-            Lên đầu trang
-            <span className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-slate-900/95 border-r border-t border-white/10 rotate-45" />
+          {/* Tooltip pill trắng */}
+          <span className={TOOLTIP_BASE}>
+            <span className="text-slate-700">Lên đầu trang</span>
           </span>
         </button>
       </div>
 
-      {/* 2. Nút Gọi Hotline (Với hiệu ứng sóng lan tỏa cam DUDI) */}
+      {/* 2. Nút Chat trợ lý AI DU — icon DU_head */}
       <div className="relative flex items-center justify-center">
-        {/* Radiating Ripple Wave Rings (Cam) */}
+        {/* Hào quang đỏ nhẹ hài hòa với nút Zalo/Hotline */}
         <span
           aria-hidden="true"
-          className="absolute inset-0 rounded-full bg-[#FF4500]/30 pointer-events-none animate-ripple-1"
+          className="absolute inset-0 rounded-full bg-[#E52E20]/25 pointer-events-none animate-ping [animation-duration:2.2s]"
         />
-        <span
-          aria-hidden="true"
-          className="absolute inset-0 rounded-full border border-[#FF6500]/40 pointer-events-none animate-ripple-2"
-        />
-
         <a
-          href={siteConfig.hotlineTel}
-          onClick={handlePhoneClick}
-          aria-label={`Gọi ngay hotline ${siteConfig.hotline}`}
-          className="group relative z-10 flex h-12 w-12 sm:h-13 sm:w-13 items-center justify-center rounded-full bg-gradient-to-tr from-[#FF3B30] to-[#FF6500] text-white shadow-xl shadow-[#FF6500]/40 border border-white/20 transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
+          href={aiChatUrl}
+          target={isExternalAi ? "_blank" : undefined}
+          rel={isExternalAi ? "noopener noreferrer" : undefined}
+          onClick={handleAiClick}
+          aria-label="Chat ngay với trợ lý AI DU"
+          className="group relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-[#FFF6F0] border-2 border-white shadow-xl shadow-[#E52E20]/30 ring-2 ring-[#E52E20]/20 transition-all duration-300 hover:scale-110 hover:ring-[#E52E20]/45 hover:shadow-[#E52E20]/45 active:scale-95 cursor-pointer"
         >
-          <Phone className="h-5 w-5 sm:h-5.5 sm:w-5.5 animate-phone-ring" />
-
-          {/* Tooltip */}
-          <span className="absolute right-full mr-3.5 px-3 py-1.5 text-xs font-bold tracking-wide text-white bg-slate-900/95 border border-white/10 rounded-lg shadow-xl whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 hidden sm:block">
-            <span className="text-[#FF7A00] font-semibold mr-1">Hotline:</span>
-            {siteConfig.hotline}
-            <span className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-slate-900/95 border-r border-t border-white/10 rotate-45" />
+          <span className="absolute inset-[2px] overflow-hidden rounded-full bg-[#FFF1E8]">
+            <Image
+              src="/images/ai-du-icon.webp"
+              alt="Trợ lý AI DU"
+              fill
+              sizes="48px"
+              className="object-cover"
+            />
+          </span>
+          {/* Tooltip pill trắng */}
+          <span className={TOOLTIP_BASE}>
+            <span className="text-[#E52E20]">Chat ngay với trợ lý AI DU</span>
           </span>
         </a>
       </div>
 
-      {/* 3. Nút Chat Zalo (Với hiệu ứng sóng lan tỏa xanh Zalo) */}
+      {/* 3. Nút Chat Zalo (chữ Zalo trắng trên nền xanh #0068FF) */}
       <div className="relative flex items-center justify-center">
         {/* Radiating Ripple Wave Rings (Xanh Zalo) */}
         <span
@@ -111,15 +123,44 @@ export function FloatingWidgets() {
           rel="noopener noreferrer"
           onClick={handleZaloClick}
           aria-label="Chat trực tiếp qua Zalo với DUDI Software"
-          className="group relative z-10 flex h-12 w-12 sm:h-13 sm:w-13 items-center justify-center rounded-full bg-[#0068FF] hover:bg-[#005ce6] text-white shadow-xl shadow-blue-600/40 border border-white/25 transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
+          className="group relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-[#0068FF] hover:bg-[#005ce6] text-white shadow-xl shadow-blue-600/40 border border-white/25 transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
         >
-          <ZaloIcon className="h-6 w-6 sm:h-7 sm:w-7 drop-shadow-sm" />
+          <span className="text-white font-bold text-[14px] tracking-tight leading-none select-none">
+            Zalo
+          </span>
 
-          {/* Tooltip */}
-          <span className="absolute right-full mr-3.5 px-3 py-1.5 text-xs font-bold tracking-wide text-white bg-slate-900/95 border border-white/10 rounded-lg shadow-xl whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 hidden sm:block">
-            <span className="text-blue-400 font-semibold mr-1">Zalo:</span>
-            Chat ngay với DUDI
-            <span className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-slate-900/95 border-r border-t border-white/10 rotate-45" />
+          {/* Tooltip pill trắng */}
+          <span className={TOOLTIP_BASE}>
+            <span className="text-[#0068FF]">Zalo:</span>
+            <span className="text-slate-800">Chat ngay với DUDI</span>
+          </span>
+        </a>
+      </div>
+
+      {/* 4. Nút Gọi Hotline (dưới cùng, giữ nguyên hiệu ứng sóng cam DUDI) */}
+      <div className="relative flex items-center justify-center">
+        {/* Radiating Ripple Wave Rings (Cam) */}
+        <span
+          aria-hidden="true"
+          className="absolute inset-0 rounded-full bg-[#FF4500]/30 pointer-events-none animate-ripple-1"
+        />
+        <span
+          aria-hidden="true"
+          className="absolute inset-0 rounded-full border border-[#FF6500]/40 pointer-events-none animate-ripple-2"
+        />
+
+        <a
+          href={siteConfig.hotlineTel}
+          onClick={handlePhoneClick}
+          aria-label={`Gọi ngay hotline ${siteConfig.hotline}`}
+          className="group relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-tr from-[#FF3B30] to-[#FF6500] text-white shadow-xl shadow-[#FF6500]/40 border border-white/20 transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
+        >
+          <Phone className="h-5 w-5 animate-phone-ring" />
+
+          {/* Tooltip pill trắng kiểu Image 2 */}
+          <span className={TOOLTIP_BASE}>
+            <span className="text-[#FF6500]">Hotline:</span>
+            <span className="text-slate-800">{siteConfig.hotline}</span>
           </span>
         </a>
       </div>
