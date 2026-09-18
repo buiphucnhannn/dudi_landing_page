@@ -154,6 +154,7 @@ export const caseStudiesContent = [
     ],
     beforeImage: "/images/case-packaging-before.webp",
     afterImage: "/images/case-packaging-after.webp",
+    mobileImage: "/images/case-packaging-mobile-v2.jpg",
   },
   {
     id: "travel",
@@ -179,6 +180,7 @@ export const caseStudiesContent = [
     ],
     beforeImage: "/images/case-travel-before.webp",
     afterImage: "/images/case-travel-after.webp",
+    mobileImage: "/images/case-travel-mobile-v2.jpg",
   },
 ];
 

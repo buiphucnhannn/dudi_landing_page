@@ -162,13 +162,13 @@ export function Problems() {
 
       {/* Interactive Horizontal Track */}
       <div
-        className="relative w-full overflow-hidden pt-1 pb-2"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeaveContainer}
-        >
-          {/* Soft edge gradient masks */}
-          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-6 sm:w-16 bg-gradient-to-r from-[#FFF9F5] to-transparent z-10" />
-          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-6 sm:w-16 bg-gradient-to-l from-[#FFF9F5] to-transparent z-10" />
+        className="relative w-full max-w-[1920px] mx-auto overflow-hidden pt-1 pb-2"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeaveContainer}
+      >
+        {/* Soft edge gradient masks */}
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-8 sm:w-20 lg:w-28 bg-gradient-to-r from-[#FFF9F5] to-transparent z-10" />
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 sm:w-20 lg:w-28 bg-gradient-to-l from-[#FFF9F5] to-transparent z-10" />
 
           {/* Scrollable & Draggable Track */}
           <div

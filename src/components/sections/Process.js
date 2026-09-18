@@ -50,10 +50,10 @@ export function Process() {
   return (
     <section
       id="quy-trinh"
-      className="relative w-full overflow-x-clip bg-gradient-to-b from-[#1C0E24] via-[#241229] to-[#120818] text-white select-none scroll-mt-[58px] sm:scroll-mt-[68px] lg:scroll-mt-[72px] py-6 sm:py-7 lg:py-8"
+      className="relative w-full max-w-[1920px] mx-auto overflow-hidden bg-gradient-to-b from-[#1C0E24] via-[#241229] to-[#120818] text-white select-none scroll-mt-[58px] sm:scroll-mt-[68px] lg:scroll-mt-[72px] py-6 sm:py-7 lg:py-8 min-[1921px]:rounded-[32px] min-[1921px]:my-8 min-[1921px]:shadow-[0_20px_50px_rgba(0,0,0,0.28)] min-[1921px]:border min-[1921px]:border-white/10"
     >
       {/* Top Wave Divider: Organic wave smoothly transitioning from #FFF9F5 */}
-      <div className="absolute -top-1 left-0 right-0 w-full overflow-hidden leading-none z-20 pointer-events-none">
+      <div className="absolute -top-1 left-0 right-0 w-full overflow-hidden leading-none z-20 pointer-events-none min-[1921px]:hidden">
         <svg
           className="relative block w-full h-5 sm:h-7 lg:h-8 text-[#FFF9F5] fill-current"
           viewBox="0 0 1440 60"
@@ -64,7 +64,7 @@ export function Process() {
       </div>
 
       {/* Bottom Wave Divider: Organic wave smoothly transitioning to #FFF9F5 */}
-      <div className="absolute -bottom-1 left-0 right-0 w-full overflow-hidden leading-none z-20 pointer-events-none">
+      <div className="absolute -bottom-1 left-0 right-0 w-full overflow-hidden leading-none z-20 pointer-events-none min-[1921px]:hidden">
         <svg
           className="relative block w-full h-5 sm:h-7 lg:h-8 text-[#FFF9F5] fill-current"
           viewBox="0 0 1440 60"

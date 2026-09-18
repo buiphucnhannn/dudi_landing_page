@@ -45,7 +45,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="scroll-mt-16 sm:scroll-mt-20 lg:scroll-mt-24 relative isolate w-full overflow-hidden bg-[#FFF9F5] lg:h-[100svh] lg:min-h-[660px] lg:max-h-[940px] flex flex-col justify-center"
+      className="scroll-mt-16 sm:scroll-mt-20 lg:scroll-mt-24 relative isolate w-full max-w-[1920px] mx-auto overflow-hidden bg-[#FFF9F5] lg:h-[100svh] lg:min-h-[660px] lg:max-h-[940px] flex flex-col justify-center"
     >
       {/* ===== DESKTOP ONLY: nền full-bleed, robot nằm gọn nửa phải ===== */}
       <div className="hidden lg:block absolute inset-0 z-0 select-none pointer-events-none" aria-hidden="true">
@@ -64,6 +64,9 @@ export function Hero() {
         className="hidden lg:block absolute inset-0 z-[1] bg-gradient-to-r from-[#FFF9F5]/90 via-[#FFF9F5]/70 via-[25%] via-[#FFF9F5]/35 via-[42%] to-transparent to-[60%] pointer-events-none select-none"
         aria-hidden="true"
       />
+      {/* Soft fade ở 2 bên mép khi màn hình rộng hơn 1920px / zoom nhỏ */}
+      <div className="hidden min-[1921px]:block pointer-events-none absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#FFF9F5] to-transparent z-[2]" aria-hidden="true" />
+      <div className="hidden min-[1921px]:block pointer-events-none absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#FFF9F5] to-transparent z-[2]" aria-hidden="true" />
 
       {/* ===== CONTENT ===== */}
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 lg:h-full lg:flex lg:flex-col lg:justify-center">

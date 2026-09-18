@@ -114,7 +114,7 @@ export function Pricing({ onSelectPackage }) {
 
             if (pkg.isFeatured) {
               return (
-                /* FEATURED CARD: Tiêu Chuẩn with Richer Warm Background & Sparkling Stars */
+                /* FEATURED CARD: Tiêu Chuẩn with Richer Warm Background */
                 <ScrollReveal
                   key={pkg.id}
                   variant={cardVariant}
@@ -126,38 +126,27 @@ export function Pricing({ onSelectPackage }) {
                     {/* Centered Top Floating Badge for Tiêu Chuẩn */}
                     <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
                       <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-[11px] font-extrabold text-white bg-gradient-to-r from-[#FF2B1C] via-[#FF5500] to-[#FF6B00] shadow-md shadow-orange-500/35 whitespace-nowrap border border-orange-300/40">
-                        <span className="text-amber-200 text-xs">✨</span>
                         <span>Phổ biến nhất</span>
-                        <span className="text-amber-200 text-xs">✨</span>
                       </span>
                     </div>
 
-                    {/* Sparkling Stars Animation around card borders */}
+                    {/* Decorative Stars - single ✦ style only, spread evenly */}
                     <span className="absolute -top-3.5 -right-2 text-amber-400 text-xl font-bold animate-sparkle drop-shadow-[0_0_8px_rgba(251,191,36,0.9)] select-none pointer-events-none z-30">
                       ✦
-                    </span>
-                    <span className="absolute -top-4 left-6 text-orange-500 text-lg animate-sparkle-delayed select-none pointer-events-none z-30">
-                      ✨
                     </span>
                     <span className="absolute -bottom-3 -left-3 text-amber-400 text-lg font-bold animate-sparkle select-none pointer-events-none z-30">
                       ✦
                     </span>
-                    <span className="absolute top-1/2 -right-3 text-amber-400 text-sm animate-sparkle-delayed select-none pointer-events-none z-30">
-                      ✨
-                    </span>
 
-                    {/* Sparkling Stars INSIDE the card body */}
-                    <span className="absolute top-16 right-5 text-amber-400 text-base font-bold animate-sparkle drop-shadow-[0_0_6px_rgba(251,191,36,0.8)] select-none pointer-events-none z-20">
+                    {/* Inner sparkles - same ✦ icon, zigzag spread top / middle / bottom */}
+                    <span className="absolute top-[58px] right-5 text-amber-400/70 text-sm font-bold animate-sparkle-delayed select-none pointer-events-none z-20">
                       ✦
                     </span>
-                    <span className="absolute top-36 right-7 text-orange-400 text-xs animate-sparkle-delayed select-none pointer-events-none z-20">
-                      ✨
-                    </span>
-                    <span className="absolute bottom-24 right-5 text-amber-400 text-sm animate-sparkle select-none pointer-events-none z-20">
+                    <span className="absolute top-[47%] left-3 text-amber-400/45 text-[10px] font-bold animate-sparkle select-none pointer-events-none z-20">
                       ✦
                     </span>
-                    <span className="absolute bottom-36 left-4 text-amber-400/80 text-xs animate-sparkle-delayed select-none pointer-events-none z-20">
-                      ✨
+                    <span className="absolute bottom-[92px] right-4 text-amber-400/55 text-xs font-bold animate-sparkle-delayed select-none pointer-events-none z-20">
+                      ✦
                     </span>
 
                     {/* Silky Light Sweep Shine Beam Effect across the card */}
@@ -182,9 +171,6 @@ export function Pricing({ onSelectPackage }) {
                           <span className="text-[10px] font-black uppercase tracking-wider text-[#FF6500] bg-orange-100/90 border border-orange-300/80 px-2 py-0.5 rounded-md whitespace-nowrap">
                             {pkg.priceTag}
                           </span>
-                          <span className="text-amber-400 text-sm animate-sparkle select-none drop-shadow-xs">
-                            ✨
-                          </span>
                         </div>
                         <p className="text-[11px] text-slate-500 font-medium mt-1 leading-tight">
                           {pkg.priceNote}
@@ -204,15 +190,13 @@ export function Pricing({ onSelectPackage }) {
                       </ul>
                     </div>
 
-                    {/* Action Button: Gradient Orange with Sparkles */}
+                    {/* Action Button: Gradient Orange */}
                     <div className="relative z-10 mt-2">
                       <button
                         onClick={() => handleSelect(pkg)}
                         className="w-full py-3 px-4 rounded-xl font-bold text-xs sm:text-sm bg-gradient-to-r from-[#FF2B1C] via-[#FF5500] to-[#FF6B00] hover:from-[#E52012] hover:to-[#EB4A00] text-white shadow-md shadow-orange-500/35 hover:shadow-lg hover:shadow-orange-500/50 hover:scale-[1.01] transition-all duration-200 cursor-pointer text-center flex items-center justify-center gap-1.5"
                       >
-                        <span className="text-amber-200 text-xs animate-sparkle">✨</span>
                         <span>{pkg.buttonText}</span>
-                        <span className="text-amber-200 text-xs animate-sparkle-delayed">✨</span>
                       </button>
                     </div>
                   </div>
