@@ -13,6 +13,7 @@ import { FAQ } from "@/components/sections/FAQ";
 import { LeadForm } from "@/components/sections/LeadForm";
 import { Footer } from "@/components/sections/Footer";
 import { FloatingWidgets } from "@/components/common/FloatingWidgets";
+import AiChat from "@/components/common/AiChat";
 import { scrollToSection } from "@/lib/utils";
 
 import { SectionDivider } from "@/components/common/SectionDivider";
@@ -97,6 +98,7 @@ export default function LandingPage() {
 
       {/* Floating Quick Action Widgets: Scroll to Top, Phone & Zalo */}
       <FloatingWidgets />
+      <AiChat />
     </div>
   );
 }

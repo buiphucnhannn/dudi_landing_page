@@ -38,12 +38,9 @@ export function FloatingWidgets() {
     trackEvent("zalo_click", { position: "floating_widget" });
   };
 
-  const aiChatUrl = siteConfig.aiChatUrl || "#";
-  const isExternalAi = aiChatUrl.startsWith("http");
-
   const handleAiClick = () => {
     trackEvent("ai_chat_click", { position: "floating_widget" });
-    window.dispatchEvent(new CustomEvent("open-ai-chat"));
+    window.dispatchEvent(new CustomEvent("toggle-ai-chat"));
   };
 
   return (
@@ -81,10 +78,9 @@ export function FloatingWidgets() {
           aria-hidden="true"
           className="absolute inset-0 rounded-full bg-[#E52E20]/25 pointer-events-none animate-ping [animation-duration:2.2s]"
         />
-        <a
-          href={aiChatUrl}
-          target={isExternalAi ? "_blank" : undefined}
-          rel={isExternalAi ? "noopener noreferrer" : undefined}
+        <button
+          type="button"
+          data-ai-chat-toggle
           onClick={handleAiClick}
           aria-label="Chat ngay với trợ lý AI DU"
           className="group relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-[#FFF6F0] border-2 border-white shadow-xl shadow-[#E52E20]/30 ring-2 ring-[#E52E20]/20 transition-all duration-300 hover:scale-110 hover:ring-[#E52E20]/45 hover:shadow-[#E52E20]/45 active:scale-95 cursor-pointer"
@@ -102,7 +98,7 @@ export function FloatingWidgets() {
           <span className={TOOLTIP_BASE}>
             <span className="text-[#E52E20]">Chat ngay với trợ lý AI DU</span>
           </span>
-        </a>
+        </button>
       </div>
 
       {/* 3. Nút Chat Zalo (chữ Zalo trắng trên nền xanh #0068FF) */}

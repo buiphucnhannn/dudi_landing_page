@@ -8,15 +8,49 @@ import {
   Phone,
   ArrowRight,
   ChevronDown,
+  AlertCircle,
 } from "lucide-react";
 import { siteConfig } from "@/constants/site-config";
 import { Container } from "@/components/common/Container";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { ZaloIcon } from "@/components/ui/ZaloIcon";
+import DudiToast from "@/components/ui/DudiToast";
 import { ScrollReveal } from "@/components/common/ScrollReveal";
 import { trackEvent } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
+
+// Kiểm tra SĐT Việt Nam THẬT: chuẩn hóa (+84/84/0, bỏ ký tự thừa),
+// bắt buộc mobile 10 số, đầu số đang lưu hành, loại số giả mạo.
+const VN_MOBILE_PREFIXES = new Set([
+  "032", "033", "034", "035", "036", "037", "038", "039", // Viettel
+  "056", "058", // Vietnamobile
+  "059", // Gmobile
+  "070", "076", "077", "078", "079", "090", "093", "089", // Mobifone
+  "081", "082", "083", "084", "085", "088", "091", "094", // Vinaphone
+  "086", "096", "097", "098", // Viettel
+  "092", // Vietnamobile
+  "099", // Gmobile
+]);
+
+function normalizeVietnamPhone(input) {
+  let d = String(input || "").replace(/[^\d+]/g, "");
+  if (d.startsWith("+84")) d = "0" + d.slice(3);
+  else if (d.startsWith("84") && d.length >= 11) d = "0" + d.slice(2);
+  return d.replace(/\D/g, "");
+}
+
+function isValidVietnamPhone(input) {
+  const d = normalizeVietnamPhone(input);
+  if (!/^0\d{9}$/.test(d)) return false; // đúng 10 số, bắt đầu bằng 0
+  if (!VN_MOBILE_PREFIXES.has(d.slice(0, 3))) return false; // đầu số đang lưu hành
+  if (/^(\d)\1{9}$/.test(d)) return false; // 0000000000, 1111111111...
+  if (d === "0123456789" || d === "9876543210") return false; // số chạy thứ tự
+  return true;
+}
+
+const VIETNAM_PHONE_ERROR =
+  "Số điện thoại chưa đúng. Vui lòng dùng số di động 10 số đang sử dụng (ví dụ: 0909 123 456).";
 
 export function LeadForm({ selectedPackage = "Chưa rõ" }) {
   const [formData, setFormData] = useState({
@@ -34,7 +68,24 @@ export function LeadForm({ selectedPackage = "Chưa rõ" }) {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitResult, setSubmitResult] = useState(null); // { success: boolean, message: string, leadId?: string }
+  const [toast, setToast] = useState(null);
+  const [btnError, setBtnError] = useState("");
+  const toastTimer = useRef(null);
+  const btnErrorTimer = useRef(null);
   const hasTrackedStart = useRef(false);
+
+  // Hiện thông báo lỗi NGAY TRÊN nút gửi (tự trở lại sau 4.5s)
+  const flashButtonError = (msg) => {
+    setBtnError(msg);
+    if (btnErrorTimer.current) clearTimeout(btnErrorTimer.current);
+    btnErrorTimer.current = setTimeout(() => setBtnError(""), 4500);
+  };
+
+  const showToast = (type, title, message) => {
+    setToast({ type, title, message });
+    if (toastTimer.current) clearTimeout(toastTimer.current);
+    toastTimer.current = setTimeout(() => setToast(null), 4500);
+  };
 
   // Khi selectedPackage thay đổi từ bảng giá, cập nhật vào form
   useEffect(() => {
@@ -67,6 +118,7 @@ export function LeadForm({ selectedPackage = "Chưa rõ" }) {
         return updated;
       });
     }
+    if (btnError) setBtnError("");
   };
 
   const validateForm = () => {
@@ -76,10 +128,8 @@ export function LeadForm({ selectedPackage = "Chưa rõ" }) {
       newErrors.fullName = "Vui lòng nhập họ và tên (tối thiểu 2 ký tự).";
     }
 
-    const cleanPhone = formData.phone.replace(/[\s.-]/g, "");
-    const phoneRegex = /^(\+84|0)[3|5|7|8|9][0-9]{8}$/;
-    if (!cleanPhone || !phoneRegex.test(cleanPhone)) {
-      newErrors.phone = "Số điện thoại chưa hợp lệ (ví dụ: 0909 123 456).";
+    if (!isValidVietnamPhone(formData.phone)) {
+      newErrors.phone = VIETNAM_PHONE_ERROR;
     }
 
     if (formData.websiteUrl.trim()) {
@@ -99,13 +149,16 @@ export function LeadForm({ selectedPackage = "Chưa rõ" }) {
     }
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    return newErrors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setBtnError("");
 
-    if (!validateForm()) {
+    const formErrors = validateForm();
+    if (Object.keys(formErrors).length > 0) {
+      flashButtonError(Object.values(formErrors)[0]);
       trackEvent("form_error", { error_type: "client_validation_failed" });
       return;
     }
@@ -144,23 +197,30 @@ export function LeadForm({ selectedPackage = "Chưa rõ" }) {
           message: data.message,
           leadId: data.leadId,
         });
+        showToast("success", "Gửi yêu cầu thành công!", "DUDI đã nhận thông tin và sẽ liên hệ lại sớm nhất.");
         trackEvent("form_success", { lead_id: data.leadId, source: "landing_page" });
       } else {
+        const msg =
+          data.message ||
+          "Có lỗi xảy ra khi gửi yêu cầu. Bạn vui lòng thử lại hoặc nhắn Zalo trực tiếp.";
         setSubmitResult({
           success: false,
-          message:
-            data.message ||
-            "Có lỗi xảy ra khi gửi yêu cầu. Bạn vui lòng thử lại hoặc nhắn Zalo trực tiếp.",
+          message: msg,
         });
+        flashButtonError(msg);
+        showToast("error", "Gửi chưa thành công", data.message || "Vui lòng thử lại hoặc nhắn Zalo trực tiếp.");
         trackEvent("form_error", { error_type: "api_rejected" });
       }
     } catch (err) {
       console.error("Submit error:", err);
+      const msg =
+        "Không thể kết nối đến máy chủ. Vui lòng kiểm tra mạng hoặc liên hệ qua Zalo 0909 163 821.";
       setSubmitResult({
         success: false,
-        message:
-          "Không thể kết nối đến máy chủ. Vui lòng kiểm tra mạng hoặc liên hệ qua Zalo 0909 163 821.",
+        message: msg,
       });
+      flashButtonError(msg);
+      showToast("error", "Mất kết nối máy chủ", "Vui lòng kiểm tra mạng hoặc liên hệ qua Zalo 0909 163 821.");
       trackEvent("form_error", { error_type: "network_error" });
     } finally {
       setIsSubmitting(false);
@@ -169,6 +229,7 @@ export function LeadForm({ selectedPackage = "Chưa rõ" }) {
 
   return (
     <section id="form-tu-van" className="scroll-mt-[58px] sm:scroll-mt-[68px] lg:scroll-mt-[72px] pt-6 sm:pt-8 lg:pt-10 pb-12 sm:pb-16 lg:pb-20 bg-transparent relative">
+      <DudiToast toast={toast} onClose={() => setToast(null)} />
       <Container className="max-w-7xl">
         <ScrollReveal variant="fade-up" duration={900}>
           <div className="relative rounded-3xl border border-[#FFE4D6] bg-white p-3.5 sm:p-5 lg:p-6 shadow-lg shadow-orange-500/5">
@@ -474,12 +535,20 @@ export function LeadForm({ selectedPackage = "Chưa rõ" }) {
                         type="submit"
                         variant="dudiGradient"
                         disabled={isSubmitting}
-                        className="w-full sm:w-auto px-7 py-3 text-sm font-bold text-white shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer flex items-center justify-center gap-2 rounded-xl"
+                        className={cn(
+                          "w-full sm:w-auto px-7 py-3 text-sm font-bold text-white shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer flex items-center justify-center gap-2 rounded-xl",
+                          btnError && "from-red-600 via-red-500 to-red-500 hover:from-red-600 hover:to-red-500"
+                        )}
                       >
                         {isSubmitting ? (
                           <>
                             <Loader2 className="h-4 w-4 animate-spin" />
                             <span>Đang gửi thông tin...</span>
+                          </>
+                        ) : btnError ? (
+                          <>
+                            <AlertCircle className="h-4 w-4 shrink-0" />
+                            <span className="text-left leading-snug">{btnError}</span>
                           </>
                         ) : (
                           <>

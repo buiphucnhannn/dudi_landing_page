@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import { saveContactToCrm } from "@/lib/dudi-crm";
 
 export async function POST(request) {
   try {
@@ -104,24 +105,44 @@ export async function POST(request) {
       },
     };
 
-    // 4. Lưu vào thư mục dữ liệu cục bộ (an toàn, không phát sinh chi phí)
+    // 4. Lưu vào thư mục dữ liệu cục bộ (ghi nối 1 dòng — nhanh, không đọc/ghi lại cả file)
     try {
       const dataDir = path.join(process.cwd(), "data");
       if (!fs.existsSync(dataDir)) {
         fs.mkdirSync(dataDir, { recursive: true });
       }
-      const leadsFile = path.join(dataDir, "leads.json");
-      let leads = [];
-      if (fs.existsSync(leadsFile)) {
-        const fileContent = fs.readFileSync(leadsFile, "utf8");
-        leads = JSON.parse(fileContent || "[]");
-      }
-      leads.push(leadRecord);
-      fs.writeFileSync(leadsFile, JSON.stringify(leads, null, 2), "utf8");
+      fs.appendFileSync(
+        path.join(dataDir, "leads.jsonl"),
+        JSON.stringify(leadRecord) + "\n",
+        "utf8"
+      );
     } catch (fsErr) {
       console.error("[Lead Storage Error]", fsErr);
       // Tiếp tục trả về thành công vì đã ghi log trên server
     }
+
+    // 4b. Đẩy về MongoDB Cloud dùng chung để trang quản lý đọc (hàm này không bao giờ ném lỗi).
+    await saveContactToCrm({
+      source: "landing1",
+      fullName: fullName.trim(),
+      phone: cleanedPhone,
+      company: (company || "").trim(),
+      websiteUrl: normalizedUrl || "",
+      package: normalizedPackage,
+      message: cleanIssue,
+      details: {
+        issue: cleanIssue,
+        packageInterested: normalizedPackage,
+        timeline: timeline || "1 tuần",
+        utm_source: utm_source || "",
+        utm_medium: utm_medium || "",
+        utm_campaign: utm_campaign || "",
+        utm_content: utm_content || "",
+        page_path: page_path || "/",
+        referrer: referrer || "",
+      },
+      raw: leadRecord,
+    });
 
     return NextResponse.json({
       success: true,
