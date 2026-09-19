@@ -224,18 +224,24 @@ export default function AiChat() {
         }`}
       />
 
-      {/* Panel chat — nằm bên trái cụm widget, chân ngang hàng nút điện thoại */}
+      {/* Lớp căn giữa trên mobile: flex center toàn màn hình.
+          Desktop dùng display:contents để panel tự neo góc phải (không ảnh hưởng layout). */}
+      <div
+        className={`fixed inset-0 z-[70] flex items-center justify-center p-3 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] sm:contents ${
+          open ? "" : "pointer-events-none"
+        }`}
+      >
+      {/* Panel chat — mobile: modal căn giữa màn hình; desktop: neo góc phải cạnh cụm widget */}
       <div
         ref={panelRef}
         data-ai-chat-panel
         role="dialog"
         aria-label="Chat với trợ lý AI DU"
         aria-hidden={!open}
-        style={{ bottom: "max(0.75rem, env(safe-area-inset-bottom, 0px))" }}
-        className={`fixed z-[70] flex flex-col overflow-hidden bg-white border border-white shadow-[0_24px_70px_-12px_rgba(0,0,0,0.35),0_0_40px_rgba(229,38,30,0.12)]
-          left-3 right-3 h-[66svh] min-h-[420px] max-h-[620px] rounded-[20px]
-          sm:left-auto sm:right-[88px] sm:w-[388px] sm:max-w-[calc(100vw-3rem)] sm:h-[600px] sm:max-h-[calc(100svh-120px)] sm:rounded-[24px]
-          transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] origin-bottom-right
+        className={`flex flex-col overflow-hidden bg-white border border-white shadow-[0_24px_70px_-12px_rgba(0,0,0,0.35),0_0_40px_rgba(229,38,30,0.12)]
+          w-full max-w-[400px] h-[min(600px,calc(100svh-2.5rem))] rounded-[20px]
+          sm:fixed sm:z-[70] sm:right-[88px] sm:bottom-6 sm:w-[388px] sm:max-w-[calc(100vw-3rem)] sm:h-[600px] sm:max-h-[calc(100svh-120px)] sm:rounded-[24px]
+          transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] origin-center sm:origin-bottom-right
           ${
             open
               ? "opacity-100 translate-y-0 scale-100 pointer-events-auto"
@@ -430,6 +436,7 @@ export default function AiChat() {
             }
           }
         `}</style>
+      </div>
       </div>
     </>
   );
